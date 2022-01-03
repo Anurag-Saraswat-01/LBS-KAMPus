@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=McLaren&family=Merienda:wght@400;700&family=Quicksand:wght@400;700&display=swap');
+
+:root {
+  --background: #3E3E3E;
+  --navbar: #202020;
+  --green-text: #D8E9A8;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: var(--background) !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ------Header css------ */
+.navbar {
+  background-color: var(--navbar);
+}
+
+.navbar-brand, .nav-link {
+  color: var(--green-text) !important;
+  font-family: 'Merienda', cursive;
+}
+
+.navbar-brand{
+  font-weight: bold;
+}
+
+/* ------Landing page css------ */
+.landing-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 5%;
+  text-align: center;
+  font-family: 'McLaren', cursive;
+}
+
+.landing-title {
+  color: #BEFFB0;
+  font-weight: bold;
+  font-size: 120px;
+}
+
+.landing-text {
+  color: #84C577;
+  font-size: 24px;
+}
+
+.landing-text span {
+  color: #BEFFB0;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.landing-signin-btn {
+  background-color: #202020;
+  color: var(--green-text);
+  height: 60px;
+  width: 120px;
+  border: none;
+  border-radius: 30px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 2% 0;
+}
+
+.landing-signup, .landing-signup a {
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  text-decoration: none;
 }
