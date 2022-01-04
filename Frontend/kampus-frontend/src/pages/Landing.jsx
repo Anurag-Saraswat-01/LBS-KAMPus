@@ -4,7 +4,7 @@ import Container from "react-bootstrap/esm/Container"
 const Landing = () => {
     return (
         <div>
-            <Header />
+            <Header page="landing" />
             <Container className="landing-container">
                 <span className="landing-title" >KAMPus</span>
                 <p className="landing-text" >A forum for you to ask, answer, and discuss
