@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=McLaren&family=Merienda:wght@400;700&family=Quicksand:wght@400;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=McLaren&family=Merienda:wght@400;700&family=Quicksand:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@400;600;700&display=swap");
 :root {
-  --background: #3E3E3E;
+  --background: #3e3e3e;
   --navbar: #202020;
-  --green-text: #D8E9A8;
+  --green-text: #d8e9a8;
+  --foreground: #222222;
+  --alt-green-text: #f6ff92;
 }
 
 * {
@@ -11,9 +13,16 @@
   margin: 0;
   padding: 0;
 }
-
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
 body {
   background-color: var(--background) !important;
+}
+/* using ul directly coz i cba to make classes for this and i dont think anyone wants list-style anyway */
+ul {
+  list-style: none;
 }
 
 /* ------Header css------ */
@@ -21,12 +30,13 @@ body {
   background-color: var(--navbar);
 }
 
-.navbar-brand, .nav-link {
+.navbar-brand,
+.nav-link {
   color: var(--green-text) !important;
-  font-family: 'Merienda', cursive;
+  font-family: "Merienda", cursive;
 }
 
-.navbar-brand{
+.navbar-brand {
   font-weight: bold;
 }
 
@@ -35,7 +45,7 @@ body {
 }
 
 .add-post {
-  background-color: #35463B;
+  background-color: #35463b;
   color: var(--green-text);
   height: 40px;
   width: 40px;
@@ -51,22 +61,22 @@ body {
   align-items: center;
   padding: 5%;
   text-align: center;
-  font-family: 'McLaren', cursive;
+  font-family: "McLaren", cursive;
 }
 
 .landing-title {
-  color: #BEFFB0;
+  color: #beffb0;
   font-weight: bold;
   font-size: 120px;
 }
 
 .landing-text {
-  color: #84C577;
+  color: #84c577;
   font-size: 24px;
 }
 
 .landing-text span {
-  color: #BEFFB0;
+  color: #beffb0;
   font-weight: bold;
   font-size: 32px;
 }
@@ -78,13 +88,14 @@ body {
   width: 120px;
   border: none;
   border-radius: 30px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-weight: bold;
   font-size: 20px;
   margin: 2% 0;
 }
 
-.landing-signup, .landing-signup a {
+.landing-signup,
+.landing-signup a {
   color: white;
   text-decoration: none;
 }
@@ -96,7 +107,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 5%;
   grid-auto-rows: minmax(100px, auto);
-  font-family: 'McLaren', cursive;
+  font-family: "McLaren", cursive;
 }
 
 .user-info {
@@ -114,7 +125,7 @@ body {
 .user-image {
   height: 200px;
   width: 200px;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   border-radius: 50%;
   margin-bottom: 1rem;
 }
@@ -127,14 +138,15 @@ body {
   padding: 1rem 0;
 }
 
-.follow-btn, .edit-btn {
+.follow-btn,
+.edit-btn {
   background-color: var(--navbar);
   color: var(--green-text);
   height: 40px;
   width: 80px;
   border: none;
   border-radius: 20px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-size: 16px;
 }
 
@@ -156,7 +168,7 @@ body {
 }
 
 .nav-tabs {
-  background-color: #3E3E3E;
+  background-color: #3e3e3e;
   border-bottom: none !important;
 }
 
@@ -189,29 +201,107 @@ body {
 }
 
 .accolade-title {
-  font-family: 'Merienda', cursive;
+  font-family: "Merienda", cursive;
   font-weight: bold;
 }
 
 .accolade-title::after {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 2px;
-  background-color: #C1FFF4;
+  background-color: #c1fff4;
 }
 
 .societies {
   margin-top: 2rem;
 }
 
-.badge-info, .society-info {
+.badge-info,
+.society-info {
   display: flex;
 }
 
-.badge-icon, .society-icon {
+.badge-icon,
+.society-icon {
   height: 20px;
   width: 20px;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   margin-right: 1rem;
+}
+
+/* Homepage CSS */
+.homepage-container {
+  display: grid;
+  grid-template-columns: 0.25fr 0.75fr;
+  grid-template-rows: 1fr;
+  /* background-color: #3e3e3e; */
+}
+
+.sidebar {
+  background-color: var(--foreground);
+  font-family: "Martel Sans";
+  height: 100vh;
+}
+
+.sidebar-user-info {
+  color: var(--alt-green-text);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 2em;
+}
+
+.sidebar-user-img-temp {
+  background-color: black;
+  border: var(--green-text) 1px solid;
+  color: var(--green-text);
+  /* font-size: 2em; */
+  /* padding: 0.5em; */
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-username {
+  padding: 0;
+  margin: 0 1em;
+}
+
+.divider {
+  color: #c1fff4;
+  opacity: 0.75;
+  margin: 0;
+}
+
+.reccomendations {
+  margin: 1em;
+  color: white;
+}
+.recco-title {
+  color: var(--green-text);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.reccomendations ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.reccomendations li {
+  margin: 1em;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.post-placeholder {
+  height: 90vh;
+  margin: 2em 3em;
+  background-color: var(--foreground);
 }
