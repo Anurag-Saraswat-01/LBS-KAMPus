@@ -28,16 +28,19 @@ ul {
 /* ------Header css------ */
 .navbar {
   background-color: var(--navbar);
+  height: 15vh;
 }
 
 .navbar-brand,
 .nav-link {
   color: var(--green-text) !important;
   font-family: "Merienda", cursive;
+  font-size: 1.25rem;
 }
 
 .navbar-brand {
   font-weight: bold;
+  font-size: 3rem !important;
 }
 
 .nav-item {
@@ -286,6 +289,7 @@ ul {
   color: var(--green-text);
   text-transform: uppercase;
   font-weight: bold;
+  font-size: 1.25rem;
 }
 .reccomendations ul {
   margin: 0 !important;
@@ -293,12 +297,12 @@ ul {
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  align-items: center;
+  /* align-items: center; */
 }
 .reccomendations li {
   margin: 1em;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1rem;
 }
 .post-placeholder {
   /* height: 90vh; */

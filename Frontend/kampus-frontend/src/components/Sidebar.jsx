@@ -1,6 +1,9 @@
 import React from "react";
 
-const branches = ["CMPN", "ETRX", "EXTC", "AIDS", "INSTRU", "IT", "MCA"];
+// const branches = ["CMPN", "ETRX", "EXTC", "AIDS", "INSTRU", "IT", "MCA"];
+const branches = ["Computer", "Electrical", "Electronics and Telecommunication", "Artificial Intelligence and Data Science",
+"Instrumentation", "Information Technology", "MCA"];
+
 
 function Sidebar() {
   return (
