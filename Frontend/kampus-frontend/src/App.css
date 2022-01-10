@@ -123,6 +123,11 @@ ul {
 	color: white;
 }
 
+.user-stats {
+	display: flex;
+	justify-content: space-between;
+}
+
 .user-bio {
 	margin-right: 5%;
 }
@@ -233,6 +238,18 @@ ul {
 	width: 20px;
 	background-color: #c4c4c4;
 	margin-right: 1rem;
+}
+
+.modal-header, .modal-content, .modal-body {
+	background-color: #202020;
+}
+
+.modal-header {
+	color: var(--green-text)
+}
+
+.modal-body {
+	color: white;
 }
 
 /* Homepage CSS */

@@ -1,7 +1,7 @@
 export const questions = [
 	{
 		id: "q01",
-		question: "How do you feel about online college being shit?",
+		question: "How do you feel about online college being good?",
 		askedBy: "Prithvi Kumar",
 		askedOn: "20th December, 2021",
 		answers: ["a01", "a02", "a03"],

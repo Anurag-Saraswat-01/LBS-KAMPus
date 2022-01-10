@@ -1,10 +1,37 @@
 import Header from "../components/Header";
 import Container from "react-bootstrap/esm/Container";
+import Modal from "react-bootstrap/Modal"
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import { FaShare } from "react-icons/fa";
+import { useState } from "react";
 
 const Profile = () => {
+  const [followerShow, setFollowerShow] = useState(false)
+  const [followingShow, setFollowingShow] = useState(false)
+
+  const handleFollowerClose = () => setFollowerShow(false);
+  const handleFollowerShow = () => setFollowerShow(true)
+  const handleFollowingClose = () => setFollowingShow(false);
+  const handleFollowingShow = () => setFollowingShow(true)
+
+  const followModal = (title, list, show, close) => {
+    return (
+      <Modal show={show} onHide={close} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ul>
+            {list.map((data, key) => (
+              <li key={key}>{data}</li>
+            ))}
+          </ul>
+        </Modal.Body>
+      </Modal>
+    )
+  }
+
   const user = {
     name: "Anurag Saraswat",
     branch: "CMPN",
@@ -38,6 +65,8 @@ const Profile = () => {
     <div>
       <Header />
       <Container className="profile-container">
+        {followModal("Followers", user.followers, followerShow, handleFollowerClose)}
+        {followModal("Following", user.following, followingShow, handleFollowingClose)}
         <div className="user-info">
           <div className="user-bio">
             <div className="user-image"></div>
@@ -46,10 +75,13 @@ const Profile = () => {
           </div>
           <div className="user-text">
             <h1 className="user-name">{user.name}</h1>
-            <p className="user-stats">
-              {user.followers.length} Followers . {user.following.length}{" "}
-              Following . {user.karma} Karma
-            </p>
+            <div className="user-stats">
+              <p onClick={handleFollowerShow}>{user.followers.length} Followers</p>
+              .
+              <p onClick={handleFollowingShow}>{user.following.length} Following </p>
+              .
+              <p>{user.karma} Karma</p>
+            </div>
             {/* edit-btn if user is viewing their own profile and will replace follow-btn */}
             <button className="follow-btn">Follow</button>
             {/* <button className="edit-btn">Edit</button> */}
