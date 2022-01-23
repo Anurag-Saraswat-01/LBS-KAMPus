@@ -240,12 +240,14 @@ ul {
 	margin-right: 1rem;
 }
 
-.modal-header, .modal-content, .modal-body {
+.modal-header,
+.modal-content,
+.modal-body {
 	background-color: #202020;
 }
 
 .modal-header {
-	color: var(--green-text)
+	color: var(--green-text);
 }
 
 .modal-body {
@@ -511,3 +513,88 @@ p .answer {
 	width: 32px;
 	height: 32px;
 }
+
+/* Ask Question */
+.askQuestion__ques {
+	width: 65%;
+	margin: 45px auto;
+}
+
+.askQuestion__ques h2 {
+	color: #fff;
+	margin-bottom: 10px;
+}
+
+.askQuestion__ques hr {
+	color: #c1fff4;
+	height: 3px;
+}
+
+.askQuestion__category {
+	width: 300px;
+	/* background-color: #202020; */
+}
+
+.askQuestion__dropdown {
+	width: 300px;
+	/* background-color: #202020; */
+}
+
+.askQuestion__dropdown label,
+.askQuestion__dropdown svg,
+.askQuestion__dropdown fieldset {
+	color: white;
+	border-color: white !important;
+}
+
+.askQuestion__dropdown .MuiSelect-select {
+	color: white;
+}
+
+.askQuestion__dropdown .MuiOutlinedInput-root {
+	background-color: #202020;
+}
+
+.askQuestion__content {
+	background-color: #202020;
+	margin-top: 30px;
+	border-radius: 8px;
+}
+
+.askQuestion__title,
+.askQuestion__body {
+	margin: 25px !important;
+	width: 95% !important;
+}
+
+.askQuestion__title label,
+.askQuestion__body label {
+	color: white;
+}
+
+.askQuestion__title fieldset,
+.askQuestion__body fieldset {
+	border-color: #c1fff4 !important;
+}
+
+.askQuestion__post {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 25px;
+	padding-bottom: 25px;
+}
+
+.askQuestion__button {
+	background-color: #d8e9a8 !important;
+	border-radius: 20px !important;
+	color: black !important;
+}
+
+.askQuestion__body textarea,
+.askQuestion__title input {
+	color: white;
+}
+
+/* .askQuestion__title legend {
+	color: white !important;
+} */

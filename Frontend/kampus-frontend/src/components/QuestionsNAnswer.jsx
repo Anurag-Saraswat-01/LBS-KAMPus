@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { questions } from "../api/postData";
 import { Container } from "react-bootstrap";
 import Answers from "./Answers";
@@ -6,6 +6,7 @@ import { PersonInfo } from "./PersonInfo";
 import AnswerCount from "./AnswerCount";
 
 const QuestionNAnswer = () => {
+	// const [questions, setQuestions] = useState([question])
 	const questionCard = questions.map((data) => {
 		return (
 			<div className="ps-2 pe-2">
@@ -28,7 +29,11 @@ const QuestionNAnswer = () => {
 			</div>
 		);
 	});
-	return questionCard;
+	return (
+		<div>
+			<Container className="post ">{questionCard}</Container>
+		</div>
+	);
 };
 
 export default QuestionNAnswer;
