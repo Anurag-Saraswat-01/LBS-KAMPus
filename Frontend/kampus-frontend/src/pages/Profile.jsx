@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Post from "../components/Post";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/Modal"
 import Tabs from "react-bootstrap/Tabs";
@@ -94,7 +95,7 @@ const Profile = () => {
         <div className="user-activity">
           <Tabs defaultActiveKey="all" id="user-activity-tabs" className="mb-3">
             <Tab eventKey="all" title="All Activty">
-              <div>all activity</div>
+              <div><Post /></div>
             </Tab>
             <Tab eventKey="posts" title="Posts">
               <div>posts</div>
