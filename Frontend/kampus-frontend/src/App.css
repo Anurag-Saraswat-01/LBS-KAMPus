@@ -547,8 +547,9 @@ p .answer {
 	border-color: white !important;
 }
 
-.askQuestion__dropdown .MuiSelect-select {
-	color: white;
+.askQuestion__dropdown .MuiSelect-select,
+.Mui-focused {
+	color: white !important;
 }
 
 .askQuestion__dropdown .MuiOutlinedInput-root {

@@ -1,0 +1,82 @@
+.signup h1 {
+	width: 100%;
+	color: white;
+	display: flex;
+	justify-content: center;
+}
+
+/* SIGNUP CONTAINER */
+.signup__container {
+	width: 32%;
+}
+.signup__outer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.signup__name,
+.signup__email,
+.passwordComponent__password {
+	width: 100%;
+	margin: 10px 0 !important;
+}
+
+.signup__year {
+	width: 40%;
+	margin: 10px 0 !important;
+}
+
+/* SIGNUP DROPDOWN */
+.signup__dropdown {
+	width: 55%;
+	margin: 10px 0 10px 5% !important;
+}
+
+label,
+input,
+fieldset,
+svg,
+.signup__email p {
+	color: white !important;
+	border-color: white !important;
+}
+
+.MuiSelect-select/*:not(.signup__email .MuiSelect-select)*/,
+.Mui-focused {
+	color: white !important;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
+	.MuiOutlinedInput-notchedOutline {
+	border-color: #d32f2f !important;
+}
+.MuiOutlinedInput-root {
+	background-color: #202020;
+}
+
+.signup__button {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.askQuestion__button {
+	width: 30%;
+	height: 25%;
+	color: #d8e9a8 !important;
+	border-radius: 16px !important;
+	background-color: #202020 !important;
+}
+
+@media only screen and (max-width: 768px) {
+	.signup__container {
+		width: 65%;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.signup__container {
+		width: 90%;
+	}
+}

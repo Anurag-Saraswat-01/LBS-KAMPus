@@ -32,8 +32,9 @@ const PasswordComponent = ({ title, label }) => {
     });
   };
 
-  return <div>
-    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" className="passwordComponent__password">
+  return (
+    <div>
+    <FormControl  variant="outlined" className="passwordComponent__password">
       <InputLabel htmlFor="outlined-adornment-password">{title}</InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
@@ -56,7 +57,7 @@ const PasswordComponent = ({ title, label }) => {
       />
     </FormControl>
 
-  </div>;
+  </div>);
 };
 
 export default PasswordComponent;
