@@ -33,7 +33,7 @@ const SignUp = () => {
 		event.preventDefault();
 		const validity = String(email.value)
 			.toLowerCase()
-			.match(/(d?20[0-9]{2}[A-Z]+\.)?[A-Z]+\@ves\.ac\.in/gi);
+			.match(/(d?20[0-9]{2}[A-Z]+\.)?[A-Z]+@ves\.ac\.in/i);
 		console.log(validity);
 		setEmail({ value: event.target.value, validity: validity });
 		console.log(email);
