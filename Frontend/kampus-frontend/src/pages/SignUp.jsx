@@ -1,5 +1,5 @@
 import "../css/SignUp.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PasswordComponent from "../components/PasswordComponent";
 import Header from "../components/Header";
 import {
@@ -20,6 +20,13 @@ const SignUp = () => {
 	const [year, setYear] = useState("");
 	const [department, setDepartment] = useState("");
 
+	useEffect(() => {
+		const validity = String(email.value)
+			.toLowerCase()
+			.match(/(d?20[0-9]{2}[A-Z]+\.)?[A-Z]+@ves\.ac\.in/i);
+		setEmail({ value: email.value, validity: validity });
+	}, [email.value]);
+
 	const handleDepartmentChange = (event) => {
 		setDepartment(event.target.value);
 	};
@@ -34,9 +41,9 @@ const SignUp = () => {
 		const validity = String(email.value)
 			.toLowerCase()
 			.match(/(d?20[0-9]{2}[A-Z]+\.)?[A-Z]+@ves\.ac\.in/i);
-		console.log(validity);
+		// console.log(validity);
 		setEmail({ value: event.target.value, validity: validity });
-		console.log(email);
+		// console.log(email.value);
 	};
 
 	const handleYearChange = (event) => {
