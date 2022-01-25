@@ -1,4 +1,4 @@
-.signup h1 {
+h1 {
 	width: 100%;
 	color: white;
 	display: flex;
@@ -10,8 +10,10 @@
 	width: 32%;
 }
 .signup__outer {
+	height: 85vh;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 }
 

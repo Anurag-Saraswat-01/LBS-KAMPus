@@ -17,6 +17,8 @@ const SignUp = () => {
 		value: "",
 		validity: true,
 	});
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
 	const [year, setYear] = useState("");
 	const [department, setDepartment] = useState("");
 
@@ -51,74 +53,97 @@ const SignUp = () => {
 		setYear(event.target.value);
 	};
 
+	const submitHandler = (event) => {
+		event.preventDefault();
+		console.log(password === confirmPassword);
+		console.log({
+			name: name,
+			email: email.value,
+			password: password,
+			confirmPassword: confirmPassword,
+			year: year,
+			department: department,
+		});
+	};
 	return (
 		<div className="signup">
 			<Header page={"landing"} />
-			<h1>Sign Up</h1>
 			<div className="signup__outer">
+				<h1>Sign Up</h1>
 				<div className="signup__container">
-					{/* <form method="POST" action="/"> */}
-					<TextField
-						className="signup__name"
-						id="outlined-name"
-						label="Name"
-						value={name}
-						onChange={handleNameChange}
-					/>
-					<TextField
-						className="signup__email"
-						id="outlined-email"
-						label="Email"
-						value={email.value}
-						onChange={handleEmailChange}
-						error={!email.validity}
-						helperText={"Enter ves email id"}
-					/>
-					<TextField
-						className="signup__year"
-						id="outlined-year"
-						label="Year"
-						value={year}
-						onChange={handleYearChange}
-					/>
-					<FormControl className="signup__dropdown" color="primary">
-						<InputLabel> Choose your Department </InputLabel>
-						<Select
-							value={department}
-							variant="outlined"
-							label="Choose your Department"
-							onChange={handleDepartmentChange}
-						>
-							<MenuItem value={""}>None</MenuItem>
-							<MenuItem value={"cmpn"}>Computers</MenuItem>
-							<MenuItem value={"el"}>Electrical</MenuItem>
-							<MenuItem value={"extc"}>Electronics and Communication</MenuItem>
-							<MenuItem value={"it"}>Information Technology</MenuItem>
-							<MenuItem value={"instru"}>Instrumentation</MenuItem>
-							<MenuItem value={"aids"}>AIDS</MenuItem>
-						</Select>
-					</FormControl>
+					{/* method="POST" action="/" */}
+					<form onSubmit={submitHandler}>
+						<TextField
+							className="signup__name"
+							id="outlined-name"
+							autoComplete="off"
+							label="Name"
+							value={name}
+							onChange={handleNameChange}
+						/>
+						<TextField
+							className="signup__email"
+							id="outlined-email"
+							autoComplete="off"
+							label="Email"
+							value={email.value}
+							onChange={handleEmailChange}
+							error={!email.validity}
+							helperText={"Enter ves email id"}
+						/>
+						<TextField
+							className="signup__year"
+							autoComplete="off"
+							id="outlined-year"
+							label="Year"
+							value={year}
+							onChange={handleYearChange}
+						/>
+						<FormControl className="signup__dropdown" color="primary">
+							<InputLabel> Choose your Department </InputLabel>
+							<Select
+								value={department}
+								autoComplete="off"
+								variant="outlined"
+								label="Choose your Department"
+								onChange={handleDepartmentChange}
+							>
+								<MenuItem value={""}>None</MenuItem>
+								<MenuItem value={"cmpn"}>Computers</MenuItem>
+								<MenuItem value={"el"}>Electrical</MenuItem>
+								<MenuItem value={"extc"}>
+									Electronics and Communication
+								</MenuItem>
+								<MenuItem value={"it"}>Information Technology</MenuItem>
+								<MenuItem value={"instru"}>Instrumentation</MenuItem>
+								<MenuItem value={"aids"}>AIDS</MenuItem>
+							</Select>
+						</FormControl>
 
-					<PasswordComponent
-						className="signup__password"
-						title="Password"
-						label="Password"
-					/>
-					<PasswordComponent
-						className="signup__password"
-						title="Confirm Password"
-						label="Confirm-Password"
-					/>
-					{/* </form> */}
-					<div className="signup__button">
-						<Button
-							className="askQuestion__button"
-							color="primary"
-							variant="contained"
-						>
-							SignUp
-						</Button>
-					</div>
+						<PasswordComponent
+							className="signup__password"
+							title="Password"
+							label="Password"
+							setPassword={setPassword}
+						/>
+						<PasswordComponent
+							className="signup__password"
+							title="Confirm Password"
+							label="Confirm-Password"
+							setPassword={setConfirmPassword}
+						/>
+
+						<div className="signup__button">
+							<Button
+								className="askQuestion__button"
+								color="primary"
+								type="submit"
+								variant="contained"
+							>
+								SignUp
+							</Button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

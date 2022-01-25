@@ -3,6 +3,7 @@ import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import Homepage from "./pages/Homepage";
 import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 import AskQuestion from "./pages/AskQuestion";
 function App() {
 	return (
@@ -10,7 +11,8 @@ function App() {
 			{/* <Landing /> */}
 			{/* <Profile /> */}
 			{/* <Homepage /> */}
-			<SignUp />
+			{/* <SignUp /> */}
+			<SignIn />
 			{/* <AskQuestion /> */}
 		</div>
 	);
