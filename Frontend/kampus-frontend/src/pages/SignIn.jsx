@@ -3,6 +3,7 @@ import PasswordComponent from "../components/PasswordComponent";
 import Header from "../components/Header";
 import { TextField, Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const SignIn = () => {
 	const [password, setPassword] = useState("");
@@ -28,12 +29,32 @@ const SignIn = () => {
 		// console.log(email.value);
 	};
 
-	const submitHandler = (event) => {
+	const submitHandler = async (event) => {
 		event.preventDefault();
 		console.log({
 			email: email.value,
 			password: password,
 		});
+
+		try {
+			const url = "http://localhost:8080";
+			const config = {
+				headers: {
+					"Content-type": "application/json",
+				},
+			};
+			const response = await axios.post(
+				`${url}/api/users/login`,
+				{
+					username: email.value,
+					password: password,
+				},
+				config
+			);
+			console.log(response.data);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<div className="signup">

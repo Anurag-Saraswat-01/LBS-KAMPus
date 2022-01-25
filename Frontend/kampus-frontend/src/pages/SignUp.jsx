@@ -2,6 +2,7 @@ import "../css/SignUp.css";
 import React, { useState, useEffect } from "react";
 import PasswordComponent from "../components/PasswordComponent";
 import Header from "../components/Header";
+import axios from "axios";
 import {
 	FormControl,
 	Select,
@@ -53,7 +54,7 @@ const SignUp = () => {
 		setYear(event.target.value);
 	};
 
-	const submitHandler = (event) => {
+	const submitHandler = async (event) => {
 		event.preventDefault();
 		console.log(password === confirmPassword);
 		console.log({
@@ -62,8 +63,32 @@ const SignUp = () => {
 			password: password,
 			confirmPassword: confirmPassword,
 			year: year,
-			department: department,
+			branch: department,
 		});
+		try {
+			const url = "http://localhost:8080";
+			const config = {
+				headers: {
+					"Content-type": "application/json",
+				},
+			};
+			if (password === confirmPassword) {
+				const response = await axios.post(
+					`${url}/api/users/signup`,
+					{
+						name: name,
+						email: email.value,
+						password: password,
+						year: year,
+						department: department,
+					},
+					config
+				);
+				console.log(response.data);
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<div className="signup">
