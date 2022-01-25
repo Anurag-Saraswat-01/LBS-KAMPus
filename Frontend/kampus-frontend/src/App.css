@@ -1,464 +1,465 @@
 @import url("https://fonts.googleapis.com/css2?family=McLaren&family=Merienda:wght@400;700&family=Quicksand:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@400;600;700&display=swap");
 :root {
-	--background: #3e3e3e;
-	--navbar: #202020;
-	--green-text: #d8e9a8;
-	--foreground: #222222;
-	--green-text: #91a35e;
-	--post-background: #191a19;
-	--alt-green-text: #f6ff92;
+  --background: #3e3e3e;
+  --navbar: #202020;
+  --green-text: #d8e9a8;
+  --foreground: #222222;
+  --green-text: #91a35e;
+  --post-background: #191a19;
+  --alt-green-text: #f6ff92;
+  --nav-height: 117px;
 }
 
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 a {
-	text-decoration: none !important;
-	color: inherit !important;
+  text-decoration: none !important;
+  color: inherit !important;
 }
 body {
-	background-color: var(--background) !important;
+  background-color: var(--background) !important;
 }
 /* using ul directly coz i cba to make classes for this and i dont think anyone wants list-style anyway */
 ul {
-	list-style: none;
+  list-style: none;
 }
 
 /* ------Header css------ */
 .navbar {
-	background-color: var(--navbar);
-	height: 15vh;
+  background-color: var(--navbar);
+  height: 15vh;
 }
 
 .navbar-brand,
 .nav-link {
-	color: var(--green-text) !important;
-	font-family: "Merienda", cursive;
-	font-size: 1.25rem;
+  color: var(--green-text) !important;
+  font-family: "Merienda", cursive;
+  font-size: 1.25rem;
 }
 
 .navbar-brand {
-	font-weight: bold;
-	font-size: 3rem !important;
+  font-weight: bold;
+  font-size: 3rem !important;
 }
 
 .nav-item {
-	margin: 0 0.5em;
+  margin: 0 0.5em;
 }
 
 .add-post {
-	background-color: #35463b;
-	color: var(--green-text);
-	height: 40px;
-	width: 40px;
-	display: grid;
-	place-items: center;
-	border-radius: 100%;
+  background-color: #35463b;
+  color: var(--green-text);
+  height: 40px;
+  width: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
 }
 
 /* ------Landing page css------ */
 .landing-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 5%;
-	text-align: center;
-	font-family: "McLaren", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
+  text-align: center;
+  font-family: "McLaren", cursive;
 }
 
 .landing-title {
-	color: #beffb0;
-	font-weight: bold;
-	font-size: 120px;
+  color: #beffb0;
+  font-weight: bold;
+  font-size: 120px;
 }
 
 .landing-text {
-	color: #84c577;
-	font-size: 24px;
+  color: #84c577;
+  font-size: 24px;
 }
 
 .landing-text span {
-	color: #beffb0;
-	font-weight: bold;
-	font-size: 32px;
+  color: #beffb0;
+  font-weight: bold;
+  font-size: 32px;
 }
 
 .landing-signin-btn {
-	background-color: #202020;
-	color: var(--green-text);
-	height: 60px;
-	width: 120px;
-	border: none;
-	border-radius: 30px;
-	font-family: "Quicksand", sans-serif;
-	font-weight: bold;
-	font-size: 20px;
-	margin: 2% 0;
+  background-color: #202020;
+  color: var(--green-text);
+  height: 60px;
+  width: 120px;
+  border: none;
+  border-radius: 30px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 2% 0;
 }
 
 .landing-signup,
 .landing-signup a {
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 /* ------Profile page css------ */
 .profile-container {
-	padding: 5%;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 5%;
-	grid-auto-rows: minmax(100px, auto);
-	font-family: "McLaren", cursive;
+  padding: 5%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5%;
+  grid-auto-rows: minmax(100px, auto);
+  font-family: "McLaren", cursive;
 }
 
 .user-info {
-	grid-column: 1/3;
-	grid-row: 1;
-	display: flex;
-	flex-direction: row;
-	color: white;
+  grid-column: 1/3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: row;
+  color: white;
 }
 
 .user-stats {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .user-bio {
-	margin-right: 5%;
+  margin-right: 5%;
 }
 
 .user-image {
-	height: 200px;
-	width: 200px;
-	background-color: #c4c4c4;
-	border-radius: 50%;
-	margin-bottom: 1rem;
+  height: 200px;
+  width: 200px;
+  background-color: #c4c4c4;
+  border-radius: 50%;
+  margin-bottom: 1rem;
 }
 
 .user-bio-text {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 .user-text {
-	padding: 1rem 0;
+  padding: 1rem 0;
 }
 
 .follow-btn,
 .edit-btn {
-	background-color: var(--navbar);
-	color: var(--green-text);
-	height: 40px;
-	width: 80px;
-	border: none;
-	border-radius: 20px;
-	font-family: "Quicksand", sans-serif;
-	font-size: 16px;
+  background-color: var(--navbar);
+  color: var(--green-text);
+  height: 40px;
+  width: 80px;
+  border: none;
+  border-radius: 20px;
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
 }
 
 .share-profile-btn {
-	background-color: var(--green-text);
-	height: 40px;
-	width: 60px;
-	border: none;
-	border-radius: 20px;
-	margin: 0 1rem;
+  background-color: var(--green-text);
+  height: 40px;
+  width: 60px;
+  border: none;
+  border-radius: 20px;
+  margin: 0 1rem;
 }
 
 .user-activity {
-	grid-column: 1/3;
-	grid-row: 2;
-	background-color: var(--navbar);
-	border-radius: 0.25rem;
-	height: 200px;
+  grid-column: 1/3;
+  grid-row: 2;
+  background-color: var(--navbar);
+  border-radius: 0.25rem;
+  height: 200px;
 }
 
 .nav-tabs {
-	background-color: #3e3e3e;
-	border-bottom: none !important;
+  background-color: #3e3e3e;
+  border-bottom: none !important;
 }
 
 .nav-tabs > .nav-item {
-	margin: 0;
+  margin: 0;
 }
 
 .nav-tabs > .nav-item > .nav-link {
-	color: white !important;
+  color: white !important;
 }
 
 .nav-tabs > .nav-item > .nav-link.active {
-	background-color: var(--navbar);
-	color: var(--green-text) !important;
-	border: 1px solid var(--navbar);
+  background-color: var(--navbar);
+  color: var(--green-text) !important;
+  border: 1px solid var(--navbar);
 }
 
 .tab-content {
-	color: white;
-	padding: 2rem;
+  color: white;
+  padding: 2rem;
 }
 
 .user-accolades {
-	grid-column: 3/4;
-	grid-row: 1/3;
-	background-color: var(--navbar);
-	color: white;
-	padding: 1rem 2rem;
-	border-radius: 0.25rem;
+  grid-column: 3/4;
+  grid-row: 1/3;
+  background-color: var(--navbar);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
 }
 
 .accolade-title {
-	font-family: "Merienda", cursive;
-	font-weight: bold;
+  font-family: "Merienda", cursive;
+  font-weight: bold;
 }
 
 .accolade-title::after {
-	content: "";
-	display: block;
-	width: 100%;
-	height: 2px;
-	background-color: #c1fff4;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #c1fff4;
 }
 
 .societies {
-	margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .badge-info,
 .society-info {
-	display: flex;
+  display: flex;
 }
 
 .badge-icon,
 .society-icon {
-	height: 20px;
-	width: 20px;
-	background-color: #c4c4c4;
-	margin-right: 1rem;
+  height: 20px;
+  width: 20px;
+  background-color: #c4c4c4;
+  margin-right: 1rem;
 }
 
 .modal-header,
 .modal-content,
 .modal-body {
-	background-color: #202020;
+  background-color: #202020;
 }
 
 .modal-header {
-	color: var(--green-text);
+  color: var(--green-text);
 }
 
 .modal-body {
-	color: white;
+  color: white;
 }
 
 /* Homepage CSS */
 .homepage-container {
-	display: grid;
-	grid-template-columns: 0.25fr 0.75fr;
-	grid-template-rows: 1fr;
-	/* background-color: #3e3e3e; */
+  display: grid;
+  grid-template-columns: 0.25fr 0.75fr;
+  grid-template-rows: 1fr;
+  /* background-color: #3e3e3e; */
 }
 
 .sidebar {
-	background-color: var(--foreground);
-	font-family: "Martel Sans";
-	height: 100vh;
+  background-color: var(--foreground);
+  font-family: "Martel Sans";
+  height: 100vh;
 }
 
 .sidebar-user-info {
-	color: var(--alt-green-text);
-	display: flex;
-	justify-content: start;
-	align-items: center;
-	padding: 2em;
+  color: var(--alt-green-text);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 2em;
 }
 
 .sidebar-user-img-temp {
-	background-color: black;
-	border: var(--green-text) 1px solid;
-	color: var(--green-text);
-	/* font-size: 2em; */
-	/* padding: 0.5em; */
-	width: 70px;
-	height: 70px;
-	border-radius: 50%;
-	font-size: 2em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  background-color: black;
+  border: var(--green-text) 1px solid;
+  color: var(--green-text);
+  /* font-size: 2em; */
+  /* padding: 0.5em; */
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sidebar-username {
-	padding: 0;
-	margin: 0 1em;
+  padding: 0;
+  margin: 0 1em;
 }
 
 .divider {
-	color: #c1fff4;
-	opacity: 0.75;
-	margin: 0;
+  color: #c1fff4;
+  opacity: 0.75;
+  margin: 0;
 }
 
 .reccomendations {
-	margin: 1em;
-	color: white;
+  margin: 1em;
+  color: white;
 }
 .recco-title {
-	color: var(--green-text);
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 1.25rem;
+  color: var(--green-text);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.25rem;
 }
 .reccomendations ul {
-	margin: 0 !important;
-	padding: 0 !important;
-	display: flex;
-	flex-direction: column;
-	/* justify-content: center; */
-	/* align-items: center; */
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 .reccomendations li {
-	margin: 1em;
-	font-weight: bold;
-	font-size: 1rem;
+  margin: 1em;
+  font-weight: bold;
+  font-size: 1rem;
 }
 .post-placeholder {
-	/* height: 90vh; */
-	margin: 2em 3em;
-	background-color: var(--foreground);
+  /* height: 90vh; */
+  margin: 2em 3em;
+  background-color: var(--foreground);
 }
 
 /* Comment CSS */
 .comment {
-	/* padding: 1em; */
-	color: white;
+  /* padding: 1em; */
+  color: white;
 }
 .comment-user-info {
-	color: var(--alt-green-text);
-	display: flex;
-	justify-content: start;
-	align-items: center;
-	padding: 2em 1em 1em 2em;
+  color: var(--alt-green-text);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 2em 1em 1em 2em;
 }
 .comment-user-img-temp {
-	background-color: black;
-	border: var(--green-text) 1px solid;
-	color: var(--green-text);
-	/* font-size: 2em; */
-	/* padding: 0.5em; */
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	font-size: 1.3em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  background-color: black;
+  border: var(--green-text) 1px solid;
+  color: var(--green-text);
+  /* font-size: 2em; */
+  /* padding: 0.5em; */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .comment-info-wrapper {
-	display: flex;
-	align-items: center;
-	/* justify-content: space-around; */
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
 }
 .comment-date {
-	padding: 0;
-	margin: 0;
-	font-size: 0.8em;
-	opacity: 0.5;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  opacity: 0.5;
 }
 .comment-body {
-	margin-left: 100px;
+  margin-left: 100px;
 }
 
 .votes-replies {
-	margin: 1em 0;
+  margin: 1em 0;
 }
 
 /* Reply CSS */
 .reply {
-	margin-left: 5em;
-	color: white;
-	border-left: var(--background) 5px solid;
+  margin-left: 5em;
+  color: white;
+  border-left: var(--background) 5px solid;
 }
 .reply-user-info {
-	color: var(--alt-green-text);
-	display: flex;
-	justify-content: start;
-	align-items: center;
-	padding: 1em 2em;
+  color: var(--alt-green-text);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 1em 2em;
 }
 .reply-user-img-temp {
-	background-color: black;
-	border: var(--green-text) 1px solid;
-	color: var(--green-text);
-	/* font-size: 2em; */
-	/* padding: 0.5em; */
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	font-size: 1em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  background-color: black;
+  border: var(--green-text) 1px solid;
+  color: var(--green-text);
+  /* font-size: 2em; */
+  /* padding: 0.5em; */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .reply-info-wrapper {
-	display: flex;
-	align-items: center;
-	/* justify-content: space-around; */
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
 }
 .reply-date {
-	padding: 0;
-	margin: 0;
-	font-size: 0.8em;
-	opacity: 0.5;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  opacity: 0.5;
 }
 .reply-body {
-	margin-left: 100px;
-	font-size: 0.9em;
+  margin-left: 100px;
+  font-size: 0.9em;
 }
 
 /*! Posts */
 .post {
-	width: 100% !important;
-	margin: auto 0;
-	padding: 0 !important;
-	background-color: var(--post-background);
+  width: 100% !important;
+  margin: auto 0;
+  padding: 0 !important;
+  background-color: var(--post-background);
 }
 
 p {
-	color: var(--alt-green-text);
+  color: var(--alt-green-text);
 }
 
 p .answer {
-	color: white !important;
+  color: white !important;
 }
 
 .questionSection {
-	padding: 12px 12px 8px !important;
-	background-color: var(--post-background);
-	border-color: var(--green-text);
+  padding: 12px 12px 8px !important;
+  background-color: var(--post-background);
+  border-color: var(--green-text);
 }
 
 .questionSection h4 {
-	color: #cdf2a8 !important;
+  color: #cdf2a8 !important;
 }
 
 .follow .followBtn {
-	width: 60px;
-	height: 30px;
-	font-size: 10px;
-	padding-left: 8px;
-	color: #fff !important;
+  width: 60px;
+  height: 30px;
+  font-size: 10px;
+  padding-left: 8px;
+  color: #fff !important;
 }
 
 .answerCount p {
-	color: #c1fff4;
+  color: #c1fff4;
 }
 
 .clickable {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 /* .clickable:hover {
@@ -468,134 +469,144 @@ p .answer {
 } */
 
 .answer {
-	color: #fff;
+  color: #fff;
 }
 
 .commentBar {
-	color: white;
+  color: white;
 }
 
 .likes,
 .dislikes {
-	background-color: #000;
-	width: 150px;
-	margin: auto 0 !important;
-	padding-bottom: 4px !important;
+  background-color: #000;
+  width: 150px;
+  margin: auto 0 !important;
+  padding-bottom: 4px !important;
 }
 .likes {
-	border-radius: 30px 0 0 30px;
-	border-right: 1px solid #888888;
+  border-radius: 30px 0 0 30px;
+  border-right: 1px solid #888888;
 }
 
 .dislikes {
-	border-radius: 0 30px 30px 0;
-	border-left: 1px solid #888888;
+  border-radius: 0 30px 30px 0;
+  border-left: 1px solid #888888;
 }
 
 .shareIcon {
-	width: 50px;
-	background-color: #84c577;
-	height: 40px;
+  width: 50px;
+  background-color: #84c577;
+  height: 40px;
 }
 
 .share {
-	color: #fff;
+  color: #fff;
 }
 
 .lineBreak {
-	margin: 10px auto 10px;
-	color: #c1fff4;
-	background-color: #c1fff4;
-	height: 3;
+  margin: 10px auto 10px;
+  color: #c1fff4;
+  background-color: #c1fff4;
+  height: 3;
 }
 
 .commentIcon {
-	width: 32px;
-	height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 /* Ask Question */
 .askQuestion__ques {
-	width: 65%;
-	margin: 45px auto;
+  width: 65%;
+  margin: 45px auto;
 }
 
 .askQuestion__ques h2 {
-	color: #fff;
-	margin-bottom: 10px;
+  color: #fff;
+  margin-bottom: 10px;
 }
 
 .askQuestion__ques hr {
-	color: #c1fff4;
-	height: 3px;
+  color: #c1fff4;
+  height: 3px;
 }
 
 .askQuestion__category {
-	width: 300px;
-	/* background-color: #202020; */
+  width: 300px;
+  /* background-color: #202020; */
 }
 
 .askQuestion__dropdown {
-	width: 300px;
-	/* background-color: #202020; */
+  width: 300px;
+  /* background-color: #202020; */
 }
 
 .askQuestion__dropdown label,
 .askQuestion__dropdown svg,
 .askQuestion__dropdown fieldset {
-	color: white;
-	border-color: white !important;
+  color: white;
+  border-color: white !important;
 }
 
 .askQuestion__dropdown .MuiSelect-select,
 .Mui-focused {
-	color: white !important;
+  color: white !important;
 }
 
 .askQuestion__dropdown .MuiOutlinedInput-root {
-	background-color: #202020;
+  background-color: #202020;
 }
 
 .askQuestion__content {
-	background-color: #202020;
-	margin-top: 30px;
-	border-radius: 8px;
+  background-color: #202020;
+  margin-top: 30px;
+  border-radius: 8px;
 }
 
 .askQuestion__title,
 .askQuestion__body {
-	margin: 25px !important;
-	width: 95% !important;
+  margin: 25px !important;
+  width: 95% !important;
 }
 
 .askQuestion__title label,
 .askQuestion__body label {
-	color: white;
+  color: white;
 }
 
 .askQuestion__title fieldset,
 .askQuestion__body fieldset {
-	border-color: #c1fff4 !important;
+  border-color: #c1fff4 !important;
 }
 
 .askQuestion__post {
-	display: flex;
-	justify-content: flex-end;
-	margin-right: 25px;
-	padding-bottom: 25px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 25px;
+  padding-bottom: 25px;
 }
 
 .askQuestion__button {
-	background-color: #d8e9a8 !important;
-	border-radius: 20px !important;
-	color: black !important;
+  background-color: #d8e9a8 !important;
+  border-radius: 20px !important;
+  color: black !important;
 }
 
 .askQuestion__body textarea,
 .askQuestion__title input {
-	color: white;
+  color: white;
 }
 
 /* .askQuestion__title legend {
 	color: white !important;
 } */
+
+.load-cont {
+  height: calc(100vh - var(--nav-height));
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--green-text);
+  flex-direction: column;
+}
