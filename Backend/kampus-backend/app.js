@@ -6,10 +6,21 @@ const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const app = express();
 const Schema = mongoose.Schema;
+const cors = require("cors");
 
+// For cross-sharing the data
+const corsOptions = {
+	origin: "*",
+	credentials: true,
+	optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
+// To get data from input
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// dbconfig => Making db connection
 main()
 	.then(console.log("Database Connection Successful"))
 	.catch((err) => console.log(err));

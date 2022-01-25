@@ -6,6 +6,7 @@ const generateJwtToken = require("../utils/generateJWT");
 // @POST
 // @desc: User registration
 const registerUser = async (req, res) => {
+	console.log("New Registration request");
 	const password = bcrypt.hashSync(req.body.password, +process.env.SALT_ROUNDS);
 	const name = req.body.name;
 	const branch = req.body.branch;
@@ -42,10 +43,11 @@ const registerUser = async (req, res) => {
 // @desc: User login
 const loginUser = async (req, res) => {
 	const { username, password } = req.body;
+	console.log("New Login request");
 	const existingUser = await User.findOne({ email: username });
 	if (!existingUser) {
-		res.status(404).json({ message: "Invalid username or password" });
-		throw new Error("Invalid username or password");
+		return res.status(404).json({ message: "Invalid username or password" });
+		// throw new Error("Invalid username or password");
 	}
 	if (existingUser && bcrypt.compareSync(password, existingUser.password)) {
 		return res.status(201).json({

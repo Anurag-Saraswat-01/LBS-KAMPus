@@ -11,8 +11,8 @@ function App() {
 			{/* <Landing /> */}
 			{/* <Profile /> */}
 			{/* <Homepage /> */}
-			{/* <SignUp /> */}
-			<SignIn />
+			<SignUp />
+			{/* <SignIn /> */}
 			{/* <AskQuestion /> */}
 		</div>
 	);
