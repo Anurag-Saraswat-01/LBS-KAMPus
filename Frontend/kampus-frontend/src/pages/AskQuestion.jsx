@@ -9,13 +9,56 @@ import {
 	MenuItem,
 } from "@mui/material";
 import Header from "../components/Header";
+import axios from "axios";
 
 const AskQuestion = () => {
 	const [department, setDepartment] = useState("");
+	const [title, setTitle] = useState("");
+	const [body, setBody] = useState("");
 
 	const handleChange = (event) => {
 		setDepartment(event.target.value);
 	};
+
+	const handleTitleChange = (event) => {
+		setTitle(event.target.value);
+	}
+
+	const handleBodyChange = (event) => {
+		setBody(event.target.value);
+	}
+
+	const submitPost = async (event) => {
+		event.preventDefault();
+		console.log({
+			department, title, body
+		});
+		try {
+      const url = "http://localhost:8080";
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+				withCredentials: true, 
+        credentials: 'include'
+
+      };
+      const response = await axios.post(
+        `${url}/api/posts/create`,
+        {
+          title: title, 
+					body: body, 
+					category: department, 
+        },
+        config
+      );
+			console.log(response.data)
+		}
+		catch(err) {
+			console.log(err)
+		}
+	}
+
 	return (
 		<div className="askQuestion">
 			<Header />
@@ -47,6 +90,8 @@ const AskQuestion = () => {
 					<TextField
 						fullWidth
 						id="outlined-basic"
+						value={title}
+						onChange={handleTitleChange}
 						label="Title"
 						variant="outlined"
 						className="askQuestion__title"
@@ -55,6 +100,8 @@ const AskQuestion = () => {
 						fullWidth
 						id="outlined-basic"
 						label="Body"
+						value={body}
+						onChange={handleBodyChange}
 						variant="outlined"
 						multiline={true}
 						minRows={6}
@@ -67,6 +114,7 @@ const AskQuestion = () => {
 							className="askQuestion__button"
 							color="primary"
 							variant="contained"
+							onClick={submitPost}
 						>
 							Post
 						</Button>

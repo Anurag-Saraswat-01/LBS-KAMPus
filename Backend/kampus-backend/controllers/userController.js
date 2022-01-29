@@ -2,6 +2,10 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 const generateJwtToken = require("../utils/generateJWT");
+const express = require("express");
+const app = express();
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
 // @POST
 // @desc: User registration
@@ -51,7 +55,11 @@ const loginUser = async (req, res) => {
 	}
 	if (existingUser && bcrypt.compareSync(password, existingUser.password)) {
 		const token = generateJwtToken(existingUser._id);
-		res.cookie("jwt", token, { httpOnly: true, secure: false });
+		res.cookie("jwt", token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production" ? true : false,
+			sameSite: none,
+		});
 		return res.status(201).json({
 			message: "User login successful",
 			token: token,

@@ -10,10 +10,16 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 // For cross-sharing the data
+const whitelist = ["http://localhost:3000"];
+
 const corsOptions = {
 	origin: "*",
 	credentials: true,
-	optionSuccessStatus: 200,
+	origin: (origin, callback) => {
+		if (whitelist.includes(origin)) return callback(null, true);
+
+		callback(new Error("Not allowed by CORS"));
+	},
 };
 app.use(cors(corsOptions));
 //! cookieparser

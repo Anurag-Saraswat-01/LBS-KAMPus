@@ -1,5 +1,6 @@
 require("dotenv").config();
 const Post = require("../models/postModel");
+const User = require("../models/userModel");
 
 const getPosts = async (req, res) => {
 	const posts = await Post.find({});
@@ -24,20 +25,23 @@ const getOnePost = async (req, res) => {
 };
 
 const createOnePost = async (req, res) => {
-	console.log(req.isLoggedIn);
-	if (req.isLoggedIn) {
-		console.log(req.decodedId);
-	}
-	const { title, category, askedBy, answeredBy } = req.body;
+	const { title, category, body } = req.body;
+	const logged = res.locals.isLogggedIn;
+	const decodedId = res.locals.decodedId;
+	// console.log(logged);
+	// console.log(decodedId);
+	const user = await User.findById(decodedId);
 	const post = await new Post({
 		title,
 		category,
-		askedBy,
-		answeredBy,
+		body,
+		askedBy: user.name,
+		// answeredBy,
 	});
 	post.save().then(console.log("Post created successfully!"));
 
 	return res.status(201).json({
+		isLogggedIn: logged,
 		post,
 	});
 };

@@ -1,23 +1,27 @@
 const jwt = require("jsonwebtoken");
 
 const checkAuth = (req, res, next) => {
-	const token = req.cookie.jwt;
+	const token = req.cookies.jwt;
+	// console.log(token);
 	//! if token exists then validate
 	if (token) {
-		jwt.verify(token, process.env.secret, (err, decodedId) => {
+		jwt.verify(token, process.env.JWT_SECRET, (err, decodedId) => {
 			if (err) {
 				console.log(err);
-				req.isLogggedIn = false;
+				return res.json({
+					isLogggedIn: false,
+				});
 			} else {
 				console.log(decodedId);
-				req.isLogggedIn = true;
-				req.decodedId = decodedId;
+				res.locals.isLogggedIn = true;
+				res.locals.decodedId = decodedId.id;
+				next();
 			}
-			next();
 		});
 	} else {
-		req.isLogggedIn = false;
-		next();
+		return res.json({
+			isLogggedIn: false,
+		});
 	}
 };
 

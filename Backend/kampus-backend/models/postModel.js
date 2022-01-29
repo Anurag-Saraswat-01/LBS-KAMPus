@@ -7,6 +7,10 @@ const PostSchema = new Schema(
 			type: String,
 			require: true,
 		},
+		body: {
+			type: String,
+			require: true,
+		},
 		category: {
 			type: String,
 			required: true,

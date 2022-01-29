@@ -5,7 +5,9 @@ import { TextField, Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { HashLoader } from "react-spinners";
+// import Cookies from 'universal-cookie';
 
+// const cookies = new Cookies();
 const SignIn = () => {
   //State that checks if youre waiting for response after submit
   const [waitingForRes, setWaitingForRes] = useState(false);
@@ -47,6 +49,8 @@ const SignIn = () => {
         headers: {
           "Content-type": "application/json",
         },
+        withCredentials: true, 
+        credentials: 'include'
       };
       const response = await axios.post(
         `${url}/api/users/login`,
@@ -59,6 +63,9 @@ const SignIn = () => {
       // if response is received, set waiting to false
       setWaitingForRes(response ? false : true);
       console.log(response.data);
+      // if (response.status === 201) {
+      //   cookies.set("jwt", response.data.token)
+      // }
     } catch (error) {
       // if error, stop waiting
       setWaitingForRes(false);
