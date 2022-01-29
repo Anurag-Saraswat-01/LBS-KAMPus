@@ -7,6 +7,8 @@ import SignIn from "./pages/SignIn";
 import AskQuestion from "./pages/AskQuestion";
 import Header from "./components/Header";
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
 function App() {
 	// TODO: Add routing, then use useLocation() hook to get current page
 	// If current page is Landing, set isLanding to true and pass as prop to Header
@@ -15,10 +17,18 @@ function App() {
 	return (
 		<div className="App">
 			{/* <Header page={isLanding} /> */}
+			<Routes>
+				<Route path="/" element={<Landing />} />
+				<Route path="home" element={<Homepage />} />
+				<Route path="signup" element={<SignUp />} />
+				<Route path="signin" element={<SignIn />} />
+				<Route path="Profile" element={<Profile />} />
+				<Route path="ask" element={<AskQuestion />} />
+			</Routes>
 			{/* <Landing /> */}
 			{/* <Profile /> */}
 			{/* <Homepage /> */}
-			<SignUp />
+			{/* <SignUp /> */}
 			{/* <SignIn /> */}
 			{/* <AskQuestion /> */}
 		</div>
