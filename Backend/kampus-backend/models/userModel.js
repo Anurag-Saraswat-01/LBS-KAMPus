@@ -29,6 +29,28 @@ const UserSchema = new Schema(
 		},
 		year: String,
 		branch: String,
+
+		followers: [
+			{
+				type: String,
+			},
+		],
+		followersCount: {
+			type: Number,
+			required: true,
+			default: 0,
+		},
+
+		followings: [
+			{
+				type: String,
+			},
+		],
+		followingCount: {
+			type: Number,
+			required: true,
+			default: 0,
+		},
 		// gender: String,
 		// joiningDate: {
 		// 	type: Date,

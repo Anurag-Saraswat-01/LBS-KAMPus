@@ -24,9 +24,14 @@ const getOnePost = async (req, res) => {
 };
 
 const createOnePost = async (req, res) => {
-	const { title, askedBy, answeredBy } = req.body;
+	console.log(req.isLoggedIn);
+	if (req.isLoggedIn) {
+		console.log(req.decodedId);
+	}
+	const { title, category, askedBy, answeredBy } = req.body;
 	const post = await new Post({
 		title,
+		category,
 		askedBy,
 		answeredBy,
 	});

@@ -1,5 +1,6 @@
 const express = require("express");
 const postRouter = express.Router();
+const checkAuth = require("../middlewares/checkAuth");
 const {
 	getOnePost,
 	getPosts,
@@ -11,7 +12,7 @@ postRouter.route("/").get(getPosts);
 
 postRouter.route("/:id").get(getOnePost);
 
-postRouter.route("/create").post(createOnePost);
+postRouter.route("/create").post(checkAuth, createOnePost);
 
 postRouter.route("/delete/:id").delete(deletePost);
 

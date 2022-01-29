@@ -50,9 +50,11 @@ const loginUser = async (req, res) => {
 		// throw new Error("Invalid username or password");
 	}
 	if (existingUser && bcrypt.compareSync(password, existingUser.password)) {
+		const token = generateJwtToken(existingUser._id);
+		res.cookie("jwt", token, { httpOnly: true, secure: false });
 		return res.status(201).json({
 			message: "User login successful",
-			token: generateJwtToken(existingUser._id),
+			token: token,
 		});
 	} else {
 		return res.status(404).json({

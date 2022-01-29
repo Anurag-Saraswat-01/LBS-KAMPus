@@ -7,6 +7,7 @@ const postRoutes = require("./routes/postRoutes");
 const app = express();
 const Schema = mongoose.Schema;
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 // For cross-sharing the data
 const corsOptions = {
@@ -15,6 +16,8 @@ const corsOptions = {
 	optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+//! cookieparser
+app.use(cookieParser());
 
 // To get data from input
 app.use(express.json());
