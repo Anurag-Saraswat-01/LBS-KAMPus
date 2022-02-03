@@ -1,4 +1,5 @@
 require("dotenv").config();
+const mongoose = require("mongoose");
 const Post = require("../models/postModel");
 const User = require("../models/userModel");
 
@@ -28,9 +29,13 @@ const createOnePost = async (req, res) => {
 	const { title, category, body } = req.body;
 	const logged = res.locals.isLogggedIn;
 	const decodedId = res.locals.decodedId;
-	// console.log(logged);
+	let user = "";
+	// console.loggged);
 	// console.log(decodedId);
-	const user = await User.findById(decodedId);
+	if (mongoose.Types.ObjectId(decodedId)) {
+		user = await User.findById(decodedId);
+	}
+
 	const post = await new Post({
 		title,
 		category,

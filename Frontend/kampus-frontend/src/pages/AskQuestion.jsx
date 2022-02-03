@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 // import ".../"
 import {
 	FormControl,
@@ -11,10 +12,62 @@ import {
 import Header from "../components/Header";
 import axios from "axios";
 
-const AskQuestion = () => {
+//TODO: Make the page responsive
+
+const AskQuestion = ({ loggedin, setLoggedin }) => {
+	const navigate = useNavigate();
 	const [department, setDepartment] = useState("");
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
+	const [login, setLogin] = useState(false);
+
+	//* will be triggered once and will check if the user is logged in
+	//* if so sets the loginStatus to true else redirects the user to Signin page
+	useEffect(() => {
+		const checkLoginStatus = async () => {
+			try {
+				const url = "http://localhost:8080";
+				const config = {
+					headers: {
+						"Content-type": "application/json",
+					},
+					withCredentials: true,
+					credentials: "include",
+				};
+				const response = await axios.get(`${url}/loginStatus`, config);
+				const { loginStatus, data: id } = response.data;
+				console.log(id);
+				console.log(loginStatus);
+				setLogin(loginStatus);
+				if (!loginStatus) {
+					navigate("/signin", {
+						state: {
+							alert: true,
+							message: "Please login before continuing",
+							type: "error",
+						},
+					});
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		checkLoginStatus();
+	}, []);
+
+	// useEffect(() => {
+	// 	console.log(login);
+	// 	// setLogin(login);
+	// 	if (login) {
+	// 		navigate("/signin", {
+	// 			state: {
+	// 				alert: true,
+	// 				message: "Please login before continuing",
+	// 				type: "error",
+	// 			},
+	// 		});
+	// 	}
+	// }, [login, navigate]);
 
 	const handleChange = (event) => {
 		setDepartment(event.target.value);
@@ -22,46 +75,46 @@ const AskQuestion = () => {
 
 	const handleTitleChange = (event) => {
 		setTitle(event.target.value);
-	}
+	};
 
 	const handleBodyChange = (event) => {
 		setBody(event.target.value);
-	}
+	};
 
 	const submitPost = async (event) => {
 		event.preventDefault();
 		console.log({
-			department, title, body
+			department,
+			title,
+			body,
 		});
 		try {
-      const url = "http://localhost:8080";
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-				withCredentials: true, 
-        credentials: 'include'
-
-      };
-      const response = await axios.post(
-        `${url}/api/posts/create`,
-        {
-          title: title, 
-					body: body, 
-					category: department, 
-        },
-        config
-      );
-			console.log(response.data)
+			const url = "http://localhost:8080";
+			const config = {
+				headers: {
+					"Content-type": "application/json",
+				},
+				withCredentials: true,
+				credentials: "include",
+			};
+			const response = await axios.post(
+				`${url}/api/posts/create`,
+				{
+					title: title,
+					body: body,
+					category: department,
+				},
+				config
+			);
+			console.log(response.data);
+		} catch (err) {
+			console.log(err);
 		}
-		catch(err) {
-			console.log(err)
-		}
-	}
+	};
 
 	return (
 		<div className="askQuestion">
-			<Header />
+			<Header loggedin={loggedin} setLoggedin={setLoggedin} />
 			<div className="askQuestion__ques">
 				<h2>Ask a Question</h2>
 				<hr />

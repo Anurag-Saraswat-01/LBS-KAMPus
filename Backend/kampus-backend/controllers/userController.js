@@ -50,7 +50,9 @@ const loginUser = async (req, res) => {
 	console.log("New Login request");
 	const existingUser = await User.findOne({ email: username });
 	if (!existingUser) {
-		return res.status(404).json({ message: "Invalid username or password" });
+		return res
+			.status(404)
+			.json({ message: "Invalid username or password", loginStatus: false });
 		// throw new Error("Invalid username or password");
 	}
 	if (existingUser && bcrypt.compareSync(password, existingUser.password)) {
@@ -58,15 +60,16 @@ const loginUser = async (req, res) => {
 		res.cookie("jwt", token, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === "production" ? true : false,
-			sameSite: none,
 		});
 		return res.status(201).json({
 			message: "User login successful",
 			token: token,
+			loginStatus: true,
 		});
 	} else {
 		return res.status(404).json({
 			message: "Invalid username or password",
+			loginStatus: false,
 		});
 	}
 };
@@ -99,9 +102,17 @@ const getOneExistingUser = async (req, res) => {
 	return res.status(200).json(user);
 };
 
+const logoutUser = async (req, res) => {
+	res.clearCookie("jwt");
+	res.status(200).json({
+		message: "User logged out successfully",
+	});
+};
+
 module.exports = {
 	registerUser,
 	getExistingUsers,
 	loginUser,
+	logoutUser,
 	getOneExistingUser,
 };

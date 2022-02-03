@@ -3,10 +3,10 @@ import Sidebar from "../components/Sidebar";
 import QuestionNAnswer from "../components/QuestionsNAnswer";
 import Header from "../components/Header";
 import Comment from "../components/Comment";
-function Homepage() {
+function Homepage({ loggedin, setLoggedin }) {
 	return (
 		<div>
-			<Header />
+			<Header loggedin={loggedin} setLoggedin={setLoggedin} />
 			<div className="homepage-container">
 				<Sidebar />
 				<div className="post-placeholder">
