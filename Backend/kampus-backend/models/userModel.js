@@ -51,11 +51,20 @@ const UserSchema = new Schema(
 			required: true,
 			default: 0,
 		},
-		// gender: String,
-		// joiningDate: {
-		// 	type: Date,
-		// 	default: Date.now,
-		// },
+		karma: {
+			type: Number, 
+			default: 0
+		}, 
+		badges: [
+			{
+				type: String,
+			}
+		], 
+		posts: [
+			{
+				type: String
+			}
+		]
 	},
 	{ timestamps: true }
 );

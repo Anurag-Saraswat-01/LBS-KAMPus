@@ -7,7 +7,7 @@ import SignIn from "./pages/SignIn";
 import LoggedOut from "./pages/LoggedOut";
 import AskQuestion from "./pages/AskQuestion";
 import Header from "./components/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
@@ -21,36 +21,47 @@ function App() {
     const config = {
       headers: {
         "Content-type": "application/json",
-        withCredentials: true,
-        credentials: "include",
       },
+      withCredentials: true,
+      credentials: "include",
     };
+    let status;
     await axios
       .get(`${url}/loginStatus`, config)
       .then((response) => {
-        console.log(response);
-        return (response.status = 200 ? response.data.loginStatus : false);
+        // console.log(response);
+        status = response.status === 200
+          ? // idhar === 200 nahi hona?
+            {
+              loginStatus: response.data.loginStatus,
+              id: response.data.data,
+            }
+          : {
+              loginStatus: false,
+              id: null,
+            };
       })
       .catch((err) => {
-		  console.log(err);
-		  return false;
-	  });
-    // if (response) {
-    //   console.log("OK");
-    // } else {
-    //   console.log("NO");
-    // }
-    // const status = (response.status = 200 ? response.data.loginStatus : false);
-    // console.log(status);
-    // return status;
+        // console.log(err);
+        status = {
+          loginStatus: false,
+          id: null,
+        };
+      });
+    // console.log(status)
+    return status;
   };
+  // const loginData = loginStatus();
+  const [loggedin, setLoggedin] = useState(null);
 
-  const [loggedin, setLoggedin] = useState(loginStatus);
+  useEffect(
+    ()=> loginStatus().then((response) => (setLoggedin(response))),[])
+
+  setTimeout(()=>console.log(loggedin),6000)
 
   return (
     <div className="App">
-      {/* <Header page={isLanding} /> */}
-      <Routes>
+      {loggedin?<Routes>
         <Route
           path="/"
           element={<Landing loggedin={loggedin} setLoggedin={setLoggedin} />}
@@ -81,7 +92,9 @@ function App() {
           path="loggedout"
           element={<LoggedOut loggedin={loggedin} setLoggedin={setLoggedin} />}
         />
-      </Routes>
+      </Routes>:<Landing/>}
+      {/* <Header page={isLanding} /> */}
+      
     </div>
   );
 }
