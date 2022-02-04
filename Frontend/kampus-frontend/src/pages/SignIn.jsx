@@ -27,6 +27,8 @@ const SignIn = ({ loggedin, setLoggedin }) => {
     const validity = String(email.value)
       .toLowerCase()
       .match(/(d?20[0-9]{2}[A-Z]+\.)[A-Z]+@ves\.ac\.in/i);
+    // following line allows any ves account. previous line only allows those starting with d20 or 20
+    // .match(/(d?20[0-9]{2}[A-Z]+\.)[A-Z]+@ves\.ac\.in/i);
     setEmail({ value: email.value, validity: validity });
   }, [email.value]);
 
