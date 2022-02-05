@@ -23,40 +23,38 @@ const AskQuestion = ({ loggedin, setLoggedin }) => {
 
 	//* will be triggered once and will check if the user is logged in
 	//* if so sets the loginStatus to true else redirects the user to Signin page
-	// useEffect(() => {
-	// 	const checkLoginStatus = async () => {
-	// 		try {
-	// 			const url = "http://localhost:8080";
-	// 			const config = {
-	// 				headers: {
-	// 					"Content-type": "application/json",
-	// 				},
-	// 				withCredentials: true,
-	// 				credentials: "include",
-	// 			};
-	// 			const response = await axios.get(`${url}/loginStatus`, config);
-	// 			const { loginStatus, data: id } = response.data;
-	// 			console.log(id);
-	// 			console.log(loginStatus);
-	// 			setLogin(loginStatus);
-	// 			if (!loginStatus) {
-	// 				navigate("/signin", {
-	// 					state: {
-	// 						alert: true,
-	// 						message: "Please login before continuing",
-	// 						type: "error",
-	// 					},
-	// 				});
-	// 			}
-	// 		} catch (err) {
-	// 			console.log(err);
-	// 		}
-	// 	};
-	// 	checkLoginStatus();
-	// }, []);
-	useEffect(()=>{
-		console.log(loggedin);
-	}, [])
+	useEffect(() => {
+		const checkLoginStatus = async () => {
+			try {
+				const url = "http://localhost:8080";
+				const config = {
+					headers: {
+						"Content-type": "application/json",
+					},
+					withCredentials: true,
+					credentials: "include",
+				};
+				const response = await axios.get(`${url}/loginStatus`, config);
+				const { loginStatus, data: id } = response.data;
+				console.log(id);
+				console.log(loginStatus);
+				setLogin(loginStatus);
+				if (!loginStatus) {
+					navigate("/signin", {
+						state: {
+							alert: true,
+							message: "Please login before continuing",
+							type: "error",
+						},
+					});
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		checkLoginStatus();
+	}, []);
+
 	// useEffect(() => {
 	// 	console.log(login);
 	// 	// setLogin(login);

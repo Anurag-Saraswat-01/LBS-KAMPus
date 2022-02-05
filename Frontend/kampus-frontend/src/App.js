@@ -7,7 +7,7 @@ import SignIn from "./pages/SignIn";
 import LoggedOut from "./pages/LoggedOut";
 import AskQuestion from "./pages/AskQuestion";
 import Header from "./components/Header";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
@@ -21,80 +21,74 @@ function App() {
     const config = {
       headers: {
         "Content-type": "application/json",
+        withCredentials: true,
+        credentials: "include",
       },
-      withCredentials: true,
-      credentials: "include",
     };
-    let status;
     await axios
       .get(`${url}/loginStatus`, config)
       .then((response) => {
-        // console.log(response);
-        status = response.status === 200
-          ? // idhar === 200 nahi hona?
-            {
-              loginStatus: response.data.loginStatus,
-              id: response.data.data,
-            }
-          : {
-              loginStatus: false,
-              id: null,
-            };
+        console.log(response);
+        return (response.status = 200 ? response.data.loginStatus : false);
       })
       .catch((err) => {
-        // console.log(err);
-        status = {
-          loginStatus: false,
-          id: null,
-        };
+        console.log(err);
+        return false;
       });
-    // console.log(status)
-    return status;
+    // if (response) {
+    //   console.log("OK");
+    // } else {
+    //   console.log("NO");
+    // }
+    // const status = (response.status = 200 ? response.data.loginStatus : false);
+    // console.log(status);
+    // return status;
   };
-  // const loginData = loginStatus();
-  const [loggedin, setLoggedin] = useState(null);
 
-  useEffect(
-    ()=> loginStatus().then((response) => (setLoggedin(response))),[])
-
-  setTimeout(()=>console.log(loggedin),6000)
+  const [loggedin, setLoggedin] = useState(loginStatus);
 
   return (
     <div className="App">
-      {loggedin?<Routes>
-        <Route
-          path="/"
-          element={<Landing loggedin={loggedin} setLoggedin={setLoggedin} />}
-        />
-        <Route
-          path="home"
-          element={<Homepage loggedin={loggedin} setLoggedin={setLoggedin} />}
-        />
-        <Route
-          path="signup"
-          element={<SignUp loggedin={loggedin} setLoggedin={setLoggedin} />}
-        />
-        <Route
-          path="signin"
-          element={<SignIn loggedin={loggedin} setLoggedin={setLoggedin} />}
-        />
-        <Route
-          path="Profile"
-          element={<Profile loggedin={loggedin} setLoggedin={setLoggedin} />}
-        />
-        <Route
-          path="ask"
-          element={
-            <AskQuestion loggedin={loggedin} setLoggedin={setLoggedin} />
-          }
-        />
-        <Route
-          path="loggedout"
-          element={<LoggedOut loggedin={loggedin} setLoggedin={setLoggedin} />}
-        />
-      </Routes>:<Landing loggedin={loggedin} setLoggedin={setLoggedin} />}
       {/* <Header page={isLanding} /> */}
-      
+      {loggedin ? (
+        <Routes>
+          <Route
+            path="/"
+            element={<Landing loggedin={loggedin} setLoggedin={setLoggedin} />}
+          />
+          <Route
+            path="home"
+            element={<Homepage loggedin={loggedin} setLoggedin={setLoggedin} />}
+          />
+          <Route
+            path="signup"
+            element={<SignUp loggedin={loggedin} setLoggedin={setLoggedin} />}
+          />
+          <Route
+            path="signin"
+            element={<SignIn loggedin={loggedin} setLoggedin={setLoggedin} />}
+          />
+          <Route
+            path="Profile"
+            element={<Profile loggedin={loggedin} setLoggedin={setLoggedin} />}
+          />
+          <Route
+            path="ask"
+            element={
+              <AskQuestion loggedin={loggedin} setLoggedin={setLoggedin} />
+            }
+          />
+          <Route
+            path="loggedout"
+            element={
+              <LoggedOut loggedin={loggedin} setLoggedin={setLoggedin} />
+            }
+          />
+        </Routes>
+      ) : (
+        <Landing loggedin={loggedin} setLoggedin={setLoggedin} />
+      )}
+      {/* <Header page={isLanding} /> */}
     </div>
   );
 }

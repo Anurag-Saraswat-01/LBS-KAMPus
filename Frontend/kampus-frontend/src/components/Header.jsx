@@ -25,10 +25,7 @@ const Header = ({ page, loggedin, setLoggedin }) => {
       const response = await axios.delete(`${url}/api/users/logout`, config);
       console.log(response);
       if (response.status == 200) {
-        setLoggedin({
-          loginStatus: false,
-          id: null,
-        });
+        setLoggedin(false);
         navigate("/loggedout");
       }
     } catch (error) {
@@ -95,7 +92,7 @@ const Header = ({ page, loggedin, setLoggedin }) => {
               {loggedin && loggedin.loginStatus ? (
                 <Nav.Item>
                   <Link to="/loggedout" onClick={handleLogout}>
-                    <Nav className="nav-link">Logout</Nav>
+                    <Nav className="nav-link">Log Out</Nav>
                   </Link>
                 </Nav.Item>
               ) : null}
