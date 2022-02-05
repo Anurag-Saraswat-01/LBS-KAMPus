@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-// import Post from "../components/Post";
+import Post from "../components/Post";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/Modal";
 import Tabs from "react-bootstrap/Tabs";
@@ -40,12 +40,13 @@ const Profile = ({ loggedin, setLoggedin }) => {
 					withCredentials: true,
 					credentials: "include",
 				};
-				// const response = await axios.get(`${url}/loginStatus`, config);
-				console.log(loggedin);
+				const response = await axios.get(`${url}/loginStatus`, config);
+				console.log(response.data);
 				const { loginStatus, data: id } = response.data;
-				// console.log(id);
-				// console.log(loginStatus);
-				if (!loggedin.statu) {
+				console.log(id);
+				console.log(loginStatus);
+				setLogin(loginStatus);
+				if (!loginStatus) {
 					navigate("/signin", {
 						state: {
 							alert: true,
@@ -152,7 +153,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
 					<Tabs defaultActiveKey="all" id="user-activity-tabs" className="mb-3">
 						<Tab eventKey="all" title="All Activty">
 							<div>
-								{/* <Post /> */}
+								<Post />
 							</div>
 						</Tab>
 						<Tab eventKey="posts" title="Posts">

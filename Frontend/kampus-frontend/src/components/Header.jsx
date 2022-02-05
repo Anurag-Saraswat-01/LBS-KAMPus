@@ -25,10 +25,7 @@ const Header = ({ page, loggedin, setLoggedin }) => {
       const response = await axios.delete(`${url}/api/users/logout`, config);
       console.log(response);
       if (response.status == 200) {
-        setLoggedin({
-          loginStatus: false,
-          id: null,
-        });
+        setLoggedin(false);
         navigate("/loggedout");
       }
     } catch (error) {
@@ -39,7 +36,7 @@ const Header = ({ page, loggedin, setLoggedin }) => {
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
-        <Link to={loggedin.loginStatus ? "/" : "/home"}>
+        <Link to="/">
           <Navbar.Brand>KAMPus</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -92,10 +89,10 @@ const Header = ({ page, loggedin, setLoggedin }) => {
                   <Nav className="nav-link">Profile</Nav>
                 </Link>
               </Nav.Item>
-              {loggedin.loginStatus ? (
+              {loggedin ? (
                 <Nav.Item>
                   <Link to="/loggedout" onClick={handleLogout}>
-                    <Nav className="nav-link">Logout</Nav>
+                    <Nav className="nav-link">Log Out</Nav>
                   </Link>
                 </Nav.Item>
               ) : null}
