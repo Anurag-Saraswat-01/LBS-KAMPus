@@ -1,9 +1,14 @@
 import React from "react";
 
-// const branches = ["CMPN", "ETRX", "EXTC", "AIDS", "INSTRU", "IT", "MCA"];
-const branches = ["Computer", "Electrical", "Electronics and Telecommunication", "Artificial Intelligence and Data Science",
-"Instrumentation", "Information Technology", "MCA"];
-
+const branches = [
+  "Computer",
+  "Electrical",
+  "Electronics and Telecommunication",
+  "Artificial Intelligence and Data Science",
+  "Instrumentation",
+  "Information Technology",
+  "MCA",
+];
 
 function Sidebar() {
   return (
@@ -22,10 +27,10 @@ function Sidebar() {
       <div className="reccomendations">
         <h3 className="recco-title">Branches to Follow</h3>
         <ul>
-          {branches.map((key) => (
-            <a href="">
+          {branches.map((data, key) => (
+            <a href="" key={key}>
               {/*i guess href will link to a feed where branch is filtered? */}
-              <li>{key}</li>
+              <li>{data}</li>
             </a>
           ))}
         </ul>
