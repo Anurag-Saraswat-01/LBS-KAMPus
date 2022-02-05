@@ -92,7 +92,7 @@ function App() {
           path="loggedout"
           element={<LoggedOut loggedin={loggedin} setLoggedin={setLoggedin} />}
         />
-      </Routes>:<Landing/>}
+      </Routes>:<Landing loggedin={loggedin} setLoggedin={setLoggedin} />}
       {/* <Header page={isLanding} /> */}
       
     </div>

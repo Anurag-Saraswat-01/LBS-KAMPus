@@ -39,7 +39,7 @@ const Header = ({ page, loggedin, setLoggedin }) => {
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
-        <Link to={loggedin.loginStatus ? "/" : "/home"}>
+        <Link to={loggedin && loggedin.loginStatus ? "/" : "/home"}>
           <Navbar.Brand>KAMPus</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -92,7 +92,7 @@ const Header = ({ page, loggedin, setLoggedin }) => {
                   <Nav className="nav-link">Profile</Nav>
                 </Link>
               </Nav.Item>
-              {loggedin.loginStatus ? (
+              {loggedin && loggedin.loginStatus ? (
                 <Nav.Item>
                   <Link to="/loggedout" onClick={handleLogout}>
                     <Nav className="nav-link">Logout</Nav>

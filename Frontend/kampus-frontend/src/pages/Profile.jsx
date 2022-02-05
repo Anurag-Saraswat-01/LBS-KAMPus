@@ -42,7 +42,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
 				};
 				// const response = await axios.get(`${url}/loginStatus`, config);
 				console.log(loggedin);
-				const { loginStatus, data: id } = response.data;
+				// const { loginStatus, data: id } = response.data;
 				// console.log(id);
 				// console.log(loginStatus);
 				if (!loggedin.statu) {
@@ -54,9 +54,9 @@ const Profile = ({ loggedin, setLoggedin }) => {
 						},
 					});
 				}
-				const { data } = await axios.get(`${url}/api/users/${id}`, config);
-				console.log(data);
-				setUserData(data);
+				// const { data } = await axios.get(`${url}/api/users/${id}`, config);
+				// console.log(data);
+				// setUserData(data);
 				console.log(userData);
 			} catch (error) {
 				console.log(error);
