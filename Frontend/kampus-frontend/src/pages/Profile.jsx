@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import Post from "../components/Post";
+// import Post from "../components/Post";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/Modal";
 import Tabs from "react-bootstrap/Tabs";
@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 
 const Profile = ({ loggedin, setLoggedin }) => {
 	const navigate = useNavigate();
-	const [login, setLogin] = useState();
 	const [followerShow, setFollowerShow] = useState(false);
 	const [followingShow, setFollowingShow] = useState(false);
 	const user = {
@@ -27,8 +26,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
 
 	const [userData, setUserData] = useState(user);
 
-	//* will be triggered when page reloads and redirects user if not logged in
-	//* if logged in shows the user profile
+	//* From the loginStatus after getting the id, it will fetch the userData and set it to useState userData
 	useEffect(() => {
 		const getUserData = async () => {
 			try {
@@ -40,12 +38,8 @@ const Profile = ({ loggedin, setLoggedin }) => {
 					withCredentials: true,
 					credentials: "include",
 				};
-				// const response = await axios.get(`${url}/loginStatus`, config);
-				console.log(loggedin);
-				// const { loginStatus, data: id } = response.data;
-				// console.log(id);
-				// console.log(loginStatus);
-				if (!loggedin.statu) {
+				// console.log(loggedin);
+				if (!loggedin.loginStatus) {
 					navigate("/signin", {
 						state: {
 							alert: true,
@@ -54,16 +48,21 @@ const Profile = ({ loggedin, setLoggedin }) => {
 						},
 					});
 				}
-				// const { data } = await axios.get(`${url}/api/users/${id}`, config);
-				// console.log(data);
-				// setUserData(data);
-				console.log(userData);
+				const { data } = await axios.get(
+					`${url}/api/users/${loggedin.id}`,
+					config
+				);
+				setUserData(data);
 			} catch (error) {
 				console.log(error);
 			}
 		};
 		getUserData();
-	}, []);
+	}, [loggedin, navigate]);
+
+	useEffect(() => {
+		console.log(userData);
+	}, [userData]);
 
 	const handleFollowerClose = () => setFollowerShow(false);
 	const handleFollowerShow = () => setFollowerShow(true);
@@ -72,22 +71,24 @@ const Profile = ({ loggedin, setLoggedin }) => {
 
 	const followModal = (title, list, show, close) => {
 		return (
-			<Modal show={show} onHide={close} centered>
-				<Modal.Header closeButton>
-					<Modal.Title>{title}</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<ul>
-						{list.map((data, key) => (
-							<li key={key}>{data}</li>
-						))}
-					</ul>
-				</Modal.Body>
-			</Modal>
+			list && (
+				<Modal show={show} onHide={close} centered>
+					<Modal.Header closeButton>
+						<Modal.Title>{title}</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<ul>
+							{list.length === 0
+								? `No ${title}`
+								: list.map((data, key) => <li key={key}>{data}</li>)}
+						</ul>
+					</Modal.Body>
+				</Modal>
+			)
 		);
 	};
 
-	const Badges = user.badges.map((data, key) => {
+	const Badges = userData.badges.map((data, key) => {
 		return (
 			<div className="badge-info" key={key}>
 				<div className="badge-icon"></div>
@@ -96,7 +97,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
 		);
 	});
 
-	const Societies = user.societies.map((data, key) => {
+	const Societies = userData.societies.map((data, key) => {
 		return (
 			<div className="society-info" key={key}>
 				<div className="society-icon"></div>
@@ -124,20 +125,20 @@ const Profile = ({ loggedin, setLoggedin }) => {
 				<div className="user-info">
 					<div className="user-bio">
 						<div className="user-image"></div>
-						<p className="user-bio-text">{user.year} Year</p>
-						<p className="user-bio-text">{user.branch} Branch</p>
+						<p className="user-bio-text">{userData.year} Year</p>
+						<p className="user-bio-text">{userData.branch} Branch</p>
 					</div>
 					<div className="user-text">
-						<h1 className="user-name">{user.name}</h1>
+						<h1 className="user-name">{userData.name}</h1>
 						<div className="user-stats">
 							<p onClick={handleFollowerShow}>
-								{user.followers.length} Followers
+								{userData.followers.length} Followers
 							</p>
 							.
 							<p onClick={handleFollowingShow}>
-								{user.following.length} Following{" "}
+								{userData.following.length} Following{" "}
 							</p>
-							.<p>{user.karma} Karma</p>
+							.<p>{userData.karma} Karma</p>
 						</div>
 						{/* edit-btn if user is viewing their own profile and will replace follow-btn */}
 						<button className="follow-btn">Follow</button>
@@ -151,9 +152,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
 				<div className="user-activity">
 					<Tabs defaultActiveKey="all" id="user-activity-tabs" className="mb-3">
 						<Tab eventKey="all" title="All Activty">
-							<div>
-								<Post />
-							</div>
+							<div>{/* <Post /> */}</div>
 						</Tab>
 						<Tab eventKey="posts" title="Posts">
 							<div>posts</div>

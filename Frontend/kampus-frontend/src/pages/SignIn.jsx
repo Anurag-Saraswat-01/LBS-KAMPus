@@ -26,7 +26,7 @@ const SignIn = ({ loggedin, setLoggedin }) => {
 	useEffect(() => {
 		const validity = String(email.value)
 			.toLowerCase()
-			.match(/(d?20[0-9]{2}[A-Z]+\.)?[A-Z]+@ves\.ac\.in/i);
+			.match(/(d?20[0-9]{2}[A-Z]+\.)[A-Z]+@ves\.ac\.in/i);
 		setEmail({ value: email.value, validity: validity });
 	}, [email.value]);
 
