@@ -39,7 +39,7 @@ const Header = ({ page, loggedin, setLoggedin }) => {
 
   useEffect(() => {
     setLoggedin(loggedin)
-  });
+  }, []);
   
 
   return (
