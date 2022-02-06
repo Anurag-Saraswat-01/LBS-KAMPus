@@ -6,7 +6,8 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import LoggedOut from "./pages/LoggedOut";
 import AskQuestion from "./pages/AskQuestion";
-import Header from "./components/Header";
+import AnswerModal from "./components/AnswerModal";
+// import Header from "./components/Header";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
@@ -93,6 +94,12 @@ function App() {
 						path="loggedout"
 						element={
 							<LoggedOut loggedin={loggedin} setLoggedin={setLoggedin} />
+						}
+					/>
+					<Route
+						path="answer"
+						element={
+							<AnswerModal loggedin={loggedin} setLoggedin={setLoggedin} />
 						}
 					/>
 				</Routes>
