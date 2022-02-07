@@ -8,6 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { FaShare } from "react-icons/fa";
 import { useState, useEffect, Component } from "react";
+import { HashLoader } from "react-spinners";
 
 const Profile = ({ loggedin, setLoggedin }) => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
     societies: ["Vesit of Time"],
   };
 
-  const [userData, setUserData] = useState(user);
+  const [userData, setUserData] = useState(null);
 
   //* From the loginStatus after getting the id, it will fetch the userData and set it to useState userData
   useEffect(() => {
@@ -61,7 +62,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
   }, [loggedin, navigate]);
 
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   const handleFollowerClose = () => setFollowerShow(false);
@@ -90,7 +91,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
   };
 
   // mapping badges onto a Component, have to add icons
-  const Badges = userData.badges.map((data, key) => {
+  const Badges = ((userData && userData.badges) || []).map((data, key) => {
     return (
       <div className="badge-info" key={key}>
         <div className="badge-icon"></div>
@@ -100,7 +101,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
   });
 
   // mapping societies onto a Component, have to add icons
-  const Societies = userData.societies.map((data, key) => {
+  const Societies = ((userData && userData.societies) || []).map((data, key) => {
     return (
       <div className="society-info" key={key}>
         <div className="society-icon"></div>
@@ -109,7 +110,7 @@ const Profile = ({ loggedin, setLoggedin }) => {
     );
   });
 
-  return (
+  return userData ? (
     <div>
       <Header loggedin={loggedin} setLoggedin={setLoggedin} />
       <Container className="profile-container">
@@ -169,14 +170,19 @@ const Profile = ({ loggedin, setLoggedin }) => {
         <div className="user-accolades">
           <div className="badges">
             <h3 className="accolade-title">Badges</h3>
-            {Badges}
+            {userData.badges.length > 0 ? Badges : <p>No badges</p>}
           </div>
           <div className="societies">
             <h3 className="accolade-title">Societies</h3>
-            {Societies}
+            {userData.societies.length > 0 ? Societies : <p>Not a part of any society</p>}
           </div>
         </div>
       </Container>
+    </div>
+  ) : (
+    <div className="load-cont">
+      <HashLoader color="#d8e9a8" />
+      <h1>Loading, please wait UwU</h1>
     </div>
   );
 };

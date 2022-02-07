@@ -43,7 +43,7 @@ const SignIn = ({ loggedin, setLoggedin }) => {
   };
 
   const submitHandler = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     //set waiting to true
     setWaitingForRes(true);
     console.log({
@@ -72,11 +72,25 @@ const SignIn = ({ loggedin, setLoggedin }) => {
         .then((response) => {
           console.log(response.data);
           setWaitingForRes(response ? false : true);
-          setLoggedin(response.data.loginStatus);
+          const status = {
+            loginStatus: response.data.loginStatus,
+            id: "",
+          };
+          // console.log(status)
+          setLoggedin(status);
+          console.log(loggedin);
           response.data.loginStatus && navigate("/home");
+        })
+        .catch((err) => {
+          const status = {
+            loginStatus: false,
+            id: null,
+          };
+          setLoggedin(status);
+          console.log(err);
         });
       // if response is received, set waiting to false
-      console.log("LoginStatus: " + loggedin);
+      console.log("LoginStatus: ",loggedin);
     } catch (error) {
       // if error, stop waiting
       setWaitingForRes(false);

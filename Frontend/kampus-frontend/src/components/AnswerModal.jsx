@@ -58,7 +58,7 @@ const AnswerModal = ({ open, setOpen }) => {
 		setText(value);
 	};
 
-	console.log(text);
+	// console.log(text);
 	return (
 		<div className="answerModal">
 			<div
