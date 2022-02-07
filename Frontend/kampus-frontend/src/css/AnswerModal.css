@@ -1,23 +1,34 @@
 .css-107w94t {
-  background-color: var(--background) !important;
-  overflow-y: scroll;
+	background-color: var(--background) !important;
+	overflow-y: scroll;
 }
 
 .css-5lbw0b-MuiTypography-root {
-  color: white;
+	color: white;
 }
 
 .ql-toolbar {
-  background-color: white;
+	background-color: white;
 }
 
 .ql-editor {
-  min-height: 400px;
-  background-color: black;
+	min-height: 400px;
+	background-color: black;
 }
 
 .ql-editor > * {
-  color: white;
+	color: white;
+}
+
+.ql-editor p {
+	display: flex;
+	justify-content: center;
+}
+
+.ql-editor p img {
+	/**/
+	width: 30%;
+	/* display: flex; */
 }
 
 /* .ql-editor > p > strong {
@@ -25,37 +36,42 @@
 } */
 
 .answerModal__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .answerModal__closeIcon:hover {
-  cursor: pointer;
-  background-color: black;
-  opacity: 0.2;
-  border-radius: 50%;
+	cursor: pointer;
+	background-color: black;
+	opacity: 0.2;
+	border-radius: 50%;
 }
 
 .answerModal__description {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	align-items: center;
 }
 
 @media screen and (max-width: 768px) {
-  .answerModal__description {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    align-items: center;
-  }
-  .ql-editor {
-    min-height: 150px;
-  }
+	.answerModal__description {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		gap: 0;
+		align-items: center;
+	}
+	.ql-editor {
+		min-height: 250px;
+	}
+	.ql-editor p img {
+		width: 40%;
+		/* display: flex; */
+	}
 
-  .answerModal__header h2 {
-    font-size: 1.75rem;
-  }
+	.answerModal__header h2 {
+		font-size: 1.75rem;
+	}
 }
