@@ -51,6 +51,7 @@ const UserSchema = new Schema(
 			required: true,
 			default: 0,
 		},
+		profileImgUri: String,
 		karma: {
 			type: Number,
 			default: 0,

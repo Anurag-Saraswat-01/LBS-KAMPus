@@ -102,6 +102,30 @@ const getOneExistingUser = async (req, res) => {
 	return res.status(200).json(user);
 };
 
+// To upload pictures
+const uploadProfilePicture = async (req, res) => {
+	const id = req.params.id;
+	const profileImgUri = req.body.profileImgUri;
+	const user = await User.findById(id);
+	if (!user) {
+		res.status(400).json({
+			message: "Bad Request Error",
+		});
+	}
+	const updateProfile = await User.findByIdAndUpdate(id, profileImgUri);
+	if (updateProfile.modifiedCount > 0) {
+		res.status(201).json({
+			status: true,
+			message: "Profile Picture updated successfully!",
+		});
+	} else {
+		res.status(403).json({
+			status: false,
+			message: "Something went wrong",
+		});
+	}
+};
+
 const logoutUser = async (req, res) => {
 	res.clearCookie("jwt");
 	res.status(200).json({
@@ -115,4 +139,5 @@ module.exports = {
 	loginUser,
 	logoutUser,
 	getOneExistingUser,
+	uploadProfilePicture,
 };

@@ -5,6 +5,7 @@ const {
 	logoutUser,
 	getOneExistingUser,
 	getExistingUsers,
+	uploadProfilePicture,
 	isLoggedIn,
 } = require("../controllers/userController");
 const checkAuth = require("../middlewares/checkAuth");
@@ -12,6 +13,8 @@ const checkAuth = require("../middlewares/checkAuth");
 const router = express.Router();
 
 router.route("/signup").post(registerUser);
+
+router.route("/upload-profile/:id").put(uploadProfilePicture)
 
 router.route("/").get(getExistingUsers);
 
