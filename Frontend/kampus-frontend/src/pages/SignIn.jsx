@@ -2,15 +2,17 @@ import "../css/SignUp.css";
 import PasswordComponent from "../components/PasswordComponent";
 import Header from "../components/Header";
 import { TextField, Button } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { HashLoader } from "react-spinners";
 import Alert from "@mui/material/Alert";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../api/AuthContext";
 // import Cookies from 'universal-cookie';
 
 // const cookies = new Cookies();
-const SignIn = ({ loggedin, setLoggedin }) => {
+const SignIn = () => {
+  const authContext = useContext(AuthContext);
   //State that checks if youre waiting for response after submit
   const [waitingForRes, setWaitingForRes] = useState(false);
   //* gets the message and type of error from original page
@@ -31,7 +33,7 @@ const SignIn = ({ loggedin, setLoggedin }) => {
   }, [email.value]);
 
   useEffect(() => {
-    console.log(showAlert);
+    console.log("Show Alert: " + showAlert);
   }, [showAlert]);
 
   const handleEmailChange = (event) => {
@@ -60,37 +62,29 @@ const SignIn = ({ loggedin, setLoggedin }) => {
         withCredentials: true,
         credentials: "include",
       };
-      await axios
-        .post(
-          `${url}/api/users/login`,
-          {
-            username: email.value,
-            password: password,
-          },
-          config
-        )
-        .then((response) => {
-          console.log(response.data);
-          setWaitingForRes(response ? false : true);
-          const status = {
-            loginStatus: response.data.loginStatus,
-            id: "",
-          };
-          // console.log(status)
-          setLoggedin(status);
-          console.log(loggedin);
-          response.data.loginStatus && navigate("/home");
-        })
-        .catch((err) => {
-          const status = {
-            loginStatus: false,
-            id: null,
-          };
-          setLoggedin(status);
-          console.log(err);
-        });
-      // if response is received, set waiting to false
-      console.log("LoginStatus: ",loggedin);
+      //same funda as in app.js, dont need to use .then inside an async func
+      const response = await axios.post(
+        `${url}/api/users/login`,
+        {
+          username: email.value,
+          password: password,
+        },
+        config
+      );
+      console.log(response.data);
+      setWaitingForRes(response ? false : true);
+      const status = {
+        // if response is received, set waiting to false
+        loginStatus: response.data.loginStatus,
+        id: response.data.id,
+      };
+      console.log(status);
+      if (status.loginStatus) {
+        // right now this is just setting loginstatus, can modify login function to take in id as a parameter and modify the userID context
+        authContext.login();
+      }
+
+      response.data.loginStatus && navigate("/home");
     } catch (error) {
       // if error, stop waiting
       setWaitingForRes(false);
@@ -107,7 +101,7 @@ const SignIn = ({ loggedin, setLoggedin }) => {
     </>
   ) : (
     <div className="signup">
-      <Header loggedin={loggedin} setLoggedin={setLoggedin} page={"landing"} />
+      <Header page={"landing"} />
       {showAlert && location.state && (
         <Alert
           onClose={() => {

@@ -4,10 +4,10 @@ import Header from "../components/Header";
 // import axios from "axios";
 import { Link } from "react-router-dom";
 
-const LoggedOut = ({ loggedin, setLoggedin }) => {
+const LoggedOut = () => {
   return (
     <div className="logout">
-      <Header loggedin={loggedin} setLoggedin={setLoggedin} />
+      <Header page={"landing"} />
       <div className="loggedout__container">
         <h1>Logged Out successfully</h1>
         <Link to="/signin">

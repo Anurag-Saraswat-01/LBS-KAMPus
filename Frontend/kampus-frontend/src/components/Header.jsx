@@ -6,12 +6,15 @@ import FormControl from "react-bootstrap/FormControl";
 import { FaSearch, FaPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { AuthContext } from "../api/AuthContext";
 // import { useLocation, } from "react-router-dom";
 
-const Header = ({ page, loggedin, setLoggedin }) => {
+const Header = ({ page }) => {
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
 
+  // i feel like logout ka logic should be moved out of the header, can do later
   const handleLogout = async (event) => {
     event.preventDefault();
     try {
@@ -26,26 +29,18 @@ const Header = ({ page, loggedin, setLoggedin }) => {
       const response = await axios.delete(`${url}/api/users/logout`, config);
       console.log(response);
       if (response.status === 200) {
-        setLoggedin({
-          loginStatus: false,
-          id: null,
-        });
+        //sets the loginstatus to false
+        authContext.logout();
         navigate("/loggedout");
       }
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    setLoggedin(loggedin)
-  }, []);
-  
-
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
-        <Link to={loggedin && loggedin.loginStatus ? "/home" : "/"}>
+        <Link to={authContext.isLoggedIn ? "/home" : "/"}>
           <Navbar.Brand>KAMPus</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -98,7 +93,7 @@ const Header = ({ page, loggedin, setLoggedin }) => {
                   <Nav className="nav-link">Profile</Nav>
                 </Link>
               </Nav.Item>
-              {loggedin && loggedin.loginStatus ? (
+              {authContext.isLoggedIn ? (
                 <Nav.Item>
                   <Link to="/loggedout" onClick={handleLogout}>
                     <Nav className="nav-link">Logout</Nav>

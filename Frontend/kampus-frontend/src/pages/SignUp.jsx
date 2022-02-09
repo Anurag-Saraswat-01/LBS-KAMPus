@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
-const SignUp = ({ loggedin, setLoggedin }) => {
+const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState({
     value: "",
@@ -103,7 +103,7 @@ const SignUp = ({ loggedin, setLoggedin }) => {
     </>
   ) : (
     <div className="signup">
-      <Header page={"landing"} loggedin={loggedin} setLoggedin={setLoggedin} />
+      <Header page={"landing"} />
       <div className="signup__outer">
         <h1>Sign Up</h1>
         <div className="signup__container">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import {
   FormControl,
@@ -11,13 +11,14 @@ import {
 } from "@mui/material";
 import Header from "../components/Header";
 import axios from "axios";
+import { AuthContext } from "../api/AuthContext";
 
 //TODO: Make the page responsive
 
-const AskQuestion = ({ loggedin, setLoggedin }) => {
+const AskQuestion = () => {
   //* To redirect the user if loggedin status is false
   const navigate = useNavigate();
-
+  const authContext = useContext(AuthContext);
   // checks if department and title are not empty
   const checkValidity = (title, department) => {
     if (title.length === 0 || department.length === 0) {
@@ -49,15 +50,9 @@ const AskQuestion = ({ loggedin, setLoggedin }) => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const url = "http://localhost:8080";
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-          withCredentials: true,
-          credentials: "include",
-        };
-        if (!loggedin.loginStatus) {
+        //removed unused code.
+        //checks if user is logged in using context
+        if (!authContext.isLoggedIn) {
           navigate("/signin", {
             state: {
               alert: true,
@@ -71,10 +66,6 @@ const AskQuestion = ({ loggedin, setLoggedin }) => {
       }
     };
     checkLoginStatus();
-  }, []);
-
-  useEffect(() => {
-    console.log(loggedin);
   }, []);
 
   const handleChange = (event) => {
@@ -163,7 +154,7 @@ const AskQuestion = ({ loggedin, setLoggedin }) => {
 
   return (
     <div className="askQuestion">
-      <Header loggedin={loggedin} setLoggedin={setLoggedin} />
+      <Header />
       {alert.show && (
         <Alert severity={alert.type}> {alertMessages[alert.type]} </Alert>
       )}

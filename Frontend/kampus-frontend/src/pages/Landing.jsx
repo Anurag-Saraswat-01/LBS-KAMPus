@@ -1,11 +1,10 @@
 import Header from "../components/Header";
 import Container from "react-bootstrap/esm/Container";
 import { Link } from "react-router-dom";
-
-const Landing = ({ loggedin, setLoggedin }) => {
+const Landing = () => {
   return (
     <div>
-      <Header page="landing" loggedin={loggedin} setLoggedin={setLoggedin} />
+      <Header page="landing" />
       <Container className="landing-container">
         <span className="landing-title">KAMPus</span>
         <p className="landing-text">
