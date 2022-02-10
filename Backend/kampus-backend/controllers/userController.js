@@ -91,7 +91,8 @@ const getExistingUsers = async (req, res) => {
 // @GET
 // @desc: Gets only one user based on id
 const getOneExistingUser = async (req, res) => {
-	const user = await User.findById(req.params.id);
+	const decodedId = res.locals.decodedId;
+	const user = await User.findById(decodedId);
 	console.log(user);
 	if (!user) {
 		res.status(404).json({
