@@ -4,10 +4,10 @@ import QuestionNAnswer from "../components/QuestionsNAnswer";
 import Header from "../components/Header";
 import Comment from "../components/Comment";
 
-function Homepage({ loggedin, setLoggedin }) {
+function Homepage() {
   return (
     <div>
-      <Header loggedin={loggedin} setLoggedin={setLoggedin} />
+      <Header />
       <div className="homepage-container">
         <Sidebar />
         <div className="post-placeholder">

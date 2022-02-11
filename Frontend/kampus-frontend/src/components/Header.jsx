@@ -7,7 +7,7 @@ import { FaSearch, FaPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useContext } from "react";
-import { AuthContext } from "../api/AuthContext";
+import { AuthContext } from "../api/Contexts";
 // import { useLocation, } from "react-router-dom";
 
 const Header = ({ page }) => {

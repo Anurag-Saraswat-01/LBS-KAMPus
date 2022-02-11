@@ -7,3 +7,9 @@ export const AuthContext = createContext({
   login: () => {},
   logout: () => {},
 });
+
+export const UserContext = createContext({
+  username: null,
+  user_img: null,
+  setData: (name, img) => {},
+});

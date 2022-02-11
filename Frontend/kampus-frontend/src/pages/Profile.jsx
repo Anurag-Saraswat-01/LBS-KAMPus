@@ -14,7 +14,7 @@ import Cropper from "react-easy-crop";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import IconButton from "@mui/material/IconButton";
 import defaultPhoto from "../assets/default photos/user-placeholder.png";
-import { AuthContext } from "../api/AuthContext";
+import { AuthContext } from "../api/Contexts";
 // // new profile shit
 // import ProfilePicture from "@dsalvagni/react-profile-picture";
 // import "@dsalvagni/react-profile-picture/dist/ProfilePicture.css";

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../api/Contexts";
 
 const branches = [
   "Computer",
@@ -11,6 +12,7 @@ const branches = [
 ];
 
 function Sidebar() {
+  const userContext = useContext(UserContext);
   return (
     <div className="sidebar">
       <div className="sidebar-user-info">
@@ -18,7 +20,7 @@ function Sidebar() {
         {/*Using div for now, image baad mei*/}
         <div className="sidebar-user-img-temp">P</div> {/*user image */}
         <a href="" className="sidebar-username">
-          Prithvi Kumar
+          {userContext.username}
         </a>
         {/*^^username. did not add 'certified eggroll' coz that might need "preferred badge" type logic 
         Clicking on username can lead to profile ig*/}
