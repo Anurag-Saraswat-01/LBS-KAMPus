@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import Header from "../components/Header";
 import axios from "axios";
-import { AuthContext } from "../api/AuthContext";
+import { AuthContext } from "../api/Contexts";
 
 //TODO: Make the page responsive
 
