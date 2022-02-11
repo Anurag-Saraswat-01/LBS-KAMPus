@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
+const answerRoutes = require("./routes/answerRoutes");
 const app = express();
 const jwt = require("jsonwebtoken");
 const Schema = mongoose.Schema;
@@ -14,11 +15,14 @@ const cookieParser = require("cookie-parser");
 const whitelist = ["http://localhost:3000", "http://localhost:8080"];
 
 const corsOptions = {
-	origin: "*",
+	// origin: "*",
 	credentials: true,
 	origin: (origin, callback) => {
-		if (whitelist.includes(origin)) return callback(null, true);
-
+		console.log(origin);
+		if (whitelist.includes(origin)) {
+			console.log("Includes");
+			return callback(null, true);
+		}
 		callback(new Error("Not allowed by CORS"));
 	},
 };
@@ -27,7 +31,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 // To get data from input
-app.use(express.json({limit: '2048kb'}));
+app.use(express.json({ limit: "2048kb" }));
 app.use(express.urlencoded({ extended: true }));
 
 // dbconfig => Making db connection
@@ -41,6 +45,7 @@ async function main() {
 
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/answers", answerRoutes);
 
 //! ********* QUESTION SECTION *********
 
