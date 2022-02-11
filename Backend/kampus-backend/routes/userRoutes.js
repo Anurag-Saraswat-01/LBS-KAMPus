@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.route("/signup").post(registerUser);
 
-router.route("/upload-profile/:id").put(uploadProfilePicture);
+router.route("/upload-profile").put(checkAuth, uploadProfilePicture);
 
 router.route("/").get(getExistingUsers);
 

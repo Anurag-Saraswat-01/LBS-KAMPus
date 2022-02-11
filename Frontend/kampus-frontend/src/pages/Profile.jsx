@@ -168,6 +168,29 @@ const Profile = () => {
     if (!croppedImage) return;
     // console.log("cropped image changed");
     setProfileImage(croppedImage);
+    const uploadProfile = async () => {
+      try {
+        const url = "http://localhost:8080";
+        const config = {
+          headers: {
+            "Content-type": "application/json",
+          },
+          withCredentials: true,
+          credentials: "include",
+        };
+        const response = await axios.put(
+          `${url}/api/users/upload-profile`,
+          {
+            profileImgUri: croppedImage,
+          },
+          config
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    uploadProfile();
     handleCropperClose();
   }, [croppedImage]);
 
@@ -203,7 +226,8 @@ const Profile = () => {
   }, [authContext.isLoggedIn, navigate]);
 
   useEffect(() => {
-    // console.log(userData);
+    if (!(userData && userData.profileImgUri)) return;
+    setProfileImage(userData.profileImgUri);
   }, [userData]);
 
   const handleFollowerClose = () => setFollowerShow(false);
@@ -320,9 +344,9 @@ const Profile = () => {
                 <img src={profileImage} alt="user-profile" />
               </div>
               <div className="edit-image" id="edit-image-div">
-                <p className="file-name">
+                {/* <p className="file-name">
                   {newImage ? newImage.name : "No File Chosen"}
-                </p>
+                </p> */}
                 <input
                   type="file"
                   name="profile-image"

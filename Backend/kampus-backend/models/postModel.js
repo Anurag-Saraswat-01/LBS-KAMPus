@@ -15,16 +15,11 @@ const PostSchema = new Schema(
       type: String,
       required: true,
     },
-    askedOn: {
-      type: Date,
-      default: Date.now(),
-    },
     askedBy: String,
-    answerId: [
-      {
-        type: String,
-      },
-    ],
+    answers: {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Answer'
+    },
   },
   { timestamps: true }
 );

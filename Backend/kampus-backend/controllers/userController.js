@@ -93,7 +93,7 @@ const getExistingUsers = async (req, res) => {
 const getOneExistingUser = async (req, res) => {
 	const decodedId = res.locals.decodedId;
 	const user = await User.findById(decodedId);
-	console.log(user);
+	// console.log(user);
 	if (!user) {
 		res.status(404).json({
 			message: "User not found",
@@ -105,16 +105,13 @@ const getOneExistingUser = async (req, res) => {
 
 // To upload pictures
 const uploadProfilePicture = async (req, res) => {
-	const id = req.params.id;
+	const id = res.locals.decodedId;
+	console.log("Upload profile Picture requested");
 	const profileImgUri = req.body.profileImgUri;
-	const user = await User.findById(id);
-	if (!user) {
-		res.status(400).json({
-			message: "Bad Request Error",
-		});
-	}
-	const updateProfile = await User.findByIdAndUpdate(id, profileImgUri);
-	if (updateProfile.modifiedCount > 0) {
+	// console.log(profileImgUri)
+	const updateProfile = await User.findByIdAndUpdate(id, {$set: {profileImgUri: profileImgUri}});
+	// console.log(updateProfile)
+	if (updateProfile) {
 		res.status(201).json({
 			status: true,
 			message: "Profile Picture updated successfully!",

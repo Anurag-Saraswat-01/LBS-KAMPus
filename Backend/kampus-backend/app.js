@@ -11,7 +11,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 // For cross-sharing the data
-const whitelist = ["http://localhost:3000"];
+const whitelist = ["http://localhost:3000", "http://localhost:8080"];
 
 const corsOptions = {
 	origin: "*",
@@ -27,7 +27,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 // To get data from input
-app.use(express.json());
+app.use(express.json({limit: '2048kb'}));
 app.use(express.urlencoded({ extended: true }));
 
 // dbconfig => Making db connection
