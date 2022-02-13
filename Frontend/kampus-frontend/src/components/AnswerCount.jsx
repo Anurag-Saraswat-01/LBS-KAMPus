@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import AnswerModal from "./AnswerModal";
 import { useState } from "react";
 
-const AnswerCount = ({ count }) => {
+const AnswerCount = ({ count, data }) => {
 	const [open, setOpen] = useState(false);
 	return (
 		<div>
@@ -12,7 +12,7 @@ const AnswerCount = ({ count }) => {
 					<p className="mb-0">
 						{count} {count > 1 ? "Answers" : "Answer"}
 					</p>
-					<AnswerModal open={open} setOpen={setOpen} />
+					<AnswerModal data={data} open={open} setOpen={setOpen} />
 				</div>
 			</Container>
 			<hr className="lineBreak" />

@@ -6,7 +6,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CommentIcon from "@mui/icons-material/Comment";
 
-const CommentBar = () => {
+const CommentBar = ({ answer }) => {
   const likeStyle = (color) => {
     return {
       color: color,
@@ -17,15 +17,16 @@ const CommentBar = () => {
 
   return (
     <div className=" commentBar d-flex justify-content-between">
-      {" "}
       <div className="d-flex justify-content-start align-items-center">
         <div className="likes clickable d-flex pt-2 pb-2 align-items-center">
-          <KeyboardArrowUpIcon size="large" style={likeStyle("#D8E9A8")} />{" "}
-          Upvotes
+          <KeyboardArrowUpIcon size="large" style={likeStyle("#D8E9A8")} />
+          {answer.upvotes}
+           {" "}Upvotes
         </div>
         <div className="dislikes clickable d-flex pt-2 pb-2 align-items-center">
-          <KeyboardArrowDownIcon size="large" style={likeStyle("#FF5353")} />{" "}
-          Downvotes
+          <KeyboardArrowDownIcon size="large" style={likeStyle("#FF5353")} />
+          {answer.downvotes}
+          {" "} Downvotes
         </div>
       </div>
       {/* SHARE */}

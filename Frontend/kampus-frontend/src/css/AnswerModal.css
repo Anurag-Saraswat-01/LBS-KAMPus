@@ -12,7 +12,7 @@
 }
 
 .ql-editor {
-	min-height: 400px;
+	min-height: 350px;
 	background-color: black;
 }
 
@@ -53,6 +53,13 @@
 	flex-direction: row;
 	gap: 1rem;
 	align-items: center;
+	margin: 1rem 0;
+}
+
+.answerModal__submit_wrapper {
+	display: flex;
+	justify-content: right;
+	margin-top: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {

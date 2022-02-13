@@ -40,7 +40,7 @@ const getPostWithMaximumUpvotes = async (req, res) => {
 		},
 		//To sort the posts in descending order based on upvotes
 		{ $sort: { upvotes: -1 } },
-		{ $limit: 1 },
+		// { $limit: 1 },
 	]);
 	if (!posts) {
 		return res.json({

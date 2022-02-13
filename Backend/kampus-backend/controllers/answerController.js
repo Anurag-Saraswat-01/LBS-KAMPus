@@ -39,7 +39,7 @@ const downvoteAnswer = async (req, res) => {
 		answerId,
 		{
 			$inc: {
-				downvotes: -1,
+				downvotes: 1,
 			},
 		},
 		{ new: true }
