@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Post = require("../models/postModel");
 const User = require("../models/userModel");
 
+// Gets the post with all the answers in it
 const getPosts = async (req, res) => {
 	const posts = await Post.aggregate([
 		// Similar to performing the join operation
@@ -16,6 +17,30 @@ const getPosts = async (req, res) => {
 		},
 		//To sort the posts in descending order based on upvotes
 		{ $sort: { upvotes: -1 } },
+	]);
+	if (!posts) {
+		return res.json({
+			message: "No data found!",
+		});
+	}
+	return res.json(posts);
+};
+
+//Gets post with the answer having maximum upvotes
+const getPostWithMaximumUpvotes = async (req, res) => {
+	const posts = await Post.aggregate([
+		// Similar to performing the join operation
+		{
+			$lookup: {
+				from: "answers", //This is the collection we want to make join operation
+				localField: "_id", //Field from the input document i.e Post
+				foreignField: "question_id", // Field from the collection i.e answer
+				as: "answer", // name for the result obtained from the join
+			},
+		},
+		//To sort the posts in descending order based on upvotes
+		{ $sort: { upvotes: -1 } },
+		{ $limit: 1 },
 	]);
 	if (!posts) {
 		return res.json({
@@ -87,4 +112,10 @@ const deletePost = async (req, res) => {
 	});
 };
 
-module.exports = { getOnePost, getPosts, createOnePost, deletePost };
+module.exports = {
+	getOnePost,
+	getPosts,
+	createOnePost,
+	deletePost,
+	getPostWithMaximumUpvotes,
+};

@@ -5,10 +5,13 @@ const {
 	getOnePost,
 	getPosts,
 	createOnePost,
+	getPostWithMaximumUpvotes,
 	deletePost,
 } = require("../controllers/postController");
 
-postRouter.route("/").get(getPosts);
+postRouter.route("/posts").get(getPosts);
+
+postRouter.route("/posts-max-upvotes").get(getPostWithMaximumUpvotes);
 
 postRouter.route("/:id").get(getOnePost);
 
