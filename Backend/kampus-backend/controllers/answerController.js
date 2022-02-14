@@ -21,7 +21,8 @@ const upvoteAnswer = async (req, res) => {
 	if (upvote) {
 		res.status(201).json({
 			status: true,
-			result: upvote,
+			upvotes: upvote.upvotes,
+			downvotes: upvote.downvotes,
 		});
 	} else {
 		res.status(403).json({
@@ -48,7 +49,8 @@ const downvoteAnswer = async (req, res) => {
 	if (downvote) {
 		res.status(201).json({
 			status: true,
-			result: downvote,
+			upvotes: downvote.upvotes,
+			downvotes: downvote.downvotes,
 		});
 	} else {
 		res.status(403).json({
