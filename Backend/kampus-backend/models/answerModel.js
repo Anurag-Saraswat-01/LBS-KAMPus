@@ -9,6 +9,7 @@ const AnswerSchema = new Schema(
 			ref: "posts",
 		},
 		answerBody: String,
+		answeredBy: String,
 		upvotes: {
 			type: Number,
 			default: 0,
@@ -17,6 +18,10 @@ const AnswerSchema = new Schema(
 			type: Number,
 			default: 0,
 		},
+		rating: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "ratings"
+		}
 		// comments: {}
 	},
 	{ timestamps: true }

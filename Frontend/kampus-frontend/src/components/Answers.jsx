@@ -4,11 +4,12 @@ import { PersonInfo } from "./PersonInfo";
 import { Container } from "react-bootstrap";
 import CommentBar from "./CommentBar";
 import Button from "@mui/material/Button";
+import moment from "moment";
 // import Parser from 'html-react-parser';
 
 // Answers section maps the answer part
 
-const Answers = ({ answers }) => {
+const Answers = ({ answer }) => {
   //! UseState to control the read more function
   // still work in progress
   const [readMore, setReadMore] = useState(false);
@@ -23,14 +24,14 @@ const Answers = ({ answers }) => {
   };
 
   // Mapping the answers from the test api
-  return answers.map((answer, key) => {
+  // return answers.map((answer, key) => {
     return (
-      <div key={key}>
+      <div>
         <Container className="answers p-2">
           <PersonInfo
-            userName={answer.answeredBy || "Manigandan Kasimani"}
+            userName={answer.answeredBy || "Mjfkkds" }
             followButton={false}
-            date={answer.answeredOn || "13/02/202"}
+            date={moment(answer.createdAt).format("Do MMMM YYYY")}
           />
           <div className="answer mb-0 pt-4 pb-2 white">
             {/* {readMore
@@ -52,7 +53,7 @@ const Answers = ({ answers }) => {
         <hr className="lineBreak mx-auto" />
       </div>
     );
-  });
+  // });
 };
 
 export default Answers;

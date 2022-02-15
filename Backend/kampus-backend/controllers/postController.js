@@ -29,6 +29,11 @@ const getPosts = async (req, res) => {
 //Gets post with the answer having maximum upvotes
 const getPostWithMaximumUpvotes = async (req, res) => {
 	const posts = await Post.aggregate([
+		{
+			$group: {
+				_id: '$answerId'
+			}
+		},
 		// Similar to performing the join operation
 		{
 			$lookup: {
@@ -37,6 +42,7 @@ const getPostWithMaximumUpvotes = async (req, res) => {
 				foreignField: "question_id", // Field from the collection i.e answer
 				as: "answer", // name for the result obtained from the join
 			},
+
 		},
 		//To sort the posts in descending order based on upvotes
 		{ $sort: { upvotes: -1 } },

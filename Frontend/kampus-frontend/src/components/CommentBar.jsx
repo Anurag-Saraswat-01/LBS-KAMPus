@@ -11,16 +11,23 @@ import CommentIcon from "@mui/icons-material/Comment";
 const CommentBar = ({ answer }) => {
 	const likeStyle = (color) => {
 		return {
-			color: color,
+			fill: color,
 			width: "50px",
 			height: "20px",
 		};
 	};
-	const [upvotes, setUpvotes] = useState(answer.upvotes);
-	const [downvotes, setDownvotes] = useState(answer.downvotes);
+	const [upvotes, setUpvotes] = useState({
+		upvoted: false,
+		upvotesNum: answer.upvotes
+	});
+	const [downvotes, setDownvotes] = useState({
+		downvoted: false,
+		downvotesNum: answer.downvotes
+	});
 
 	const upvote = async (id) => {
-		setUpvotes(upvotes + 1);
+		// setUpvotes({...upvotes, upvotesNum: upvotes.upvotesNum + 1});
+		setUpvotes({upvoted: !upvotes.upvoted, upvotesNum: upvotes.upvotesNum + 1});
 		try {
 			const url = "http://localhost:8080";
 			const config = {
@@ -43,7 +50,8 @@ const CommentBar = ({ answer }) => {
 	};
 
 	const downvote = async (id) => {
-		setDownvotes(downvotes + 1);
+		// setDownvotes({...downvotes, downvotesNum: downvotes.downvotesNum + 1});
+		setDownvotes({downvoted: !downvotes.downvoted, downvotesNum: downvotes.downvotesNum + 1});
 		try {
 			const url = "http://localhost:8080";
 			const config = {
@@ -72,15 +80,15 @@ const CommentBar = ({ answer }) => {
 					onClick={() => upvote(answer._id)}
 					className="likes clickable d-flex pt-2 pb-2 align-items-center"
 				>
-					<BiUpvote style={likeStyle("#D8E9A8")} />
-					{upvotes}
+					<BiUpvote style={likeStyle(upvotes.upvoted ? "#84c577": "white")}/>
+					{upvotes.upvotesNum}
 				</div>
 				<div
 					onClick={() => downvote(answer._id)}
 					className="dislikes clickable d-flex pt-2 pb-2 align-items-center"
 				>
-					<BiDownvote style={likeStyle("#FF5353")} />
-					{downvotes}
+					<BiDownvote style={likeStyle(downvotes.downvoted ? "#FF5353" : "white")} />
+					{downvotes.downvotesNum}
 				</div>
 			</div>
 			{/* SHARE */}

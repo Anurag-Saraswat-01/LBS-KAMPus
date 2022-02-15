@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -14,6 +14,7 @@ import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import axios from "axios";
 import "../css/AnswerModal.css";
 import Button from "@mui/material/Button";
+import moment from "moment";
 
 const style = {
   position: "absolute",
@@ -77,6 +78,7 @@ const AnswerModal = ({ open, setOpen, data }) => {
         `${url}/api/answers/add-answer/${data._id}`,
         {
           answerBody: text,
+          // answeredBy: username
         },
         config
       );
@@ -130,7 +132,7 @@ const AnswerModal = ({ open, setOpen, data }) => {
                 Asked By: {data.askedBy}.
               </Typography>
               <Typography id="transition-modal-description">
-                On: {data.createdAt}
+                On: {moment(data.createdAt).format("Do MMMM YYYY")}
               </Typography>
             </div>
             <div className="answerModal__textfield">
