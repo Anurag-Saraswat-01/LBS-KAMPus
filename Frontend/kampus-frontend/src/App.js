@@ -7,17 +7,37 @@ import SignIn from "./pages/SignIn";
 import LoggedOut from "./pages/LoggedOut";
 import AskQuestion from "./pages/AskQuestion";
 import AnswerModal from "./components/AnswerModal";
+import Loader from "./components/Loader";
 import { useState, useEffect, createContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { HashLoader } from "react-spinners";
 import { AuthContext, UserContext } from "./api/Contexts";
 
 function App() {
-  // TODO: Add routing, then use useLocation() hook to get current page
-  // If current page is Landing, set isLanding to true and pass as prop to Header
-  // Alternatively, no need to create state, can just use === /landing or /signup
-  //   const [isLanding, setisLanding] = useState(false);
+  // state to check whether user is logged in
+  const [loggedin, setLoggedin] = useState(null);
+  const [userData, setUserData] = useState({ username: null, user_img: null });
+  // stores if login status has been returned or not
+  const [waitingForResponse, setWaitingForResponse] = useState(false);
+  // if user is logged in, state to store their user_id for data fetching
+  // calling loginstatus to see if a user is logged in. If they are, their id is stored, and loggedin is set to true
+  // If they arent, loggedin is false and id is null
+  useEffect(() => {
+    loginStatus().then((response) => {
+      setLoggedin(response.loginStatus);
+    });
+  }, []);
+
+  // functions that get passed into context provider, that change the state of loggedin to true or false
+  const login = () => {
+    setLoggedin(true);
+  };
+  const logout = () => {
+    setLoggedin(false);
+  };
+  const contextSetUser = (username, user_img) => {
+    setUserData({ username: username, user_img: user_img });
+  };
   const loginStatus = async () => {
     const url = "http://localhost:8080";
     const config = {
@@ -44,29 +64,9 @@ function App() {
         loginStatus: false,
         id: null,
       };
+    } finally {
+      setWaitingForResponse(false);
     }
-  };
-  // state to check whether user is logged in
-  const [loggedin, setLoggedin] = useState(null);
-  const [userData, setUserData] = useState({ username: null, user_img: null });
-  // if user is logged in, state to store their user_id for data fetching
-  // calling loginstatus to see if a user is logged in. If they are, their id is stored, and loggedin is set to true
-  // If they arent, loggedin is false and id is null
-  useEffect(() => {
-    loginStatus().then((response) => {
-      setLoggedin(response.loginStatus);
-    });
-  }, []);
-
-  // functions that get passed into context provider, that change the state of loggedin to true or false
-  const login = () => {
-    setLoggedin(true);
-  };
-  const logout = () => {
-    setLoggedin(false);
-  };
-  const contextSetUser = (username, user_img) => {
-    setUserData({ username: username, user_img: user_img });
   };
   return (
     // This is a component that provides the login data to all components that need it, provided they use UseContext
@@ -85,29 +85,32 @@ function App() {
         }}
       >
         <div className="App">
-          {loggedin ? (
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="home" element={<Homepage />} />
-              <Route path="signup" element={<SignUp />} />
-              <Route path="signin" element={<SignIn />} />
-              <Route path="Profile" element={<Profile />} />
-              <Route path="ask" element={<AskQuestion />} />
-              <Route path="loggedout" element={<LoggedOut />} />
-              <Route path="answer" element={<AnswerModal />} />
-            </Routes>
+          {/* Checking if loginstatus received. If not, loading screen. */}
+          {waitingForResponse ? (
+            <Loader />
           ) : (
-            // If not logged in, only allow access to select routes.
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="home" element={<Homepage />} />
-              <Route path="signup" element={<SignUp />} />
-              <Route path="signin" element={<SignIn />} />
-              <Route path="Profile" element={<Profile />} />
-              {/* <Route path="ask" element={<AskQuestion />} /> */}
-              <Route path="loggedout" element={<LoggedOut />} />
-              {/* <Route path="answer" element={<AnswerModal />} /> */}
-            </Routes>
+            <>
+              {loggedin ? (
+                <Routes>
+                  <Route path="/" element={<Landing />} />
+                  <Route path="home" element={<Homepage />} />
+                  <Route path="signup" element={<SignUp />} />
+                  <Route path="signin" element={<SignIn />} />
+                  <Route path="Profile" element={<Profile />} />
+                  <Route path="ask" element={<AskQuestion />} />
+                  <Route path="loggedout" element={<LoggedOut />} />
+                  <Route path="answer" element={<AnswerModal />} />
+                </Routes>
+              ) : (
+                // If not logged in, only allow access to select routes. Remaining redirect to signin
+                <Routes>
+                  <Route path="/" element={<Landing />} />
+                  <Route path="signup" element={<SignUp />} />
+                  <Route path="signin" element={<SignIn />} />
+                  <Route path="*" element={<SignIn />} />
+                </Routes>
+              )}
+            </>
           )}
         </div>
       </UserContext.Provider>

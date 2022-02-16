@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import { FaShare } from "react-icons/fa";
 import { useState, useEffect, useContext, useCallback } from "react";
 import { Button } from "@mui/material";
-import { HashLoader } from "react-spinners";
+import Loader from "../components/Loader";
 import Cropper from "react-easy-crop";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import IconButton from "@mui/material/IconButton";
@@ -206,16 +206,6 @@ const Profile = () => {
           withCredentials: true,
           credentials: "include",
         };
-        // console.log(loggedin);
-        if (!authContext.isLoggedIn) {
-          navigate("/signin", {
-            state: {
-              alert: true,
-              message: "Please login before continuing",
-              type: "error",
-            },
-          });
-        }
         const { data } = await axios.get(`${url}/api/users/profile`, config);
         setUserData(data);
       } catch (error) {
@@ -223,7 +213,7 @@ const Profile = () => {
       }
     };
     getUserData();
-  }, [authContext.isLoggedIn, navigate]);
+  }, []);
 
   useEffect(() => {
     if (!(userData && userData.profileImgUri)) return;
@@ -418,10 +408,7 @@ const Profile = () => {
       </Container>
     </div>
   ) : (
-    <div className="load-cont">
-      <HashLoader color="#d8e9a8" />
-      <h1>Loading, please wait UwU</h1>
-    </div>
+    <Loader />
   );
 };
 

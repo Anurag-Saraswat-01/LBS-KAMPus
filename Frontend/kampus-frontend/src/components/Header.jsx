@@ -65,12 +65,12 @@ const Header = ({ page }) => {
                   <Nav className="nav-link">Home</Nav>
                 </Link>
               </Nav.Item>
-              <Nav.Item>
-                {/* will have to make an explore page ig, not sure so for now home */}
+              {/* <Nav.Item>
+                will have to make an explore page ig, not sure so for now home
                 <Link to="/home">
                   <Nav className="nav-link">Explore</Nav>
                 </Link>
-              </Nav.Item>
+              </Nav.Item> */}
               <Nav.Item>
                 <InputGroup className="search-bar">
                   <FormControl

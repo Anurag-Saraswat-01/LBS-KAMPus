@@ -2,7 +2,7 @@ import "../css/SignUp.css";
 import React, { useState, useEffect } from "react";
 import PasswordComponent from "../components/PasswordComponent";
 import Header from "../components/Header";
-import { HashLoader } from "react-spinners";
+import Loader from "../components/Loader";
 import axios from "axios";
 import {
   FormControl,
@@ -12,8 +12,10 @@ import {
   Button,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState({
     value: "",
@@ -87,6 +89,8 @@ const SignUp = () => {
           config
         );
         setWaitingForRes(response ? false : true);
+        //redirects you to sign in page
+        navigate("/signin");
         console.log(response.data);
       }
     } catch (error) {
@@ -95,12 +99,7 @@ const SignUp = () => {
     }
   };
   return waitingForRes ? (
-    <>
-      <div className="load-cont">
-        <HashLoader color="#d8e9a8" />
-        <h1>Loading, please wait UwU</h1>
-      </div>
-    </>
+    <Loader />
   ) : (
     <div className="signup">
       <Header page={"landing"} />
@@ -126,14 +125,21 @@ const SignUp = () => {
               error={!email.validity}
               helperText={"Enter ves email id"}
             />
-            <TextField
-              className="signup__year"
-              autoComplete="off"
-              id="outlined-year"
-              label="Year"
-              value={year}
-              onChange={handleYearChange}
-            />
+            <FormControl className="signup__year" color="primary">
+              <InputLabel> Year </InputLabel>
+              <Select
+                value={year}
+                autoComplete="off"
+                variant="outlined"
+                label="Year"
+                onChange={handleYearChange}
+              >
+                <MenuItem value={"FE"}>First</MenuItem>
+                <MenuItem value={"SE"}>Second</MenuItem>
+                <MenuItem value={"TE"}>Third</MenuItem>
+                <MenuItem value={"BE"}>Fourth</MenuItem>
+              </Select>
+            </FormControl>
             <FormControl className="signup__dropdown" color="primary">
               <InputLabel> Choose your Department </InputLabel>
               <Select

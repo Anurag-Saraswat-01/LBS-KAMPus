@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import { TextField, Button } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { HashLoader } from "react-spinners";
+import Loader from "../components/Loader";
 import Alert from "@mui/material/Alert";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../api/Contexts";
@@ -18,7 +18,7 @@ const SignIn = () => {
   //* gets the message and type of error from original page
   const navigate = useNavigate();
   const location = useLocation();
-  const [showAlert, setShowAlert] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState({
     value: "",
@@ -90,15 +90,13 @@ const SignIn = () => {
       // if error, stop waiting
       setWaitingForRes(false);
       console.log(error);
+      setShowAlert(true);
     }
   };
   // check if waiting. If so, return a loader instead of the content
   return waitingForRes ? (
     <>
-      <div className="load-cont">
-        <HashLoader color="#d8e9a8" />
-        <h1>Loading, please wait UwU</h1>
-      </div>
+      <Loader />
     </>
   ) : (
     <div className="signup">
@@ -134,7 +132,9 @@ const SignIn = () => {
               title="Password"
               setPassword={setPassword}
             />
-
+            {showAlert ? (
+              <p className="signin-error">email or password incorrect</p>
+            ) : null}
             <div className="signup__button">
               <Button
                 className="askQuestion__button"
