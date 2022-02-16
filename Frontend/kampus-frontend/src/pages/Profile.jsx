@@ -15,6 +15,9 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import IconButton from "@mui/material/IconButton";
 import defaultPhoto from "../assets/default photos/user-placeholder.png";
 import { AuthContext } from "../api/Contexts";
+import ProfilePosts from "../components/ProfilePosts";
+import "../css/Profile.css";
+import ProfileComments from "../components/ProfileComments";
 // // new profile shit
 // import ProfilePicture from "@dsalvagni/react-profile-picture";
 // import "@dsalvagni/react-profile-picture/dist/ProfilePicture.css";
@@ -359,11 +362,11 @@ const Profile = () => {
           <div className="user-text">
             <h1 className="user-name">{userData.name}</h1>
             <div className="user-stats">
-              <p onClick={handleFollowerShow} style={{cursor: "pointer"}}>
+              <p onClick={handleFollowerShow} style={{ cursor: "pointer" }}>
                 {userData.followers.length} Followers
               </p>
               .
-              <p onClick={handleFollowingShow} style={{cursor: "pointer"}}>
+              <p onClick={handleFollowingShow} style={{ cursor: "pointer" }}>
                 {userData.following.length} Following{" "}
               </p>
               .<p>{userData.karma} Karma</p>
@@ -378,15 +381,21 @@ const Profile = () => {
         </div>
 
         <div className="user-activity">
-          <Tabs defaultActiveKey="all" id="user-activity-tabs" className="mb-3">
-            <Tab eventKey="all" title="All Activty">
-              <div>{/* <Post /> */}</div>
-            </Tab>
+          <Tabs
+            defaultActiveKey="posts"
+            id="user-activity-tabs"
+            className="mb-3"
+          >
+            {/* <Tab eventKey="all" title="All Activty">
+              <div><Post /></div>
+            </Tab> */}
             <Tab eventKey="posts" title="Posts">
-              <div>posts</div>
+              <div>
+                <ProfilePosts />
+              </div>
             </Tab>
             <Tab eventKey="comments" title="Comment">
-              <div>comments</div>
+              <ProfileComments />
             </Tab>
           </Tabs>
         </div>

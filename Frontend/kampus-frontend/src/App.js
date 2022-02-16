@@ -18,13 +18,14 @@ function App() {
   const [loggedin, setLoggedin] = useState(null);
   const [userData, setUserData] = useState({ username: null, user_img: null });
   // stores if login status has been returned or not
-  const [waitingForResponse, setWaitingForResponse] = useState(false);
+  const [waitingForResponse, setWaitingForResponse] = useState(true);
   // if user is logged in, state to store their user_id for data fetching
   // calling loginstatus to see if a user is logged in. If they are, their id is stored, and loggedin is set to true
   // If they arent, loggedin is false and id is null
   useEffect(() => {
     loginStatus().then((response) => {
       setLoggedin(response.loginStatus);
+      setWaitingForResponse(false);
     });
   }, []);
 
@@ -64,8 +65,6 @@ function App() {
         loginStatus: false,
         id: null,
       };
-    } finally {
-      setWaitingForResponse(false);
     }
   };
   return (
@@ -107,6 +106,7 @@ function App() {
                   <Route path="/" element={<Landing />} />
                   <Route path="signup" element={<SignUp />} />
                   <Route path="signin" element={<SignIn />} />
+                  <Route path="loggedout" element={<LoggedOut />} />
                   <Route path="*" element={<SignIn />} />
                 </Routes>
               )}
