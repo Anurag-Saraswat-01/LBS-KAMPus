@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoArrowRedoSharp } from "react-icons/io5";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
 import axios from "axios";
@@ -18,16 +18,61 @@ const CommentBar = ({ answer }) => {
 	};
 	const [upvotes, setUpvotes] = useState({
 		upvoted: false,
-		upvotesNum: answer.upvotes
+		upvotesNum: answer.upvotes,
 	});
 	const [downvotes, setDownvotes] = useState({
 		downvoted: false,
-		downvotesNum: answer.downvotes
+		downvotesNum: answer.downvotes,
 	});
+
+	useEffect(() => {
+		const getRatings = async () => {
+			try {
+				const url = "http://localhost:8080";
+				const config = {
+					headers: {
+						"Content-type": "application/json",
+					},
+					withCredentials: true,
+					credentials: "include",
+				};
+				//same funda as in app.js, dont need to use .then inside an async func
+				const getUpvotes = await axios.get(
+					`${url}/api/ratings/upvotes`,
+					config
+				);
+				console.log(getUpvotes.data);
+				// console.log(response.data[0].allAnswers[0]);
+				setUpvotes({ ...upvotes, upvotesNum: getUpvotes.data.likes });
+
+				const getDownvotes = await axios.get(
+					`${url}/api/ratings/downvotes`,
+					config
+				);
+				console.log(getDownvotes.data);
+				// console.log(response.data[0].allAnswers[0]);
+				setDownvotes({
+					...downvotes,
+					downvotesNum: getDownvotes.data.dislikes,
+				});
+
+				// setLoading(false);
+			} catch (err) {
+				console.log("Something went wrong");
+				console.log(err);
+			}
+		};
+		getRatings();
+	}, []);
+
+	useEffect(() => {}, [upvotes, downvotes]);
 
 	const upvote = async (id) => {
 		// setUpvotes({...upvotes, upvotesNum: upvotes.upvotesNum + 1});
-		setUpvotes({upvoted: !upvotes.upvoted, upvotesNum: upvotes.upvotesNum + 1});
+		setUpvotes({
+			upvoted: !upvotes.upvoted,
+			upvotesNum: upvotes.upvotesNum + 1,
+		});
 		try {
 			const url = "http://localhost:8080";
 			const config = {
@@ -38,8 +83,13 @@ const CommentBar = ({ answer }) => {
 				credentials: "include",
 			};
 			//same funda as in app.js, dont need to use .then inside an async func
-			const response = await axios.put(
-				`${url}/api/answers/upvote/${id}`,
+			// const response = await axios.put(
+			// 	`${url}/api/answers/upvote/${id}`,
+			// 	config
+			// );
+			const response = await axios.post(
+				`${url}/api/ratings/upvote`,
+				{ answerId: id },
 				config
 			);
 			console.log(response.data);
@@ -51,7 +101,10 @@ const CommentBar = ({ answer }) => {
 
 	const downvote = async (id) => {
 		// setDownvotes({...downvotes, downvotesNum: downvotes.downvotesNum + 1});
-		setDownvotes({downvoted: !downvotes.downvoted, downvotesNum: downvotes.downvotesNum + 1});
+		setDownvotes({
+			downvoted: !downvotes.downvoted,
+			downvotesNum: downvotes.downvotesNum + 1,
+		});
 		try {
 			const url = "http://localhost:8080";
 			const config = {
@@ -62,8 +115,13 @@ const CommentBar = ({ answer }) => {
 				credentials: "include",
 			};
 			//same funda as in app.js, dont need to use .then inside an async func
-			const response = await axios.put(
-				`${url}/api/answers/downvote/${id}`,
+			// const response = await axios.put(
+			// 	`${url}/api/answers/downvote/${id}`,
+			// 	config
+			// );
+			const response = await axios.post(
+				`${url}/api/ratings/downvote`,
+				{ answerId: id },
 				config
 			);
 			console.log(response.data);
@@ -80,14 +138,16 @@ const CommentBar = ({ answer }) => {
 					onClick={() => upvote(answer._id)}
 					className="likes clickable d-flex pt-2 pb-2 align-items-center"
 				>
-					<BiUpvote style={likeStyle(upvotes.upvoted ? "#84c577": "white")}/>
+					<BiUpvote style={likeStyle(upvotes.upvoted ? "#84c577" : "white")} />
 					{upvotes.upvotesNum}
 				</div>
 				<div
 					onClick={() => downvote(answer._id)}
 					className="dislikes clickable d-flex pt-2 pb-2 align-items-center"
 				>
-					<BiDownvote style={likeStyle(downvotes.downvoted ? "#FF5353" : "white")} />
+					<BiDownvote
+						style={likeStyle(downvotes.downvoted ? "#FF5353" : "white")}
+					/>
 					{downvotes.downvotesNum}
 				</div>
 			</div>
