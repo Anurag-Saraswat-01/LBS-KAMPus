@@ -63,30 +63,37 @@ const AnswerModal = ({ open, setOpen, data }) => {
   };
 
   const submitHandler = async () => {
-    setWaitingForRes(true);
-    try {
-      const url = "http://localhost:8080";
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-        withCredentials: true,
-        credentials: "include",
-      };
-      //same funda as in app.js, dont need to use .then inside an async func
-      const response = await axios.post(
-        `${url}/api/answers/add-answer/${data._id}`,
-        {
-          answerBody: text,
-          // answeredBy: username
-        },
-        config
-      );
-      console.log(response.data);
-      setWaitingForRes(response ? false : true);
-    } catch (err) {
-      console.log("Something went wrong!");
-      console.log(err);
+    //prevents submission of empty answer, can do real validation later
+    if (text !== "") {
+      setWaitingForRes(true);
+      try {
+        const url = "http://localhost:8080";
+        const config = {
+          headers: {
+            "Content-type": "application/json",
+          },
+          withCredentials: true,
+          credentials: "include",
+        };
+        //same funda as in app.js, dont need to use .then inside an async func
+        const response = await axios.post(
+          `${url}/api/answers/add-answer/${data._id}`,
+          {
+            answerBody: text,
+            // answeredBy: username
+          },
+          config
+        );
+        console.log(response.data);
+        setWaitingForRes(response ? false : true);
+        //closes modal on submit
+        setOpen(false);
+      } catch (err) {
+        console.log("Something went wrong!");
+        console.log(err);
+      }
+    } else {
+      alert("Answer required");
     }
   };
 
