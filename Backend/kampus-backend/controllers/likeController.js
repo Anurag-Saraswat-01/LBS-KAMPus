@@ -3,11 +3,12 @@ const Dislike = require("../models/dislikeModel");
 
 const getLikes = async (req, res) => {
 	const answerId = req.body.answerId;
-	await Like.find({ answerId }).exec((err, likes) => {
+	await Like.find({ answerId: answerId }).exec((err, likes) => {
 		if (!err) {
 			return res.status(200).json({
 				status: true,
-				likes: likes.length(),
+				likes: likes,
+				userId: res.locals.decodedId
 			});
 		}
 		return res.status(400).json({
@@ -31,16 +32,19 @@ const likePost = async (req, res) => {
 			});
 		}
 		//TODO: If already downvoted then decrease the downvote and increase upvote
-		const dislike = await Dislike.findOneAndDelete({ answerId });
-		if (dislike) {
-			res.status(200).json({
-				status: true,
-			});
-		} else {
-			return res.status(400).json({
-				status: false,
-			});
-		}
+		Dislike.findOneAndDelete({ $and: [{answerId: answerId}, {userId: userId}]
+		}).exec((err, result) => {
+			if (err) {
+				return res.status(400).json({
+					status: false,
+				});	
+			}
+			if (result) {
+				res.status(200).json({
+					status: true,
+				});
+			}
+		});
 	});
 };
 
@@ -50,7 +54,8 @@ const unlikePost = async (req, res) => {
 	const answerId = req.body.answerId;
 	const userId = res.locals.decodedId;
 
-	await Like.findOneAndDelete({ answerId: answerId, userId: userId }).exec(
+	await Like.findOneAndDelete({ $and: [{answerId: answerId}, {userId: userId}]
+	}).exec(
 		(err, _result) => {
 			if (err) {
 				return res.status(400).json({
@@ -67,3 +72,4 @@ const unlikePost = async (req, res) => {
 };
 
 module.exports = { getLikes, likePost, unlikePost };
+

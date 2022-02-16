@@ -359,11 +359,11 @@ const Profile = () => {
           <div className="user-text">
             <h1 className="user-name">{userData.name}</h1>
             <div className="user-stats">
-              <p onClick={handleFollowerShow}>
+              <p onClick={handleFollowerShow} style={{cursor: "pointer"}}>
                 {userData.followers.length} Followers
               </p>
               .
-              <p onClick={handleFollowingShow}>
+              <p onClick={handleFollowingShow} style={{cursor: "pointer"}}>
                 {userData.following.length} Following{" "}
               </p>
               .<p>{userData.karma} Karma</p>

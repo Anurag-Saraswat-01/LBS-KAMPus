@@ -2,11 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@400;600;700&display=swap");
 :root {
   --background: #3e3e3e;
-  --navbar: #202020;
+  --navbar: #191919;
   --green-text: #d8e9a8;
-  --foreground: #222222;
-  --green-text: #91a35e;
-  --post-background: #191a19;
+  /* --foreground: #222222; */
+  /* --green-text: #91a35e; */
+  /* --post-background: #191919; */
   --alt-green-text: #f6ff92;
   --nav-height: 117px;
 }
@@ -32,6 +32,7 @@ ul {
 .navbar {
   background-color: var(--navbar);
   height: 15vh;
+  position: fixed;
 }
 
 .navbar-brand,
@@ -171,7 +172,7 @@ ul {
   align-items: center;
   justify-content: center;
   position: absolute;
-  /* visibility: visible; */
+  visibility: hidden;
 }
 
 .cropper-wrapper {
@@ -254,7 +255,7 @@ ul {
 .follow-btn,
 .edit-btn {
   background-color: var(--navbar);
-  color: var(--green-text);
+  color: #84c577;
   height: 40px;
   width: 80px;
   border: none;
@@ -264,7 +265,7 @@ ul {
 }
 
 .share-profile-btn {
-  background-color: var(--green-text);
+  background-color: #84c577;
   height: 40px;
   width: 60px;
   border: none;
@@ -359,16 +360,27 @@ ul {
 
 /* Homepage CSS */
 .homepage-container {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 0.25fr 0.75fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr; */
+  height: 85vh;
+  overflow-y: scroll;
+  width: 75vw;
+  margin-left: 25vw;
+  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em 3em;
   /* background-color: #3e3e3e; */
 }
 
 .sidebar {
-  background-color: var(--foreground);
+  background-color: var(--navbar);
   font-family: "Martel Sans";
-  height: 100vh;
+  height: 85vh;
+  width: 25vw;
+  position: fixed;
 }
 
 .sidebar-user-info {
@@ -429,9 +441,12 @@ ul {
   font-size: 1rem;
 }
 .post-placeholder {
-  /* height: 90vh; */
-  margin: 2em 3em;
-  background-color: var(--foreground);
+  height: 100%;
+  /* margin: 2em 3em; */
+  background-color: var(--navbar);
+  width: 100%;
+  max-width: 750px;
+  position: relative;
 }
 
 /* Comment CSS */
@@ -531,7 +546,7 @@ ul {
   width: 100% !important;
   margin: auto 0;
   padding: 0 !important;
-  background-color: var(--post-background);
+  background-color: var(--navbar);
 }
 
 p {
@@ -544,7 +559,7 @@ p .answer {
 
 .questionSection {
   padding: 12px 12px 8px !important;
-  background-color: var(--post-background);
+  background-color: var(--navbar);
   border-color: var(--green-text);
 }
 

@@ -13,8 +13,8 @@ const {
 } = require("../controllers/dislikeController");
 
 // To get the number of upvotes and downvotes
-ratingRouter.get("/upvotes", getLikes);
-ratingRouter.get("/downvotes", getDislikes);
+ratingRouter.post("/upvotes", checkAuth, getLikes);
+ratingRouter.post("/downvotes", checkAuth, getDislikes);
 
 // To upvote or downvote a post
 ratingRouter.post("/upvote", checkAuth, likePost);

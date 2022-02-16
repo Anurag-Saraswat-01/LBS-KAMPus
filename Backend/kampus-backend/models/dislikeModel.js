@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const dislikeSchema = new Schema({
+const DislikeSchema = new Schema({
 	userId: {
 		type: Schema.Types.ObjectId,
 		ref: "users",

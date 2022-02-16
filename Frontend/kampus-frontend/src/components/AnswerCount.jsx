@@ -10,7 +10,7 @@ const AnswerCount = ({ count, data }) => {
 			<Container className="answerDetails">
 				<div className="answerCount d-flex justify-content-between pt-1 pb-1">
 					<p className="mb-0">
-						{count} {count > 1 ? "Answers" : "Answer"}
+						{count} {count != 1 ? "Answers" : "Answer"}
 					</p>
 					<AnswerModal data={data} open={open} setOpen={setOpen} />
 				</div>

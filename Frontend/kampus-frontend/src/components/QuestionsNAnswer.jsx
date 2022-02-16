@@ -24,8 +24,8 @@ const QuestionNAnswer = () => {
         };
         //same funda as in app.js, dont need to use .then inside an async func
         const response = await axios.get(`${url}/api/posts/posts`, config);
-        console.log(response.data);
-        console.log(response.data[0].allAnswers[0]);
+        // console.log(response.data);
+        // console.log(response.data[0].allAnswers[0]);
         setQuestions(response.data);
         // setLoading(false);
       } catch (err) {

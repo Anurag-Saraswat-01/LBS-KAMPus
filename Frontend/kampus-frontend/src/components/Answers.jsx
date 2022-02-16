@@ -25,34 +25,36 @@ const Answers = ({ answer }) => {
 
   // Mapping the answers from the test api
   // return answers.map((answer, key) => {
-    return (
-      <div>
-        <Container className="answers p-2">
-          <PersonInfo
-            userName={answer.answeredBy || "Mjfkkds" }
-            followButton={false}
-            date={moment(answer.createdAt).format("Do MMMM YYYY")}
-          />
-          <div className="answer mb-0 pt-4 pb-2 white">
-            {/* {readMore
+  return (
+    <div style={{ paddingLeft: "2em" }}>
+      <Container className="answers p-2">
+        <PersonInfo
+          userName={answer.answeredBy || "Mjfkkds"}
+          followButton={false}
+          date={moment(answer.createdAt).format("Do MMMM YYYY")}
+        />
+        <div className="answer mb-0 pt-4 pb-2 white">
+          {/* {readMore
               ? answer.answerBody
               : answer.answerBody.substring(0, 200)} */}
-            <div
-              dangerouslySetInnerHTML={{
-                __html: readMore
-                  ? answer.answerBody
-                  : answer.answerBody.substring(0, 2000),
-              }}
-            ></div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: readMore
+                ? answer.answerBody
+                : answer.answerBody.substring(0, 2000),
+            }}
+          ></div>
+          {answer.answerBody.length > 2000 ? (
             <Button onClick={buttonHandler} variant="text">
               {readMore ? "Read Less" : "Read More"}
             </Button>
-          </div>
-          <CommentBar answer={answer}/>
-        </Container>
-        <hr className="lineBreak mx-auto" />
-      </div>
-    );
+          ) : null}
+        </div>
+        <CommentBar answer={answer} />
+      </Container>
+      <hr className="lineBreak mx-auto" />
+    </div>
+  );
   // });
 };
 
