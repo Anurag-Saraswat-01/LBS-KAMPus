@@ -5,11 +5,15 @@ const commentSchema = new Schema(
 	{
 		comment_to: {
 			type: Schema.Types.ObjectId,
-			ref: ["answer", "comments"],
+			ref: "answer",
 		},
         tagged: String,
 		commentBody: String,
-		commentedBy: String,
+		commentedBy: {
+			commentedId: String, 
+			commentedName: String
+		},
+		
 	},
 	{ timestamps: true }
 );

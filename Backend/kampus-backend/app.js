@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const answerRoutes = require("./routes/answerRoutes");
 const ratingRoutes = require("./routes/ratingRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 const app = express();
 const jwt = require("jsonwebtoken");
 const Schema = mongoose.Schema;
@@ -48,6 +49,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/answers", answerRoutes);
 app.use("/api/ratings", ratingRoutes);
+app.use("/api/comments", commentRoutes);
 
 //! ********* QUESTION SECTION *********
 
