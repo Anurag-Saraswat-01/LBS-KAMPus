@@ -18,9 +18,6 @@ import { AuthContext } from "../api/Contexts";
 import ProfilePosts from "../components/ProfilePosts";
 import "../css/Profile.css";
 import ProfileComments from "../components/ProfileComments";
-// // new profile shit
-// import ProfilePicture from "@dsalvagni/react-profile-picture";
-// import "@dsalvagni/react-profile-picture/dist/ProfilePicture.css";
 
 const Profile = () => {
   const navigate = useNavigate();

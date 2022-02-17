@@ -4,6 +4,7 @@ import Profile from "./pages/Profile";
 import Homepage from "./pages/Homepage";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import SinglePost from "./pages/SinglePost";
 import LoggedOut from "./pages/LoggedOut";
 import AskQuestion from "./pages/AskQuestion";
 import AnswerModal from "./components/AnswerModal";
@@ -93,6 +94,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Landing />} />
                   <Route path="home" element={<Homepage />} />
+                  <Route path="post/:id" element={<SinglePost />} />
                   <Route path="signup" element={<SignUp />} />
                   <Route path="signin" element={<SignIn />} />
                   <Route path="Profile" element={<Profile />} />

@@ -81,6 +81,7 @@ const unDislikePost = async (req, res) => {
 			} else {
 				res.json({
 					status: true,
+					message: 'un-disliked the post successfully'
 				});
 			}
 		}

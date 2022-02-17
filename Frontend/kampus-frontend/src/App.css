@@ -288,7 +288,7 @@ ul {
 
 /*! Posts */
 .skeleton {
-  background-color: hsla(120, 2%, 10%, 0.5) !important;
+  background-color: var(--background) !important;
 }
 
 .post {

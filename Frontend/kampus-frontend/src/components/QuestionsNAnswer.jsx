@@ -6,6 +6,7 @@ import Skeleton from "./postSkeleton";
 import { PersonInfo } from "./PersonInfo";
 import AnswerCount from "./AnswerCount";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import moment from "moment";
 
 const QuestionNAnswer = () => {
@@ -49,21 +50,23 @@ const QuestionNAnswer = () => {
       <div className="ps-2 pe-2" key={key}>
         <Container className="questionSection">
           <PersonInfo
-            key={data.id}
             userName={data.askedBy}
             followButton={true}
             date={moment(data.createdAt).format("Do MMMM YYYY")}
           />
-          <h4 className="p-0 pt-2">
-            {/*key={key}*/}
-            {data.title}
-          </h4>
+          <Link to={`/post/${data._id}`}>
+            <h4 className="p-0 pt-2">
+              {/*key={key}*/}
+              {data.title}
+            </h4>
+          </Link>
+
           <p className="p-0 pt-2">{data.body}</p>
         </Container>
         <hr className="lineBreak" />
 
         <AnswerCount data={data} count={data.allAnswers.length} />
-        {data.allAnswers.map((answer, key) => (
+        {data.allAnswers.slice(0, 1).map((answer, key) => (
           <Answers key={key} answer={answer} />
         ))}
         {/* <Answers answer={data.allAnswers[0]} /> */}
