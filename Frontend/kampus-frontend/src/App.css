@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=McLaren&family=Merienda:wght@400;700&family=Quicksand:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Roboto:wght@300;400&display=swap");
 :root {
   --background: #3e3e3e;
   --navbar: #191919;
@@ -7,7 +8,8 @@
   /* --foreground: #222222; */
   /* --green-text: #91a35e; */
   /* --post-background: #191919; */
-  --alt-green-text: #f6ff92;
+  --alt-green-text: #87bc85;
+  --light-text: #e7ecd4;
   --nav-height: 117px;
 }
 
@@ -217,7 +219,6 @@ ul {
   max-width: 750px;
   position: relative;
 }
-
 /* Comment CSS */
 .comment {
   /* padding: 1em; */
@@ -315,35 +316,63 @@ ul {
   width: 100% !important;
   margin: auto 0;
   padding: 0 !important;
+  background-color: #262626;
   background-color: var(--navbar);
 }
-
-p {
+.date {
   color: var(--alt-green-text);
-}
-
-p .answer {
-  color: white !important;
+  font-family: "Montserrat";
 }
 
 .questionSection {
+  width: 100%;
   padding: 12px 12px 8px !important;
-  background-color: var(--navbar);
-  border-color: var(--green-text);
+  /* background-color: var(--navbar); */
 }
 
-.questionSection h4 {
-  color: #cdf2a8 !important;
+.question-title {
+  color: var(--green-text) !important;
+  font-family: "Martel Sans";
+  padding: 1rem 0;
+  margin: 0;
+}
+.question-body {
+  color: var(--light-text);
+  padding-left: 2rem;
+  font-family: "Quicksand";
+}
+.question-body::first-letter {
+  text-transform: uppercase;
 }
 
+.follow {
+  align-items: center;
+}
 .follow .followBtn {
   width: 60px;
   height: 30px;
   font-size: 10px;
   padding-left: 8px;
-  color: #fff !important;
+  background-color: var(--navbar);
+  color: #84c577;
+  border: 2px solid var(--alt-green-text);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-family: "Quicksand", sans-serif;
+  transition: 0.2s ease;
+  margin-left: 1em;
 }
 
+.follow .followBtn:hover {
+  background-color: #84c577;
+  color: var(--navbar);
+  transform: scale(1.1);
+}
+/* username */
+.follow p {
+  color: var(--green-text);
+  font-family: "Quicksand";
+}
 .answerCount p {
   color: #c1fff4;
 }
@@ -357,10 +386,6 @@ p .answer {
 	background-color: black;
 	opacity: 0.2;
 } */
-
-.answer {
-  color: #fff;
-}
 
 .commentBar {
   color: white;
@@ -424,8 +449,9 @@ p .answer {
 .shareIcon {
   width: 50px;
   background-color: #84c577;
-  height: 40px;
+  height: 30px;
   justify-content: center;
+  cursor: pointer;
 }
 
 .share {
@@ -544,11 +570,16 @@ p .answer {
   color: #ff5757;
 }
 
-.answer p {
-  color: white;
+.answer {
+  color: var(--light-text);
+  font-family: "Quicksand";
 }
 .answer a {
   color: var(--alt-green-text);
+}
+.answer a:hover {
+  color: rgb(0, 0, 0);
+  background-color: rgba(200, 255, 210, 0.623);
 }
 .answer button {
   border: 1px solid var(--alt-green-text);
@@ -559,4 +590,9 @@ p .answer {
 .answer button:hover {
   color: var(--alt-green-text);
   transform: scale(1.1);
+}
+
+.answer img {
+  max-width: 90%;
+  margin: auto;
 }

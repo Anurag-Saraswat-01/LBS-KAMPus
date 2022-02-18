@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 export const PersonInfo = (props) => {
   return (
     <div className="personInfo d-flex justify-content-between">
-      <div className="follow d-flex align-items-center">
+      <div className="follow d-flex">
         <div className="me-2 comment-user-img-temp">
           {props.userName.slice(0, 1)}
         </div>
@@ -16,7 +16,7 @@ export const PersonInfo = (props) => {
           </Button>
         )}
       </div>
-      <p className="mb-0 d-flex align-items-center">{props.date}</p>
+      <p className="mb-0 d-flex align-items-center date">{props.date}</p>
     </div>
   );
 };

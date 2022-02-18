@@ -7,7 +7,9 @@
   grid-auto-rows: minmax(100px, auto);
   font-family: "McLaren", cursive;
 }
-
+.profile-container * {
+  color: var(--alt-green-text);
+}
 .user-info {
   grid-column: 1/3;
   grid-row: 1;
@@ -30,6 +32,7 @@
 }
 .user-stats > *::first-letter {
   font-size: 2rem;
+  color: var(--light-text);
 }
 .user-stats p {
   transition: 0.2s ease;
@@ -40,7 +43,11 @@
 .user-bio {
   margin-right: 5%;
 }
-
+.user-bio-text {
+  font-size: 18px;
+  text-align: center;
+  text-transform: capitalize;
+}
 .user-image-wrapper {
   height: 200px;
   width: 200px;
@@ -149,11 +156,6 @@
   box-shadow: 0px 0px 0px 8px rgba(63, 81, 181, 0.16);
 }
 
-.user-bio-text {
-  font-size: 18px;
-  text-align: center;
-}
-
 .user-text {
   padding: 1rem 0;
   width: 100%;
@@ -194,7 +196,9 @@
   border-radius: 20px;
   margin: 0 1rem;
 }
-
+.share-profile-btn > svg > path {
+  color: var(--navbar);
+}
 .user-activity {
   grid-column: 1/3;
   grid-row: 2;
@@ -213,6 +217,7 @@
 
 .nav-tabs > .nav-item > .nav-link {
   color: white !important;
+  font-family: "Montserrat";
 }
 
 .nav-tabs > .nav-item > .nav-link.active {
@@ -237,8 +242,9 @@
 }
 
 .accolade-title {
-  font-family: "Merienda", cursive;
+  font-family: "Mclaren", cursive;
   font-weight: bold;
+  color: var(--light-text);
 }
 
 .accolade-title::after {
@@ -301,9 +307,11 @@
 .profile-post-title {
   text-transform: capitalize;
   color: var(--green-text);
+  font-family: "Martel Sans";
 }
 .profile-comment-ans {
   font-size: 1.3rem;
   margin-left: 2em;
   color: rgba(255, 255, 255, 0.829);
+  font-family: "Quicksand";
 }

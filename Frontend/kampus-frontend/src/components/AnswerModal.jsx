@@ -52,7 +52,6 @@ const modules = {
 const AnswerModal = ({ open, setOpen, data }) => {
   // MODAL
   // const [open, setOpen] = useState(false);
-  const [waitingForRes, setWaitingForRes] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -65,8 +64,8 @@ const AnswerModal = ({ open, setOpen, data }) => {
   const submitHandler = async () => {
     //prevents submission of empty answer, can do real validation later
     if (text !== "") {
-      setWaitingForRes(true);
       try {
+        setOpen(false);
         const url = "http://localhost:8080";
         const config = {
           headers: {
@@ -85,9 +84,7 @@ const AnswerModal = ({ open, setOpen, data }) => {
           config
         );
         console.log(response.data);
-        setWaitingForRes(response ? false : true);
         //closes modal on submit
-        setOpen(false);
       } catch (err) {
         console.log("Something went wrong!");
         console.log(err);

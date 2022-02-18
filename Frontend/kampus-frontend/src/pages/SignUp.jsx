@@ -84,7 +84,7 @@ const SignUp = () => {
             email: email.value,
             password: password,
             year: year,
-            department: department,
+            branch: department,
           },
           config
         );

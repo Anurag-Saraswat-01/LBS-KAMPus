@@ -1,6 +1,6 @@
 .css-107w94t {
   background-color: var(--background) !important;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .css-5lbw0b-MuiTypography-root {
@@ -12,8 +12,9 @@
 }
 
 .ql-editor {
-  min-height: 350px;
+  height: 45vh;
   background-color: black;
+  overflow: scroll;
 }
 
 .ql-editor > * {
@@ -54,6 +55,7 @@
   gap: 1rem;
   align-items: center;
   margin: 1rem 0;
+  color: var(--green-text);
 }
 
 .answerModal__submit_wrapper {
@@ -82,10 +84,16 @@
     font-size: 1.75rem;
   }
 }
+
+.answerDetails {
+  font-family: "Montserrat";
+}
+
 .answerModal {
   padding: 0.2rem 0.4rem;
   border-radius: 10px;
   transition: 0.2s ease;
+  font-family: "Montserrat";
 }
 .answerModal:hover {
   background-color: var(--background);

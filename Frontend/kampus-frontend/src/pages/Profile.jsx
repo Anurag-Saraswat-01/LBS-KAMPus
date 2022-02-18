@@ -19,6 +19,13 @@ import "../css/Profile.css";
 import ProfileComments from "../components/ProfileComments";
 import { custom_badges_map, society_badges_map } from "../api/iconData";
 
+const yearMap = {
+  FE: "First",
+  SE: "Second",
+  TE: "Third",
+  BE: "Fourth",
+};
+
 const Profile = () => {
   const navigate = useNavigate();
   const [followerShow, setFollowerShow] = useState(false);
@@ -28,7 +35,6 @@ const Profile = () => {
   const [cropperShow, setCropperShow] = useState(false);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
-
   // cropper states
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -253,7 +259,11 @@ const Profile = () => {
     (data, key) => {
       return (
         <div className="society-info" key={key}>
-          <img className="society-icon" src={society_badges_map[data]} alt={data} />
+          <img
+            className="society-icon"
+            src={society_badges_map[data]}
+            alt={data}
+          />
           <p className="society-name">{data}</p>
         </div>
       );
@@ -346,8 +356,8 @@ const Profile = () => {
                 </label>
               </div>
             </div>
-            <p className="user-bio-text">{userData.year} Year</p>
-            <p className="user-bio-text">{userData.branch} Branch</p>
+            <p className="user-bio-text">{yearMap[userData.year]} Year</p>
+            <p className="user-bio-text">{userData.branch}</p>
           </div>
           <div className="user-text">
             <h1 className="user-name">{userData.name}</h1>
@@ -362,7 +372,7 @@ const Profile = () => {
                 Following{" "}
               </p>
 
-              <p>
+              <p style={{ cursor: "default" }}>
                 {userData.karma}
                 <br /> Karma
               </p>
