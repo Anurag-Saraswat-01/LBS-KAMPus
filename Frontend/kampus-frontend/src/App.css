@@ -177,6 +177,13 @@ ul {
   align-items: center;
 }
 
+.sidebar-user-img {
+  border: var(--green-text) 1px solid;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
 .sidebar-username {
   padding: 0;
   margin: 0 1em;
@@ -244,6 +251,12 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.comment-user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: var(--green-text) 1px solid;
 }
 .comment-info-wrapper {
   display: flex;

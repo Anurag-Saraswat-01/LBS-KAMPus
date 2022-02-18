@@ -53,6 +53,7 @@ const QuestionNAnswer = () => {
             userName={data.askedBy}
             followButton={true}
             date={moment(data.createdAt).format("Do MMMM YYYY")}
+            userProfile={data.userProfile}
           />
           <Link to={`/post/${data._id}`}>
             <h3 className="question-title">

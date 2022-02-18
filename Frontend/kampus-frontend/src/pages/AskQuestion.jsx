@@ -109,6 +109,7 @@ const AskQuestion = () => {
           config
         );
         console.log(response.status);
+        console.log(response);
         if (response) {
           setAlert({
             show: true,

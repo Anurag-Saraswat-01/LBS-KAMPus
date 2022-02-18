@@ -17,8 +17,8 @@ export default function Variants() {
 				<Skeleton
 					className="skeleton"
 					variant="rectangular"
-					width={350}
-					height={200}
+					width={360}
+					height={170}
 				/>
 			</Stack>
 		</Container>

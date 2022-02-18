@@ -87,8 +87,45 @@ const addAnswer = async (req, res) => {
 	}
 };
 
+
+const getComments_to = async(req,res)=>{
+	const answer_id = new mongoose.Types.ObjectId(req.params.id);
+	const userid = res.locals.decodedId;
+  
+  
+	const comments = Answer.aggregate([
+	  {
+		$lookup: {
+		  $from: "comments",
+		  $localfield: "_id",
+		  $foreignfield: "comment_to",
+		  $as: "comments",
+		}
+	  },
+	  // {
+	  //   $match: {
+	  //     comment_to: answer_id
+	  //   }
+	  // }
+	])
+  
+	if(comments){
+	  return res.status(201).json({
+		comments
+	  })
+	}else {
+	  return res.status(403).json({
+		status: false,
+		message: "comment couldn't be fetched",
+	  });
+	}
+  
+  }
+  
+
 module.exports = {
 	addAnswer,
 	upvoteAnswer,
 	downvoteAnswer,
+	getComments_to,
 };

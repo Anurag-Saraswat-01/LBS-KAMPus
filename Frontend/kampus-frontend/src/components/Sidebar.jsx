@@ -16,9 +16,16 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar-user-info">
-        {/* <img src="" alt="" className="sidebar-user-img" />  */}{" "}
-        {/*Using div for now, image baad mei*/}
-        <div className="sidebar-user-img-temp">P</div> {/*user image */}
+        {/* user image */}
+        {localStorage.getItem("userProfile") ? (
+          <img
+            src={localStorage.getItem("userProfile")}
+            alt="user profile"
+            className="sidebar-user-img"
+          />
+        ) : (
+          <div className="sidebar-user-img-temp">P</div>
+        )}
         <a href="" className="sidebar-username">
           {userContext.username}
         </a>

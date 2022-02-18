@@ -4,6 +4,7 @@ const {
 	addAnswer,
 	upvoteAnswer,
 	downvoteAnswer,
+	getComments_to,
 } = require("../controllers/answerController");
 const checkAuth = require('../middlewares/checkAuth')
 
@@ -14,4 +15,5 @@ answerRouter.route("/upvote/:id").put(upvoteAnswer);
 
 answerRouter.route("/downvote/:id").put(downvoteAnswer);
 
+answerRouter.route("/get/comments/:id").get(getComments_to)
 module.exports = answerRouter;

@@ -61,7 +61,7 @@ const getOnePost = async (req, res) => {
 		[
 			{
 				$match: {
-					_id: new mongoose.Types.ObjectId("61f61a86e8514df183a698b2"),
+					_id: new mongoose.Types.ObjectId(id),
 				},
 			},
 			// Similar to performing the join operation
@@ -104,6 +104,7 @@ const createOnePost = async (req, res) => {
 		category,
 		body,
 		askedBy: user.name,
+		userProfile: user.profileImgUri,
 		// answeredBy,
 	});
 	post

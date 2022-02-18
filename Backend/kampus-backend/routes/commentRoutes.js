@@ -7,6 +7,6 @@ const {
 const checkAuth = require('../middlewares/checkAuth')
 
 commentRouter.route("/make-comment:id").post(checkAuth,makeComment);
-commentRouter.route("/get/to:id").get(getComments_to);
+// commentRouter.route("/get/to:id").get(getComments_to);
 
 module.exports = commentRouter

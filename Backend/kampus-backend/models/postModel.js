@@ -16,6 +16,7 @@ const PostSchema = new Schema(
 			required: true,
 		},
 		askedBy: String,
+		userProfile: String, 
 		answers: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "answers",

@@ -193,6 +193,11 @@ const Profile = () => {
     handleCropperClose();
   }, [croppedImage]);
 
+  // Storing profile image in local storage
+  useEffect(() => {
+    localStorage.setItem('userProfile', profileImage)
+  }, [profileImage])
+
   //* From the loginStatus after getting the id, it will fetch the userData and set it to useState userData
   useEffect(() => {
     const getUserData = async () => {
