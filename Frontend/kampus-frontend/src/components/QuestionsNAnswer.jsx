@@ -10,81 +10,81 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 const QuestionNAnswer = () => {
-  const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const url = "http://localhost:8080";
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-          withCredentials: true,
-          credentials: "include",
-        };
-        //same funda as in app.js, dont need to use .then inside an async func
-        const response = await axios.get(`${url}/api/posts/posts`, config);
-        // console.log(response.data);
-        // console.log(response.data[0].allAnswers[0]);
-        setQuestions(response.data);
-        // setLoading(false);
-      } catch (err) {
-        console.log("Something went wrong");
-        console.log(err);
-      }
-    };
-    getPosts();
-  }, []);
+	const [questions, setQuestions] = useState([]);
+	const [loading, setLoading] = useState(true);
+	useEffect(() => {
+		const getPosts = async () => {
+			try {
+				const url = "http://localhost:8080";
+				const config = {
+					headers: {
+						"Content-type": "application/json",
+					},
+					withCredentials: true,
+					credentials: "include",
+				};
+				//same funda as in app.js, dont need to use .then inside an async func
+				const response = await axios.get(`${url}/api/posts/posts`, config);
+				// console.log(response.data);
+				// console.log(response.data[0].allAnswers[0]);
+				setQuestions(response.data);
+				// setLoading(false);
+			} catch (err) {
+				console.log("Something went wrong");
+				console.log(err);
+			}
+		};
+		getPosts();
+	}, []);
 
-  useEffect(() => {
-    if (questions.length === 0) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  }, [questions]);
+	useEffect(() => {
+		if (questions.length === 0) {
+			setLoading(true);
+		} else {
+			setLoading(false);
+		}
+	}, [questions]);
 
-  const questionCard = questions.map((data, key) => {
-    return data ? (
-      <div className="ps-2 pe-2" key={key}>
-        <Container className="questionSection">
-          <PersonInfo
-            userName={data.askedBy}
-            followButton={true}
-            date={moment(data.createdAt).format("Do MMMM YYYY")}
-          />
-          <Link to={`/post/${data._id}`}>
-            <h4 className="p-0 pt-2">
-              {/*key={key}*/}
-              {data.title}
-            </h4>
-          </Link>
+	const questionCard = questions.map((data, key) => {
+		return data ? (
+			<div className="ps-2 pe-2" key={key}>
+				<Container className="questionSection">
+					<PersonInfo
+						userName={data.askedBy}
+						followButton={true}
+						date={moment(data.createdAt).format("Do MMMM YYYY")}
+					/>
+					<Link to={`/post/${data._id}`}>
+						<h4 className="p-0 pt-2">
+							{/*key={key}*/}
+							{data.title}
+						</h4>
+					</Link>
 
-          <p className="p-0 pt-2">{data.body}</p>
-        </Container>
-        <hr className="lineBreak" />
+					<p className="p-0 pt-2">{data.body}</p>
+				</Container>
+				<hr className="lineBreak" />
 
-        <AnswerCount data={data} count={data.allAnswers.length} />
-        {data.allAnswers.slice(0, 1).map((answer, key) => (
-          <Answers key={key} answer={answer} />
-        ))}
-        {/* <Answers answer={data.allAnswers[0]} /> */}
-      </div>
-    ) : null;
-  });
+				<AnswerCount data={data} count={data.allAnswers.length} />
+				{data.allAnswers.slice(0, 1).map((answer, key) => (
+					<Answers key={key} answer={answer} />
+				))}
+				{/* <Answers answer={data.allAnswers[0]} /> */}
+			</div>
+		) : null;
+	});
 
-  return loading ? (
-    <>
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-    </>
-  ) : (
-    <div>
-      <Container className="post ">{questionCard}</Container>
-    </div>
-  );
+	return loading ? (
+		<>
+			<Skeleton />
+			<Skeleton />
+			{/* <Skeleton /> */}
+		</>
+	) : (
+		<div>
+			<Container className="post ">{questionCard}</Container>
+		</div>
+	);
 };
 
 export default QuestionNAnswer;

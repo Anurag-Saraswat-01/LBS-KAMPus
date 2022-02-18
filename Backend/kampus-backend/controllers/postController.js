@@ -31,8 +31,8 @@ const getPostWithMaximumUpvotes = async (req, res) => {
 	const posts = await Post.aggregate([
 		{
 			$group: {
-				_id: '$answerId'
-			}
+				_id: "$answerId",
+			},
 		},
 		// Similar to performing the join operation
 		{
@@ -42,7 +42,6 @@ const getPostWithMaximumUpvotes = async (req, res) => {
 				foreignField: "question_id", // Field from the collection i.e answer
 				as: "answer", // name for the result obtained from the join
 			},
-
 		},
 		//To sort the posts in descending order based on upvotes
 		{ $sort: { upvotes: -1 } },
@@ -57,14 +56,35 @@ const getPostWithMaximumUpvotes = async (req, res) => {
 };
 
 const getOnePost = async (req, res) => {
-	const post = await Post.findById(req.params.id);
-	console.log(post);
-	if (!post) {
+	const id = req.params.id;
+	const posts = await Post.aggregate(
+		[
+			{
+				$match: {
+					_id: new mongoose.Types.ObjectId("61f61a86e8514df183a698b2"),
+				},
+			},
+			// Similar to performing the join operation
+			{
+				$lookup: {
+					from: "answers", //This is the collection we want to make join operation
+					localField: "_id", //Field from the input document i.e Post
+					foreignField: "question_id", // Field from the collection i.e answer
+					as: "allAnswers", // name for the result obtained from the join
+				},
+			},
+			//To sort the posts in descending order based on upvotes
+			{ $sort: { upvotes: -1 } },
+			//
+		]
+		// [] // group by postID
+	);
+	if (!posts) {
 		return res.json({
-			message: "No post found with given id " + req.params.id,
+			message: "No data found!",
 		});
 	}
-	return res.json(post);
+	return res.json(posts);
 };
 
 // Asking the Question
