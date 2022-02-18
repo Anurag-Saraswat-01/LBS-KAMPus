@@ -5,7 +5,7 @@ const commentSchema = new Schema(
 	{
 		comment_to: {
 			type: Schema.Types.ObjectId,
-			ref: "answer",
+			ref: "answers",
 		},
         tagged: String,
 		commentBody: String,
