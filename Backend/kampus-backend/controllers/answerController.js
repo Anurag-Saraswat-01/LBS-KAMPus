@@ -1,7 +1,8 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 // const Post = require("../models/postModel");
 const User = require("../models/userModel");
 const Answer = require("../models/answerModel");
+const Comment = require("../models/commentModel");
 
 // Upvoting the answer
 const upvoteAnswer = async (req, res) => {
@@ -87,41 +88,40 @@ const addAnswer = async (req, res) => {
 	}
 };
 
-
+// to get comments to the answer
 const getComments_to = async(req,res)=>{
 	const answer_id = new mongoose.Types.ObjectId(req.params.id);
 	const userid = res.locals.decodedId;
   
   
 	const comments = Answer.aggregate([
+		{
+			$match: {
+			_id: answer_id
+		}
+		},
 	  {
 		$lookup: {
-		  $from: "comments",
-		  $localfield: "_id",
-		  $foreignfield: "comment_to",
-		  $as: "comments",
+		  from: "comments",
+		  localField: "_id",
+		  foreignField: "comment_to",
+		  as: "result",
 		}
 	  },
-	  // {
-	  //   $match: {
-	  //     comment_to: answer_id
-	  //   }
-	  // }
-	])
+	]).allowDiskUse(true);
   
-	if(comments){
-	  return res.status(201).json({
-		comments
-	  })
-	}else {
-	  return res.status(403).json({
+	if(!comments){
+		return res.status(403).json({
 		status: false,
 		message: "comment couldn't be fetched",
-	  });
+		});
+	
+	}else {
+		return res.json(comments);
 	}
   
   }
-  
+
 
 module.exports = {
 	addAnswer,

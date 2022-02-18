@@ -15,5 +15,6 @@ answerRouter.route("/upvote/:id").put(upvoteAnswer);
 
 answerRouter.route("/downvote/:id").put(downvoteAnswer);
 
-answerRouter.route("/get/comments/:id").get(getComments_to)
+answerRouter.route("/get/comments/:id").get(getComments_to);
+
 module.exports = answerRouter;
