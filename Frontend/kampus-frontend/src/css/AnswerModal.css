@@ -1,23 +1,23 @@
 .css-107w94t {
-	background-color: var(--background) !important;
-	overflow-y: scroll;
+  background-color: var(--background) !important;
+  overflow-y: scroll;
 }
 
 .css-5lbw0b-MuiTypography-root {
-	color: white;
+  color: white;
 }
 
 .ql-toolbar {
-	background-color: white;
+  background-color: white;
 }
 
 .ql-editor {
-	min-height: 350px;
-	background-color: black;
+  min-height: 350px;
+  background-color: black;
 }
 
 .ql-editor > * {
-	color: white;
+  color: white;
 }
 
 /* .ql-editor p {
@@ -26,9 +26,9 @@
 } */
 
 .ql-editor p img {
-	/**/
-	width: 30%;
-	/* display: flex; */
+  /**/
+  width: 30%;
+  /* display: flex; */
 }
 
 /* .ql-editor > p > strong {
@@ -36,49 +36,61 @@
 } */
 
 .answerModal__header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .answerModal__closeIcon:hover {
-	cursor: pointer;
-	background-color: black;
-	opacity: 0.2;
-	border-radius: 50%;
+  cursor: pointer;
+  background-color: black;
+  opacity: 0.2;
+  border-radius: 50%;
 }
 
 .answerModal__description {
-	display: flex;
-	flex-direction: row;
-	gap: 1rem;
-	align-items: center;
-	margin: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  margin: 1rem 0;
 }
 
 .answerModal__submit_wrapper {
-	display: flex;
-	justify-content: right;
-	margin-top: 0.5rem;
+  display: flex;
+  justify-content: right;
+  margin-top: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
-	.answerModal__description {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		gap: 0;
-		align-items: center;
-	}
-	.ql-editor {
-		min-height: 250px;
-	}
-	.ql-editor p img {
-		width: 40%;
-		/* display: flex; */
-	}
+  .answerModal__description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    align-items: center;
+  }
+  .ql-editor {
+    min-height: 250px;
+  }
+  .ql-editor p img {
+    width: 40%;
+    /* display: flex; */
+  }
 
-	.answerModal__header h2 {
-		font-size: 1.75rem;
-	}
+  .answerModal__header h2 {
+    font-size: 1.75rem;
+  }
+}
+.answerModal {
+  padding: 0.2rem 0.4rem;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+.answerModal:hover {
+  background-color: var(--background);
+}
+.answerModal:active {
+  transition: 0.1s linear;
+  background-color: grey;
 }

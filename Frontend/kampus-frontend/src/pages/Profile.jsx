@@ -360,20 +360,28 @@ const Profile = () => {
             <h1 className="user-name">{userData.name}</h1>
             <div className="user-stats">
               <p onClick={handleFollowerShow} style={{ cursor: "pointer" }}>
-                {userData.followers.length} Followers
+                {userData.followers.length} <br />
+                Followers
               </p>
-              .
+
               <p onClick={handleFollowingShow} style={{ cursor: "pointer" }}>
-                {userData.following.length} Following{" "}
+                {userData.following.length} <br />
+                Following{" "}
               </p>
-              .<p>{userData.karma} Karma</p>
+
+              <p>
+                {userData.karma}
+                <br /> Karma
+              </p>
             </div>
             {/* edit-btn if user is viewing their own profile and will replace follow-btn */}
-            <button className="follow-btn">Follow</button>
-            {/* <button className="edit-btn">Edit</button> */}
-            <button className="share-profile-btn">
-              <FaShare />
-            </button>
+            <div className="profile-buttons">
+              <button className="follow-btn">Follow</button>
+              {/* <button className="edit-btn">Edit</button> */}
+              <button className="share-profile-btn">
+                <FaShare />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -391,7 +399,7 @@ const Profile = () => {
                 <ProfilePosts />
               </div>
             </Tab>
-            <Tab eventKey="comments" title="Comment">
+            <Tab eventKey="comments" title="Answers">
               <ProfileComments />
             </Tab>
           </Tabs>

@@ -12,7 +12,7 @@ const CommentBar = ({ answer }) => {
   const likeStyle = (color) => {
     return {
       fill: color,
-      width: "50px",
+      width: "30px",
       height: "20px",
     };
   };
@@ -145,7 +145,11 @@ const CommentBar = ({ answer }) => {
           className="likes clickable d-flex pt-2 pb-2 align-items-center"
         >
           <BiUpvote style={likeStyle(upvotes.upvoted ? "#84c577" : "white")} />
-          {upvotes.upvotesNum}
+          {
+            <p className={upvotes.upvoted ? "upvote-text" : ""}>
+              {upvotes.upvotesNum}
+            </p>
+          }
         </div>
         <div
           onClick={() => downvote(answer._id)}
@@ -154,7 +158,11 @@ const CommentBar = ({ answer }) => {
           <BiDownvote
             style={likeStyle(downvotes.downvoted ? "#FF5353" : "white")}
           />
-          {downvotes.downvotesNum}
+          {
+            <p className={downvotes.downvoted ? "downvote-text" : ""}>
+              {downvotes.downvotesNum}
+            </p>
+          }
         </div>
       </div>
       {/* SHARE */}

@@ -18,7 +18,15 @@
 }
 a {
   text-decoration: none !important;
-  color: inherit !important;
+  color: inherit;
+}
+
+.reccomendations a {
+  color: white;
+}
+
+.reccomendations a:hover {
+  color: var(--green-text);
 }
 body {
   background-color: var(--background) !important;
@@ -51,6 +59,13 @@ ul {
   margin: 0 0.5em;
 }
 
+.navbar-nav .nav-link {
+  border-radius: 20px;
+  transition: 0.1s ease;
+}
+.navbar-nav .nav-link:hover {
+  background-color: var(--background);
+}
 .add-post {
   background-color: #35463b;
   color: var(--green-text);
@@ -59,6 +74,11 @@ ul {
   display: grid;
   place-items: center;
   border-radius: 100%;
+  transition: 0.2s ease;
+}
+
+.add-post:hover {
+  transform: scale(1.1);
 }
 
 /* ------Landing page css------ */
@@ -349,9 +369,17 @@ p .answer {
 .likes,
 .dislikes {
   background-color: #000;
-  width: 100px;
+  width: 110px;
   margin: auto 0 !important;
   padding-bottom: 4px !important;
+  padding: 0.5em;
+  justify-content: space-evenly;
+  transition: 0.2s ease;
+}
+.likes p,
+.dislikes p {
+  margin: 0;
+  color: white;
 }
 .likes {
   border-radius: 30px 0 0 30px;
@@ -362,11 +390,42 @@ p .answer {
   border-radius: 0 30px 30px 0;
   border-left: 1px solid #888888;
 }
+.likes:hover,
+.likes:hover p {
+  transform: scale(1.1);
+  color: #84c577 !important;
+}
+.dislikes:hover,
+.dislikes:hover > p {
+  transform: scale(1.1);
+  color: #ff5353 !important;
+}
+.likes svg,
+.dislikes svg {
+  transition: 0.2s ease;
+}
+.likes:hover svg {
+  fill: #84c577 !important;
+}
+.dislikes:hover svg {
+  fill: #ff5353 !important;
+}
+.upvote-text,
+.downvote-text {
+  margin: 0;
+}
+.likes .upvote-text {
+  color: #84c577;
+}
 
+.dislikes .downvote-text {
+  color: #ff5353;
+}
 .shareIcon {
   width: 50px;
   background-color: #84c577;
   height: 40px;
+  justify-content: center;
 }
 
 .share {
@@ -487,4 +546,17 @@ p .answer {
 
 .answer p {
   color: white;
+}
+.answer a {
+  color: var(--alt-green-text);
+}
+.answer button {
+  border: 1px solid var(--alt-green-text);
+  color: white;
+  transition: 0.25s ease;
+  font-size: 0.8rem;
+}
+.answer button:hover {
+  color: var(--alt-green-text);
+  transform: scale(1.1);
 }
