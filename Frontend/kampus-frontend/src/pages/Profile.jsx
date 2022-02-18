@@ -1,5 +1,4 @@
 import Header from "../components/Header";
-// import Post from "../components/Post";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/Modal";
 import Tabs from "react-bootstrap/Tabs";
@@ -18,6 +17,7 @@ import { AuthContext } from "../api/Contexts";
 import ProfilePosts from "../components/ProfilePosts";
 import "../css/Profile.css";
 import ProfileComments from "../components/ProfileComments";
+import { custom_badges_map, society_badges_map } from "../api/iconData";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -86,13 +86,6 @@ const Profile = () => {
 
     // As Base64 string
     return canvas.toDataURL("image/jpeg");
-
-    // As a blob
-    // return new Promise((resolve, reject) => {
-    //   canvas.toBlob((file) => {
-    //     resolve(URL.createObjectURL(file));
-    //   }, "image/jpeg");
-    // });
   };
 
   // is called whenever save button is clicked
@@ -249,7 +242,7 @@ const Profile = () => {
   const Badges = ((userData && userData.badges) || []).map((data, key) => {
     return (
       <div className="badge-info" key={key}>
-        <div className="badge-icon"></div>
+        <img className="badge-icon" src={custom_badges_map[data]} alt={data} />
         <p className="badge-name">{data}</p>
       </div>
     );
@@ -260,7 +253,7 @@ const Profile = () => {
     (data, key) => {
       return (
         <div className="society-info" key={key}>
-          <div className="society-icon"></div>
+          <img className="society-icon" src={society_badges_map[data]} alt={data} />
           <p className="society-name">{data}</p>
         </div>
       );

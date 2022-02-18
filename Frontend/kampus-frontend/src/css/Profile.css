@@ -256,14 +256,19 @@
 .badge-info,
 .society-info {
   display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .badge-icon,
 .society-icon {
-  height: 20px;
-  width: 20px;
-  background-color: #c4c4c4;
-  margin-right: 1rem;
+  height: 30px;
+  width: 30px;
+}
+
+.badge-name,
+.society-name {
+  margin: 0;
 }
 
 .modal-header,
