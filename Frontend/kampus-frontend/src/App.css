@@ -91,6 +91,7 @@ ul {
   padding: 5%;
   text-align: center;
   font-family: "McLaren", cursive;
+  height: calc(100vh - var(--nav-height));
 }
 
 .landing-title {
@@ -196,7 +197,14 @@ ul {
 .sidebar-username:hover {
   color: #84c577;
 }
-
+a[href="/signin"] {
+  color: var(--alt-green-text);
+  transition: 0.2s ease;
+}
+a[href="/signin"]:hover {
+  color: var(--green-text);
+  transform: scale(1.1);
+}
 .divider {
   color: #c1fff4;
   opacity: 0.75;
@@ -568,7 +576,7 @@ ul {
   border-radius: 20px !important;
   color: black !important;
 }
-.askQuestion_button{
+.askQuestion_button {
   background-color: black;
   border: 1px solid var(--green-text) !important;
   color: var(--green-text) !important;
@@ -576,7 +584,7 @@ ul {
 }
 .askQuestion_button:hover {
   transform: scale(1.2) !important;
-  background-color:  var(--green-text) !important;
+  background-color: var(--green-text) !important;
   color: black !important;
 }
 .askQuestion__body textarea,
@@ -627,4 +635,11 @@ ul {
 .answer img {
   max-width: 90%;
   margin: auto;
+}
+.ves-bs {
+  position: relative;
+  color: white;
+  bottom: -40px;
+  font-family: "Montserrat";
+  color: #f5bd00;
 }

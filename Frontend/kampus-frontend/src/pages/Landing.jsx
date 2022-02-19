@@ -22,6 +22,7 @@ const Landing = () => {
           Not a member?
           <Link to="/signup"> Sign Up </Link>
         </p>
+        <p className="ves-bs">An LBS project created by students of VESIT</p>
       </Container>
     </div>
   );

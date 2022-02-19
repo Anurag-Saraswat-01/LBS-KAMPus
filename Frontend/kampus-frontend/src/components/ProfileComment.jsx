@@ -1,11 +1,13 @@
 import React from "react";
-
-function ProfileComment({ title, date, comment }) {
+import { Link } from "react-router-dom";
+function ProfileComment({ title, date, comment, post_id }) {
   return (
     <div className="profile-post-container ">
       <div className="d-flex justify-content-between">
         <span className="profile-comment-title">
-          {title.substring(0, 30) + (title.length > 30 ? "..." : "")}
+          <Link to={`../post/${post_id}`}>
+            {title.substring(0, 30) + (title.length > 30 ? "..." : "")}
+          </Link>
         </span>
         <p className="mb-0 d-flex align-items-center">{date}</p>
       </div>
@@ -14,8 +16,7 @@ function ProfileComment({ title, date, comment }) {
         dangerouslySetInnerHTML={{
           __html: comment.substring(0, 60) + (comment.length > 60 ? "..." : ""),
         }}
-      >
-      </div>
+      ></div>
       <hr className="linebreak" />
     </div>
   );

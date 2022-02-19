@@ -34,13 +34,32 @@ const profilePosts = [
   { title: "Bruh", date: "20th jan 2020", count: 2 },
 ];
 const profileComments = [
-  { title: "Bruh", date: "20th jan 2020", comment:'I am the bruh, but the bro' },
-  { title: "Bruh", date: "20th jan 2020", comment:'I am the bruh, but the bro' },
-  { title: "Bruh", date: "20th jan 2020", comment:'I am the bruh, but the bro' },
-  { title: "Bruh", date: "20th jan 2020", comment:'I am the bruh, but the bro' },
-  { title: "Bruh", date: "20th jan 2020", comment:'I am the bruh, but the bro' },
+  {
+    title: "Bruh",
+    date: "20th jan 2020",
+    comment: "I am the bruh, but the bro",
+  },
+  {
+    title: "Bruh",
+    date: "20th jan 2020",
+    comment: "I am the bruh, but the bro",
+  },
+  {
+    title: "Bruh",
+    date: "20th jan 2020",
+    comment: "I am the bruh, but the bro",
+  },
+  {
+    title: "Bruh",
+    date: "20th jan 2020",
+    comment: "I am the bruh, but the bro",
+  },
+  {
+    title: "Bruh",
+    date: "20th jan 2020",
+    comment: "I am the bruh, but the bro",
+  },
 ];
-
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -74,17 +93,20 @@ const Profile = () => {
         const response = await axios.get(`${url}/api/profile/getPosts`, config);
         setPosts(response.data.posts);
         console.log(response.data.posts);
-        const answers = await axios.get(`${url}/api/profile/getAnswers`, config);
-        setAnswers(answers.data.answers)
-        console.log(answers.data.answers)
-      } catch(err) {
+        const answers = await axios.get(
+          `${url}/api/profile/getAnswers`,
+          config
+        );
+        setAnswers(answers.data.answers);
+        console.log(answers.data.answers);
+      } catch (err) {
         console.log(err.message);
         console.log(err);
-      }  
-    }
+      }
+    };
     getPosts();
-  }, [])  
-  
+  }, []);
+
   //callback for when cropping is complete
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -253,7 +275,7 @@ const Profile = () => {
     };
     getUserData();
   }, []);
-  
+
   useEffect(() => {
     if (!(userData && userData.profileImgUri)) return;
     setProfileImage(userData.profileImgUri);
@@ -399,14 +421,18 @@ const Profile = () => {
             <h1 className="user-name">{userData.name}</h1>
             <div className="user-stats">
               <p onClick={handleFollowerShow} style={{ cursor: "pointer" }}>
-                <span className='user-stat-number'>{userData.followers.length}</span>
-                <br/>Followers
+                <span className="user-stat-number">
+                  {userData.followers.length}
+                </span>
+                <br />
+                Followers
               </p>
 
               <p onClick={handleFollowingShow} style={{ cursor: "pointer" }}>
-              <span className='user-stat-number'>{userData.following.length}</span>
-                <br/> Following{" "}
-              
+                <span className="user-stat-number">
+                  {userData.following.length}
+                </span>
+                <br /> Following{" "}
               </p>
               <p style={{ cursor: "default" }}>
                 <span className="user-stat-number">{userData.karma}</span>
@@ -435,11 +461,19 @@ const Profile = () => {
             </Tab> */}
             <Tab eventKey="posts" title="Posts">
               <div>
-                <ProfilePosts profilePosts={posts} />
+                {posts.length > 0 ? (
+                  <ProfilePosts profilePosts={posts} />
+                ) : (
+                  <p className="profile-no-data">No Posts</p>
+                )}
               </div>
             </Tab>
             <Tab eventKey="comments" title="Answers">
-              <ProfileComments profileComments={answers}/>
+              {answers.length > 0 ? (
+                <ProfileComments profileComments={answers} />
+              ) : (
+                <p className="profile-no-data">No Answers</p>
+              )}
             </Tab>
           </Tabs>
         </div>

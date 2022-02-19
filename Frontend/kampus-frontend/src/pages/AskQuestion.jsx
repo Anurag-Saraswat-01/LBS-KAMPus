@@ -172,6 +172,7 @@ const AskQuestion = () => {
               onChange={handleChange}
             >
               <MenuItem value={""}>None</MenuItem>
+              <MenuItem value={"gen"}>General</MenuItem>
               <MenuItem value={"cmpn"}>Computers</MenuItem>
               <MenuItem value={"el"}>Electrical</MenuItem>
               <MenuItem value={"extc"}>Electronics and Communication</MenuItem>
@@ -209,7 +210,6 @@ const AskQuestion = () => {
           <div className="askQuestion__post">
             <Button
               className="askQuestion_button"
-              
               variant="outlined"
               onClick={submitPost}
             >
