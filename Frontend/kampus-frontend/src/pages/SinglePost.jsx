@@ -67,6 +67,7 @@ const SinglePost = () => {
               userName={question.askedBy}
               followButton={true}
               date={moment(question.createdAt).format("Do MMMM YYYY")}
+              userProfile={question.userProfile}
             />
             <Link to={`/post/${question._id}`}>
               <h3 className="question-title">
@@ -96,7 +97,7 @@ const SinglePost = () => {
         <div className="post-placeholder">{questionCard()}</div>
       </div>
     </div>
-  )
+  );
 };
 
 export default SinglePost;
