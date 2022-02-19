@@ -190,6 +190,7 @@ ul {
   margin: 0;
   font-size: 1.5em;
   color: white;
+  transition: 0.1s ease;
 }
 
 .sidebar-username:hover {
@@ -409,6 +410,7 @@ ul {
 
 .commentBar {
   color: white;
+  font-family: "Montserrat";
 }
 
 .likes,

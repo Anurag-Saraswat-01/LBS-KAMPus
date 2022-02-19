@@ -38,11 +38,18 @@ const Profile = () => {
   // cropper states
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-
+  const [posts, setPosts] = useState([]);
   //authContext allows access to user details (logged in or not)
   const authContext = useContext(AuthContext);
   const userContext = useContext(UserContext);
-
+  const url = "http://localhost:8080";
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+    withCredentials: true,
+    credentials: "include",
+  };
   //callback for when cropping is complete
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -196,21 +203,13 @@ const Profile = () => {
 
   // Storing profile image in local storage
   useEffect(() => {
-    userContext.setData(userContext.username, profileImage)
-  }, [profileImage])
+    userContext.setData(userContext.username, profileImage);
+  }, [profileImage]);
 
   //* From the loginStatus after getting the id, it will fetch the userData and set it to useState userData
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const url = "http://localhost:8080";
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-          withCredentials: true,
-          credentials: "include",
-        };
         const { data } = await axios.get(`${url}/api/users/profile`, config);
         setUserData(data);
       } catch (error) {
@@ -219,7 +218,17 @@ const Profile = () => {
     };
     getUserData();
   }, []);
-
+  useEffect(() => {
+    const getUserPosts = async () => {
+      try {
+        const { data } = await axios.get(`${url}/api/users/profile`, config);
+        setPosts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUserPosts();
+  }, []);
   useEffect(() => {
     if (!(userData && userData.profileImgUri)) return;
     setProfileImage(userData.profileImgUri);
