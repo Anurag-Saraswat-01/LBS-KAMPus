@@ -19,25 +19,26 @@ import Veslit from "../assets/society badges/veslit.png";
 import Vpc from "../assets/society badges/vpc.png";
 
 export const custom_badges_map = {
-    "Adept": Adept,
-    "New Poster": NewPoster,
-    "Pro": Pro,
-    "New Replier": NewReplier,
-    "Rookie": Rookie,
-    // to be changed later
-    "Vesit of Time": Pro,
-}
+  "Adept": Adept,
+  "New Poster": NewPoster,
+  "Pro": Pro,
+  "New Replier": NewReplier,
+  "Rookie": Rookie,
+  // to be changed later
+  "Vesit of Time": Pro,
+};
 
 export const society_badges_map = {
-    "VESIT Connect": Connect,
-    "CSI VESIT": Csi,
-    "Cultural Council": Cult,
-    "IEEE VESIT": Ieee,
-    "ISA VESIT": Isa,
-    "ISTE VESIT": Iste,
-    "SoRT VESIT": Sort,
-    "Sports Council": Sports,
-    "VESLang Circle": Veslang,
-    "VESLit Circle": Veslit,
-    "VESIT Photo Circle": Vpc,
-}
+  "VESIT Codecell": Codecell,
+  "VESIT Connect": Connect,
+  "CSI VESIT": Csi,
+  "Cultural Council": Cult,
+  "IEEE VESIT": Ieee,
+  "ISA VESIT": Isa,
+  "ISTE VESIT": Iste,
+  "SoRT VESIT": Sort,
+  "Sports Council": Sports,
+  "VESLang Circle": Veslang,
+  "VESLit Circle": Veslit,
+  "VESIT Photo Circle": Vpc,
+};

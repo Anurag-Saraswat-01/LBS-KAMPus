@@ -176,7 +176,7 @@ const SignUp = () => {
 
             <div className="signup__button">
               <Button
-                className="askQuestion__button"
+                className="signIn-button"
                 color="primary"
                 type="submit"
                 variant="contained"

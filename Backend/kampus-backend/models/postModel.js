@@ -15,6 +15,10 @@ const PostSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		userId: {
+			type: Schema.Types.ObjectId,
+			ref: "users",
+		},
 		askedBy: String,
 		userProfile: String, 
 		answers: {

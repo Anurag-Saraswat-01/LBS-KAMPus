@@ -1,15 +1,19 @@
 import React from "react";
-
-function ProfilePost({ title, date, count }) {
+import { Link } from "react-router-dom";
+import moment from "moment";
+function ProfilePost({ title, date, body, category, post_id }) {
   return (
     <div className="profile-post-container ">
-      <div className="d-flex justify-content-between">
-        <h5 className="profile-post-title">{title}</h5>
-        <p className="mb-0 d-flex align-items-center">{date}</p>
+      <Link to={`../post/${post_id}`}>
+        <div className="d-flex justify-content-between">
+          <h5 className="profile-post-title">{title}</h5>
+          <p className="mb-0 d-flex align-items-center">{moment(date).format("Do MMMM YYYY")}</p>
+        </div>
+      </Link>
+      <div className="profile-post-ans-body">
+        <p>{body.substring(0, 50) + "..."}</p>
+        <p>{category}</p>
       </div>
-      <p className="profile-post-ans-count">
-        {count} {count != 1 ? "Answers" : "Answer"}
-      </p>
       <hr className="linebreak" />
     </div>
   );

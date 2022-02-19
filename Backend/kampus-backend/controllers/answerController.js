@@ -74,6 +74,8 @@ const addAnswer = async (req, res) => {
 		question_id: question_id,
 		answeredBy: user.name,
 		answerBody: answerBody,
+		userProfile: user.profileImgUri,
+		answeredByUserId: user._id,
 	});
 	if (answer) {
 		return res.status(201).json({
@@ -94,21 +96,23 @@ const getComments_to = async(req,res)=>{
 	const userid = res.locals.decodedId;
   
   
-	const comments = Answer.aggregate([
+	const comments = await Comment.aggregate([
 		{
 			$match: {
 			_id: answer_id
 		}
 		},
-	  {
-		$lookup: {
-		  from: "comments",
-		  localField: "_id",
-		  foreignField: "comment_to",
-		  as: "result",
-		}
-	  },
+	//   {
+	// 	$lookup: {
+	// 	  from: "comments",
+	// 	  localField: "_id",
+	// 	  foreignField: "comment_to",
+	// 	  as: "result",
+	// 	}
+	//   },
 	]).allowDiskUse(true);
+
+	// console.log(comments);
   
 	if(!comments){
 		return res.status(403).json({

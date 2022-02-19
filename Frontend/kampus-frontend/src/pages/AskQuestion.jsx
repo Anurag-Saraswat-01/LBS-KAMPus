@@ -208,9 +208,9 @@ const AskQuestion = () => {
 
           <div className="askQuestion__post">
             <Button
-              className="askQuestion__button"
-              color="primary"
-              variant="contained"
+              className="askQuestion_button"
+              
+              variant="outlined"
               onClick={submitPost}
             >
               Post

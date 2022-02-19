@@ -88,7 +88,7 @@ const SinglePost = () => {
     );
   };
 
-  return question ? (
+  return (
     <div>
       <Header />
       <Sidebar />
@@ -96,9 +96,7 @@ const SinglePost = () => {
         <div className="post-placeholder">{questionCard()}</div>
       </div>
     </div>
-  ) : (
-    <Loader />
-  );
+  )
 };
 
 export default SinglePost;

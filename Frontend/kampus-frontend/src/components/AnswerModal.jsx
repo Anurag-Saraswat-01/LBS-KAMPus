@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState} from "react";
+import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -50,6 +51,8 @@ const modules = {
 };
 
 const AnswerModal = ({ open, setOpen, data }) => {
+  const navigate = useNavigate();
+
   // MODAL
   // const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -84,6 +87,7 @@ const AnswerModal = ({ open, setOpen, data }) => {
           config
         );
         console.log(response.data);
+        response && navigate(`/post/${data._id}`)
         //closes modal on submit
       } catch (err) {
         console.log("Something went wrong!");

@@ -103,6 +103,7 @@ const createOnePost = async (req, res) => {
 		title,
 		category,
 		body,
+		userId: user._id,
 		askedBy: user.name,
 		userProfile: user.profileImgUri,
 		// answeredBy,

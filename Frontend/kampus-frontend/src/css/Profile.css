@@ -30,7 +30,7 @@
   background-color: #313131;
   border-radius: 20px;
 }
-.user-stats > *::first-letter {
+.user-stat-number {
   font-size: 2rem;
   color: var(--light-text);
 }
@@ -261,7 +261,11 @@
 .societies {
   margin-top: 2rem;
 }
-
+.badges, .societies {
+  display:flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 .badge-info,
 .society-info {
   display: flex;
@@ -273,8 +277,11 @@
 .society-icon {
   height: 30px;
   width: 30px;
+  
 }
-
+.society-icon{
+  border-radius: 50%
+}
 .badge-name,
 .society-name {
   margin: 0;
@@ -284,6 +291,7 @@
 .modal-content,
 .modal-body {
   background-color: #202020;
+  font-family: 'Quicksand'
 }
 
 .modal-header {
@@ -293,11 +301,19 @@
 .modal-body {
   color: white;
 }
-
-.profile-post-ans-count {
+.profile-post-ans-body {
   color: grey;
+  display: flex;
+  justify-content: space-between;
 }
-
+.profile-post-ans-body > p{
+  color: grey;
+  margin: 0;
+}
+.profile-post-ans-body> p:nth-child(2){
+  color: var(--alt-green-text);
+  text-transform: uppercase;
+}
 .profile-post-container {
   width: 50vw;
 }
@@ -311,6 +327,11 @@
   text-transform: capitalize;
   color: var(--green-text);
   font-family: "Martel Sans";
+  transition:0.1s ease;
+}
+.profile-comment-title:hover,
+.profile-post-title:hover {
+  text-decoration: underline;
 }
 .profile-comment-ans {
   font-size: 1.3rem;

@@ -563,12 +563,22 @@ ul {
   padding-bottom: 25px;
 }
 
-.askQuestion__button {
+.signIn-button {
   background-color: #d8e9a8 !important;
   border-radius: 20px !important;
   color: black !important;
 }
-
+.askQuestion_button{
+  background-color: black;
+  border: 1px solid var(--green-text) !important;
+  color: var(--green-text) !important;
+  transition: 0.2s ease !important;
+}
+.askQuestion_button:hover {
+  transform: scale(1.2) !important;
+  background-color:  var(--green-text) !important;
+  color: black !important;
+}
 .askQuestion__body textarea,
 .askQuestion__title input {
   color: white;
