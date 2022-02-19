@@ -167,6 +167,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 1rem;
 }
 .follow-btn,
 .edit-btn {
@@ -179,7 +180,7 @@
   border-radius: 20px;
   font-family: "Quicksand", sans-serif;
   font-size: 1.2rem;
-  transition: 0.5s ease;
+  transition: 0.2s ease;
 }
 
 .follow-btn:hover {
@@ -194,7 +195,9 @@
   width: 60px;
   border: none;
   border-radius: 20px;
-  margin: 0 1rem;
+  margin: 0;
+  display: grid;
+  place-items: center;
 }
 .share-profile-btn > svg > path {
   color: var(--navbar);

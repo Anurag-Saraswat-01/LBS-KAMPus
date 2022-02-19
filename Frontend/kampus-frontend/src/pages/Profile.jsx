@@ -13,7 +13,7 @@ import Cropper from "react-easy-crop";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import IconButton from "@mui/material/IconButton";
 import defaultPhoto from "../assets/default photos/user-placeholder.png";
-import { AuthContext } from "../api/Contexts";
+import { AuthContext, UserContext } from "../api/Contexts";
 import ProfilePosts from "../components/ProfilePosts";
 import "../css/Profile.css";
 import ProfileComments from "../components/ProfileComments";
@@ -41,6 +41,7 @@ const Profile = () => {
 
   //authContext allows access to user details (logged in or not)
   const authContext = useContext(AuthContext);
+  const userContext = useContext(UserContext);
 
   //callback for when cropping is complete
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
@@ -195,7 +196,7 @@ const Profile = () => {
 
   // Storing profile image in local storage
   useEffect(() => {
-    localStorage.setItem('userProfile', profileImage)
+    userContext.setData(userContext.username, profileImage)
   }, [profileImage])
 
   //* From the loginStatus after getting the id, it will fetch the userData and set it to useState userData
@@ -342,9 +343,6 @@ const Profile = () => {
                 <img src={profileImage} alt="user-profile" />
               </div>
               <div className="edit-image" id="edit-image-div">
-                {/* <p className="file-name">
-                  {newImage ? newImage.name : "No File Chosen"}
-                </p> */}
                 <input
                   type="file"
                   name="profile-image"
@@ -357,7 +355,6 @@ const Profile = () => {
                   <IconButton aria-label="add=photo" component="span">
                     <AddAPhotoIcon fontSize="large" />
                   </IconButton>
-                  {/* <Button component="span">Add</Button> */}
                 </label>
               </div>
             </div>

@@ -90,6 +90,12 @@ const CommentBar = ({ answer }) => {
       upvoted: !upvotes.upvoted,
       upvotesNum: upvotes.upvotesNum + (upvotes.upvoted ? -1 : 1),
     });
+    if(downvotes.downvoted){
+      setDownvotes({
+        downvoted: false,
+        downvotesNum: downvotes.downvotesNum - 1,
+      })
+    }
     try {
       const url = "http://localhost:8080";
       const config = {
@@ -117,6 +123,12 @@ const CommentBar = ({ answer }) => {
       downvoted: !downvotes.downvoted,
       downvotesNum: downvotes.downvotesNum + (downvotes.downvoted ? -1 : 1),
     });
+    if(upvotes.upvoted){
+      setUpvotes({
+        upvoted: false,
+        upvotesNum: upvotes.upvotesNum - 1,
+      })
+    }
     try {
       const url = "http://localhost:8080";
       const config = {

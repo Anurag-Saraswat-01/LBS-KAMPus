@@ -7,12 +7,13 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import Alert from "@mui/material/Alert";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../api/Contexts";
+import { AuthContext, UserContext } from "../api/Contexts";
 // import Cookies from 'universal-cookie';
 
 // const cookies = new Cookies();
 const SignIn = () => {
   const authContext = useContext(AuthContext);
+  const userContext = useContext(UserContext)
   //State that checks if youre waiting for response after submit
   const [waitingForRes, setWaitingForRes] = useState(false);
   //* gets the message and type of error from original page
@@ -76,13 +77,16 @@ const SignIn = () => {
       const status = {
         // if response is received, set waiting to false
         loginStatus: response.data.loginStatus,
+        username: response.data.username,
+        userImg: response.data.userImg,
       };
-      console.log(status);
+      // console.log(status);
       if (status.loginStatus) {
         // right now this is just setting loginstatus, can modify login function to take in id as a parameter and modify the userID context
         authContext.login();
         //TODO: call the backend to return the username and image and store it in:
-        //userContext.setData(username, image)
+        // did already
+        userContext.setData(status.username, status.userImg)
       }
 
       response.data.loginStatus && navigate("/home");

@@ -160,6 +160,7 @@ ul {
   justify-content: start;
   align-items: center;
   padding: 2em;
+  gap: 2rem;
 }
 
 .sidebar-user-img-temp {
@@ -186,7 +187,13 @@ ul {
 
 .sidebar-username {
   padding: 0;
-  margin: 0 1em;
+  margin: 0;
+  font-size: 1.5em;
+  color: white;
+}
+
+.sidebar-username:hover {
+  color: #84c577;
 }
 
 .divider {

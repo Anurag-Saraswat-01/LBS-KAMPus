@@ -17,7 +17,7 @@ import { AuthContext, UserContext } from "./api/Contexts";
 function App() {
   // state to check whether user is logged in
   const [loggedin, setLoggedin] = useState(null);
-  const [userData, setUserData] = useState({ username: null, user_img: null });
+  const [userData, setUserData] = useState({ username: null, userImg: null });
   // stores if login status has been returned or not
   const [waitingForResponse, setWaitingForResponse] = useState(true);
   // if user is logged in, state to store their user_id for data fetching
@@ -26,6 +26,7 @@ function App() {
   useEffect(() => {
     loginStatus().then((response) => {
       setLoggedin(response.loginStatus);
+      setUserData({username: response.name, userImg: response.img})
       setWaitingForResponse(false);
     });
   }, []);
@@ -37,8 +38,8 @@ function App() {
   const logout = () => {
     setLoggedin(false);
   };
-  const contextSetUser = (username, user_img) => {
-    setUserData({ username: username, user_img: user_img });
+  const contextSetUser = (username, userImg) => {
+    setUserData({ username: username, userImg: userImg });
   };
   const loginStatus = async () => {
     const url = "http://localhost:8080";
@@ -56,7 +57,9 @@ function App() {
       if (response.status === 200) {
         const status = {
           loginStatus: response.data.loginStatus,
-          id: response.data.data,
+          id: response.data.id,
+          name: response.data.username,
+          img: response.data.userImg,
         };
         return status;
       }
@@ -80,7 +83,7 @@ function App() {
       <UserContext.Provider
         value={{
           username: userData.username,
-          user_img: userData.user_img,
+          userImg: userData.userImg,
           setData: contextSetUser,
         }}
       >

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../api/Contexts";
+import { Link } from "react-router-dom";
 
 const branches = [
   "Computer",
@@ -17,18 +18,20 @@ function Sidebar() {
     <div className="sidebar">
       <div className="sidebar-user-info">
         {/* user image */}
-        {localStorage.getItem("userProfile") ? (
+        {userContext.userImg ? (
           <img
-            src={localStorage.getItem("userProfile")}
+            src={userContext.userImg}
             alt="user profile"
             className="sidebar-user-img"
           />
         ) : (
-          <div className="sidebar-user-img-temp">P</div>
+          <div className="sidebar-user-img-temp">
+            {userContext.username ? userContext.username.slice(0,1) : ''}
+          </div>
         )}
-        <a href="" className="sidebar-username">
+        <Link to="/profile" className="sidebar-username">
           {userContext.username}
-        </a>
+        </Link>
         {/*^^username. did not add 'certified eggroll' coz that might need "preferred badge" type logic 
         Clicking on username can lead to profile ig*/}
       </div>

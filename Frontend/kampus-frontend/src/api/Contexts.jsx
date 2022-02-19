@@ -10,6 +10,6 @@ export const AuthContext = createContext({
 
 export const UserContext = createContext({
   username: null,
-  user_img: null,
+  userImg: null,
   setData: (name, img) => {},
 });
