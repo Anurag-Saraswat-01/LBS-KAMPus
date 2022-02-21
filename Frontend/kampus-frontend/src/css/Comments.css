@@ -1,0 +1,33 @@
+.comment-section {
+	padding-top: 1rem;
+	align-items: center;
+	flex-direction: column;
+	justify-content: right;
+	gap: 1rem;
+}
+
+.write-comment .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+	width: 100% !important;
+	/* display: flex; */
+}
+.write-comment {
+	width: 100% !important;
+	/* display: flex !important; */
+}
+
+.write-comment
+	.css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input::placeholder {
+	color: grey;
+}
+
+.write-comment .css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input {
+	padding: 0 1rem;
+}
+
+.write-comment .css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root {
+	border-radius: 25px;
+}
+
+.write-comment legend {
+	width: 0px;
+}
