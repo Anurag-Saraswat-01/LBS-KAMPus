@@ -33,6 +33,7 @@ const Answers = ({ answer }) => {
           followButton={false}
           date={moment(answer.createdAt).format("Do MMMM YYYY")}
           userProfile={answer.userProfile}
+          userId={answer.answeredByUserId}
         />
         <div className="answer mb-0 pt-4 pb-2 white">
           {/* {readMore

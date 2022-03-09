@@ -4,7 +4,8 @@ const Answer = require("../models/answerModel");
 const mongoose = require("mongoose");
 
 const getAllPosts = async (req, res) => {
-  const userId = res.locals.decodedId;
+  console.log(req.params)
+  const userId = req.params.id || res.locals.decodedId;
   const posts = await Post.find({ userId: userId });
   // console.log(post);
   // const posts = await User.aggregate([
@@ -32,7 +33,7 @@ const getAllPosts = async (req, res) => {
 };
 
 const getAllAnswers = async (req, res) => {
-  const userId = res.locals.decodedId;
+  const userId = req.params.id || res.locals.decodedId;
   const answers = await Answer.aggregate([
     {
       $lookup: {
@@ -45,7 +46,6 @@ const getAllAnswers = async (req, res) => {
     {
       $match: { answeredByUserId: new mongoose.Types.ObjectId(userId) },
     },
-    
   ]);
   if (answers) {
     return res.status(201).json({
@@ -54,7 +54,6 @@ const getAllAnswers = async (req, res) => {
     });
   }
 };
-
 
 module.exports = {
   getAllPosts,

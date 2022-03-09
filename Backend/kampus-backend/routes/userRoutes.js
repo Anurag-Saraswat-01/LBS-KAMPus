@@ -20,6 +20,8 @@ router.route("/").get(getExistingUsers);
 
 router.route("/profile").get(checkAuth, getOneExistingUser);
 
+router.route("/:id").get(getOneExistingUser);
+
 router.route("/login").post(loginUser);
 
 router.route("/logout").delete(logoutUser);

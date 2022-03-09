@@ -17,6 +17,7 @@ import { AuthContext, UserContext } from "./api/Contexts";
 function App() {
   // state to check whether user is logged in
   const [loggedin, setLoggedin] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [userData, setUserData] = useState({ username: null, userImg: null });
   // stores if login status has been returned or not
   const [waitingForResponse, setWaitingForResponse] = useState(true);
@@ -26,7 +27,8 @@ function App() {
   useEffect(() => {
     loginStatus().then((response) => {
       setLoggedin(response.loginStatus);
-      setUserData({username: response.name, userImg: response.img})
+      setUserId(response.id);
+      setUserData({ username: response.name, userImg: response.img });
       setWaitingForResponse(false);
     });
   }, []);
@@ -75,6 +77,7 @@ function App() {
     // This is a component that provides the login data to all components that need it, provided they use UseContext
     <AuthContext.Provider
       value={{
+        user_id: userId, 
         isLoggedIn: loggedin,
         login: login,
         logout: logout,
@@ -100,7 +103,9 @@ function App() {
                   <Route path="post/:id" element={<SinglePost />} />
                   <Route path="signup" element={<SignUp />} />
                   <Route path="signin" element={<SignIn />} />
-                  <Route path="Profile" element={<Profile />} />
+                  {/* old route for profile w/o id */}
+                  {/* <Route path="profile" element={<Profile />} /> */}
+                  <Route path="profile/:id" element={<Profile />} />
                   <Route path="ask" element={<AskQuestion />} />
                   <Route path="loggedout" element={<LoggedOut />} />
                   <Route path="answer" element={<AnswerModal />} />
