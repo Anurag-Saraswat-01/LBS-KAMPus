@@ -267,6 +267,7 @@ const Profile = () => {
 
   // Storing profile image in local storage
   useEffect(() => {
+    if (params.id !== authContext.user_id) return;
     userContext.setData(userContext.username, profileImage);
   }, [profileImage]);
 
