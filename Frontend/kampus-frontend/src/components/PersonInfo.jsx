@@ -9,7 +9,7 @@ export const PersonInfo = (props) => {
       <div className="follow d-flex">
         {props.userProfile ? (
           <img
-            className="me-2 comment-user-img"
+            className="me-2 answer-user-img"
             src={props.userProfile}
             alt="user profile"
           />

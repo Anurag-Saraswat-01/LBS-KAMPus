@@ -7,13 +7,13 @@ const commentSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: "answers",
 		},
-        tagged: String,
+		tagged: String,
 		commentBody: String,
 		commentedBy: {
-			commentedId: String, 
-			commentedName: String
+			commentedId: String,
+			commentedName: String,
+			commentedImg: String,
 		},
-		
 	},
 	{ timestamps: true }
 );

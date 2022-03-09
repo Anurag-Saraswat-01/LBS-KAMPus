@@ -1,0 +1,234 @@
+.comment-btn {
+  padding: 0.3rem;
+  border-radius: 10px;
+  transition: 0.1s ease;
+  color: var(--light-text);
+}
+.comment-btn:hover {
+  background-color: var(--background);
+}
+.comment-btn:hover svg {
+  animation: btn-shake 0.75s ease;
+}
+@keyframes btn-shake {
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+.comment-section {
+  padding-top: 1rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: right;
+  gap: 1rem;
+}
+
+.write-comment .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 100% !important;
+  /* display: flex; */
+}
+.write-comment {
+  width: 100% !important;
+  /* display: flex !important; */
+}
+
+.write-comment
+  .css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input::placeholder {
+  color: grey;
+}
+
+.write-comment .css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 0 1rem;
+}
+
+.write-comment .css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 25px;
+}
+
+.write-comment legend {
+  width: 0px;
+}
+/* Comment CSS */
+.comment {
+  /* padding: 1em; */
+  font-family: "Quicksand";
+  color: var(--light-text);
+  padding-left: 3rem;
+}
+.comment-user-img-temp {
+  background-color: black;
+  border: var(--green-text) 1px solid;
+  color: var(--green-text);
+  /* font-size: 2em; */
+  /* padding: 0.5em; */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.comment-user-img,
+.answer-user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: var(--green-text) 1px solid;
+}
+.comment-info-wrapper {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+}
+
+.comment-personInfo {
+  display: flex;
+  gap: 1em;
+  flex-direction: row;
+  width: 80%;
+}
+.comment-date {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  color: var(--alt-green-text);
+  font-family: "Montserrat";
+}
+.comment-nameimg {
+  display: flex;
+  align-items: center;
+  color: var(--green-text);
+}
+.comment-body {
+  /* margin-left: 100px; */
+  padding-left: 3.1rem;
+  font-size: 0.9rem;
+}
+
+.comment-bar {
+  padding-left: 3rem;
+  margin-block: 0.5rem;
+}
+.comment-likes,
+.comment-dislikes {
+  background-color: #000;
+  width: 60px;
+  margin: auto 0 !important;
+  /* padding-bottom: 4px !important; */
+  padding-block: 0.3rem;
+  justify-content: space-evenly;
+  transition: 0.2s ease;
+}
+.comment-likes p,
+.comment-dislikes p {
+  margin: 0;
+  color: white;
+  font-size: 0.8rem;
+}
+.comment-likes {
+  border-radius: 30px 0 0 30px;
+  border-right: 1px solid #888888;
+}
+
+.comment-dislikes {
+  border-radius: 0 30px 30px 0;
+  border-left: 1px solid #888888;
+}
+.comment-likes:hover,
+.comment-likes:hover p {
+  transform: scale(1.1);
+  color: #84c577 !important;
+}
+.comment-dislikes:hover,
+.comment-dislikes:hover > p {
+  transform: scale(1.1);
+  color: #ff5353 !important;
+}
+.comment-likes svg,
+.comment-dislikes svg {
+  transition: 0.2s ease;
+}
+.comment-likes:hover svg {
+  fill: #84c577 !important;
+}
+.comment-dislikes:hover svg {
+  fill: #ff5353 !important;
+}
+.upvote-text,
+.downvote-text {
+  margin: 0;
+}
+.comment-likes .upvote-text {
+  color: #84c577;
+}
+
+.comment-dislikes .downvote-text {
+  color: #ff5353;
+}
+.comment-share-icon {
+  width: 35px;
+  background-color: #84c577;
+  height: 25px;
+  opacity: 0.7;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.1s ease;
+  transform: scaleX(-1);
+}
+.comment-share {
+  cursor: pointer;
+  padding-inline: 0.5rem;
+  border-radius: 10px;
+  color: var(--light-text);
+}
+.comment-share:hover {
+  background-color: var(--background);
+}
+.comment-share:hover .comment-share-icon {
+  opacity: 1;
+}
+/* Reply CSS */
+.reply {
+  margin-left: 2rem;
+  padding-left: 1rem;
+  color: white;
+  border-left: var(--background) 5px solid;
+}
+.reply-user-info {
+  color: var(--alt-green-text);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  /* padding: 1em 2em; */
+}
+.reply-user-img-temp {
+  background-color: black;
+  border: var(--green-text) 1px solid;
+  color: var(--green-text);
+  /* font-size: 2em; */
+  /* padding: 0.5em; */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reply-info-wrapper {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+}
+
+.reply-body {
+  font-size: 0.8rem;
+  padding-left: 3rem;
+}

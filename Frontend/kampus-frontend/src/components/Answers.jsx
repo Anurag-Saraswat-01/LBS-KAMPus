@@ -2,9 +2,10 @@ import React, { useState } from "react";
 // import { answers } from "../api/postData";
 import { PersonInfo } from "./PersonInfo";
 import { Container } from "react-bootstrap";
-import CommentBar from "./CommentBar";
+import AnswerBar from "./AnswerBar";
 import Button from "@mui/material/Button";
 import moment from "moment";
+import Comment from "./Comment";
 // import Parser from 'html-react-parser';
 
 // Answers section maps the answer part
@@ -13,6 +14,14 @@ const Answers = ({ answer }) => {
   //! UseState to control the read more function
   // still work in progress
   const [readMore, setReadMore] = useState(false);
+  // state to show or hide the comments
+  const [displayComments, setDisplayComments] = useState(false);
+
+  // toggles display of comments
+  const toggleDisplayComments = () => {
+    setDisplayComments(!displayComments);
+    console.log("toggle", displayComments);
+  };
 
   // ButtonHandler will handle the click on Read more button
   const buttonHandler = () => {
@@ -52,7 +61,18 @@ const Answers = ({ answer }) => {
             </Button>
           ) : null}
         </div>
-        <CommentBar answer={answer} />
+        <AnswerBar
+          toggleDisplayComments={toggleDisplayComments}
+          answer={answer}
+        />
+        <hr className="lineBreak" />
+        {/* displayComments to toggle the comments with comment icon */}
+        {displayComments ? (
+          <div className="comment-container">
+            <Comment />
+            <Comment />
+          </div>
+        ) : null}
       </Container>
       <hr className="lineBreak mx-auto" />
     </div>
