@@ -89,7 +89,7 @@ const Header = ({ page }) => {
                 </Nav.Item>
               </Link>
               <Nav.Item>
-                <Link to="/profile">
+                <Link to={`/profile/${authContext.user_id}`}>
                   <Nav className="nav-link">Profile</Nav>
                 </Link>
               </Nav.Item>

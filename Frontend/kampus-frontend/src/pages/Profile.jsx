@@ -18,6 +18,7 @@ import ProfilePosts from "../components/ProfilePosts";
 import "../css/Profile.css";
 import ProfileComments from "../components/ProfileComments";
 import { custom_badges_map, society_badges_map } from "../api/iconData";
+import { useParams } from "react-router-dom";
 
 const yearMap = {
   FE: "First",
@@ -63,6 +64,7 @@ const profileComments = [
 
 const Profile = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const [followerShow, setFollowerShow] = useState(false);
   const [followingShow, setFollowingShow] = useState(false);
   const [newImage, setNewImage] = useState(null);
@@ -90,11 +92,14 @@ const Profile = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await axios.get(`${url}/api/profile/getPosts`, config);
+        const response = await axios.get(
+          `${url}/api/profile/getPosts/${params.id}`,
+          config
+        );
         setPosts(response.data.posts);
         console.log(response.data.posts);
         const answers = await axios.get(
-          `${url}/api/profile/getAnswers`,
+          `${url}/api/profile/getAnswers/${params.id}`,
           config
         );
         setAnswers(answers.data.answers);
@@ -105,7 +110,7 @@ const Profile = () => {
       }
     };
     getPosts();
-  }, []);
+  }, [params.id]);
 
   //callback for when cropping is complete
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
@@ -202,11 +207,13 @@ const Profile = () => {
 
   // handle visibility of edit image div
   const makeEditVisible = () => {
+    if (params.id !== authContext.user_id) return;
     const element = document.getElementById("edit-image-div");
     element.style.visibility = "visible";
   };
 
   const makeEditHidden = () => {
+    if (params.id !== authContext.user_id) return;
     const element = document.getElementById("edit-image-div");
     element.style.visibility = "hidden";
   };
@@ -260,6 +267,7 @@ const Profile = () => {
 
   // Storing profile image in local storage
   useEffect(() => {
+    if (params.id !== authContext.user_id) return;
     userContext.setData(userContext.username, profileImage);
   }, [profileImage]);
 
@@ -267,14 +275,18 @@ const Profile = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const { data } = await axios.get(`${url}/api/users/profile`, config);
+        const { data } = await axios.get(
+          // `${url}/api/users/profile`,
+          `${url}/api/users/${params.id || "profile"}`,
+          config
+        );
         setUserData(data);
       } catch (error) {
         console.log(error);
       }
     };
     getUserData();
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     if (!(userData && userData.profileImgUri)) return;
@@ -398,21 +410,23 @@ const Profile = () => {
               <div className="user-image">
                 <img src={profileImage} alt="user-profile" />
               </div>
-              <div className="edit-image" id="edit-image-div">
-                <input
-                  type="file"
-                  name="profile-image"
-                  id="edit-image-input"
-                  accept="image/*"
-                  onChange={onImageChange}
-                  style={{ display: "none" }}
-                />
-                <label htmlFor="edit-image-input">
-                  <IconButton aria-label="add=photo" component="span">
-                    <AddAPhotoIcon fontSize="large" />
-                  </IconButton>
-                </label>
-              </div>
+              {params.id === authContext.user_id ? (
+                <div className="edit-image" id="edit-image-div">
+                  <input
+                    type="file"
+                    name="profile-image"
+                    id="edit-image-input"
+                    accept="image/*"
+                    onChange={onImageChange}
+                    style={{ display: "none" }}
+                  />
+                  <label htmlFor="edit-image-input">
+                    <IconButton aria-label="add=photo" component="span">
+                      <AddAPhotoIcon fontSize="large" />
+                    </IconButton>
+                  </label>
+                </div>
+              ) : null}
             </div>
             <p className="user-bio-text">{yearMap[userData.year]} Year</p>
             <p className="user-bio-text">{userData.branch}</p>
@@ -441,8 +455,11 @@ const Profile = () => {
             </div>
             {/* edit-btn if user is viewing their own profile and will replace follow-btn */}
             <div className="profile-buttons">
-              <button className="follow-btn">Follow</button>
-              {/* <button className="edit-btn">Edit</button> */}
+              {params.id === authContext.user_id ? (
+                <button className="edit-btn">Edit</button>
+              ) : (
+                <button className="follow-btn">Follow</button>
+              )}
               <button className="share-profile-btn">
                 <FaShare />
               </button>
@@ -456,9 +473,6 @@ const Profile = () => {
             id="user-activity-tabs"
             className="mb-3"
           >
-            {/* <Tab eventKey="all" title="All Activty">
-              <div><Post /></div>
-            </Tab> */}
             <Tab eventKey="posts" title="Posts">
               <div>
                 {posts.length > 0 ? (

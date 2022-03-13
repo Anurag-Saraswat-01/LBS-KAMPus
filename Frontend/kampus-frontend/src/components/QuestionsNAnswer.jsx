@@ -46,22 +46,23 @@ const QuestionNAnswer = () => {
 		}
 	}, [questions]);
 
-	const questionCard = questions.map((data, key) => {
-		return data ? (
-			<div className="ps-2 pe-2" key={key}>
-				<Container className="questionSection">
-					<PersonInfo
-						userName={data.askedBy}
-						followButton={true}
-						date={moment(data.createdAt).format("Do MMMM YYYY")}
-						userProfile={data.userProfile}
-					/>
-					<Link to={`/post/${data._id}`}>
-						<h3 className="question-title">
-							{/*key={key}*/}
-							{data.title}
-						</h3>
-					</Link>
+  const questionCard = questions.map((data, key) => {
+    return data ? (
+      <div className="ps-2 pe-2" key={key}>
+        <Container className="questionSection">
+          <PersonInfo
+            userName={data.askedBy}
+            followButton={true}
+            date={moment(data.createdAt).format("Do MMMM YYYY")}
+            userProfile={data.userProfile}
+            userId={data.userId}
+          />
+          <Link to={`/post/${data._id}`}>
+            <h3 className="question-title">
+              {/*key={key}*/}
+              {data.title}
+            </h3>
+          </Link>
 
 					<p className="question-body">{data.body}</p>
 				</Container>

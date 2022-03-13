@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../api/Contexts";
+import { AuthContext, UserContext } from "../api/Contexts";
 import { Link } from "react-router-dom";
 
 const branches = [
@@ -13,6 +13,7 @@ const branches = [
 ];
 
 function Sidebar() {
+  const authContext = useContext(AuthContext);
   const userContext = useContext(UserContext);
   return (
     <div className="sidebar">
@@ -26,10 +27,10 @@ function Sidebar() {
           />
         ) : (
           <div className="sidebar-user-img-temp">
-            {userContext.username ? userContext.username.slice(0,1) : ''}
+            {userContext.username ? userContext.username.slice(0, 1) : ""}
           </div>
         )}
-        <Link to="/profile" className="sidebar-username">
+        <Link to={`/profile/${authContext.user_id}`} className="sidebar-username">
           {userContext.username}
         </Link>
         {/*^^username. did not add 'certified eggroll' coz that might need "preferred badge" type logic 

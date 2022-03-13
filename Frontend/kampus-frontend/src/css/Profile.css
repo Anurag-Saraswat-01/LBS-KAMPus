@@ -183,7 +183,8 @@
   transition: 0.2s ease;
 }
 
-.follow-btn:hover {
+.follow-btn:hover,
+.edit-btn:hover {
   background-color: #84c577;
   color: var(--navbar);
   transform: scale(1.1);
