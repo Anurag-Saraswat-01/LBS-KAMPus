@@ -8,7 +8,7 @@ const getLikes = async (req, res) => {
 			return res.status(200).json({
 				status: true,
 				likes: likes,
-				userId: res.locals.decodedId
+				userId: res.locals.decodedId,
 			});
 		}
 		return res.status(400).json({
@@ -32,12 +32,13 @@ const likePost = async (req, res) => {
 			});
 		}
 		//TODO: If already downvoted then decrease the downvote and increase upvote
-		Dislike.findOneAndDelete({ $and: [{answerId: answerId}, {userId: userId}]
+		Dislike.findOneAndDelete({
+			$and: [{ answerId: answerId }, { userId: userId }],
 		}).exec((err, result) => {
 			if (err) {
 				return res.status(400).json({
 					status: false,
-				});	
+				});
 			}
 			if (result) {
 				res.status(200).json({
@@ -54,23 +55,21 @@ const unlikePost = async (req, res) => {
 	const answerId = req.body.answerId;
 	const userId = res.locals.decodedId;
 
-	await Like.findOneAndDelete({ $and: [{answerId: answerId}, {userId: userId}]
-	}).exec(
-		(err, _result) => {
-			if (err) {
-				return res.status(400).json({
-					status: false,
-					error: err.message,
-				});
-			} else {
-				res.json({
-					status: true,
-					message: 'Unliked the post'
-				});
-			}
+	await Like.findOneAndDelete({
+		$and: [{ answerId: answerId }, { userId: userId }],
+	}).exec((err, _result) => {
+		if (err) {
+			return res.status(400).json({
+				status: false,
+				error: err.message,
+			});
+		} else {
+			res.json({
+				status: true,
+				message: "Unliked the post",
+			});
 		}
-	);
+	});
 };
 
 module.exports = { getLikes, likePost, unlikePost };
-

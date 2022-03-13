@@ -21,496 +21,556 @@ import { custom_badges_map, society_badges_map } from "../api/iconData";
 import { useParams } from "react-router-dom";
 
 const yearMap = {
-  FE: "First",
-  SE: "Second",
-  TE: "Third",
-  BE: "Fourth",
+	FE: "First",
+	SE: "Second",
+	TE: "Third",
+	BE: "Fourth",
 };
 // temp post data
 const profilePosts = [
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
+	{ title: "Bruh", date: "20th jan 2020", count: 2 },
+	{ title: "Bruh", date: "20th jan 2020", count: 2 },
+	{ title: "Bruh", date: "20th jan 2020", count: 2 },
+	{ title: "Bruh", date: "20th jan 2020", count: 2 },
+	{ title: "Bruh", date: "20th jan 2020", count: 2 },
 ];
 const profileComments = [
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
+	{
+		title: "Bruh",
+		date: "20th jan 2020",
+		comment: "I am the bruh, but the bro",
+	},
+	{
+		title: "Bruh",
+		date: "20th jan 2020",
+		comment: "I am the bruh, but the bro",
+	},
+	{
+		title: "Bruh",
+		date: "20th jan 2020",
+		comment: "I am the bruh, but the bro",
+	},
+	{
+		title: "Bruh",
+		date: "20th jan 2020",
+		comment: "I am the bruh, but the bro",
+	},
+	{
+		title: "Bruh",
+		date: "20th jan 2020",
+		comment: "I am the bruh, but the bro",
+	},
 ];
 
 const Profile = () => {
-  const navigate = useNavigate();
-  const params = useParams();
-  const [followerShow, setFollowerShow] = useState(false);
-  const [followingShow, setFollowingShow] = useState(false);
-  const [newImage, setNewImage] = useState(null);
-  const [profileImage, setProfileImage] = useState(defaultPhoto);
-  const [cropperShow, setCropperShow] = useState(false);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
-  // cropper states
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
-  const [posts, setPosts] = useState([]);
-  const [answers, setAnswers] = useState([]);
-  //authContext allows access to user details (logged in or not)
-  const authContext = useContext(AuthContext);
-  const userContext = useContext(UserContext);
-  const url = "http://localhost:8080";
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-    },
-    withCredentials: true,
-    credentials: "include",
-  };
+	const navigate = useNavigate();
+	const params = useParams();
+	const [followerShow, setFollowerShow] = useState(false);
+	const [followingShow, setFollowingShow] = useState(false);
+	const [newImage, setNewImage] = useState(null);
+	const [profileImage, setProfileImage] = useState(defaultPhoto);
+	const [cropperShow, setCropperShow] = useState(false);
+	const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+	const [croppedImage, setCroppedImage] = useState(null);
+	//for checking if a user already follows the user
+	const [follows, setFollows] = useState(false);
+	// cropper states
+	const [crop, setCrop] = useState({ x: 0, y: 0 });
+	const [zoom, setZoom] = useState(1);
+	const [posts, setPosts] = useState([]);
+	const [answers, setAnswers] = useState([]);
+	//authContext allows access to user details (logged in or not)
+	const authContext = useContext(AuthContext);
+	const userContext = useContext(UserContext);
+	const url = "http://localhost:8080";
+	const config = {
+		headers: {
+			"Content-type": "application/json",
+		},
+		withCredentials: true,
+		credentials: "include",
+	};
 
-  useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const response = await axios.get(
-          `${url}/api/profile/getPosts/${params.id}`,
-          config
-        );
-        setPosts(response.data.posts);
-        console.log(response.data.posts);
-        const answers = await axios.get(
-          `${url}/api/profile/getAnswers/${params.id}`,
-          config
-        );
-        setAnswers(answers.data.answers);
-        console.log(answers.data.answers);
-      } catch (err) {
-        console.log(err.message);
-        console.log(err);
-      }
-    };
-    getPosts();
-  }, [params.id]);
+	// for getting posts and answers
+	useEffect(() => {
+		const getPosts = async () => {
+			try {
+				const response = await axios.get(
+					`${url}/api/profile/getPosts/${params.id}`,
+					config
+				);
+				setPosts(response.data.posts);
+				console.log(response.data.posts);
+				const answers = await axios.get(
+					`${url}/api/profile/getAnswers/${params.id}`,
+					config
+				);
+				setAnswers(answers.data.answers);
+				console.log(answers.data.answers);
+			} catch (err) {
+				console.log(err.message);
+				console.log(err);
+			}
+		};
+		getPosts();
+	}, [params.id]);
 
-  //callback for when cropping is complete
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-    // console.log(croppedArea, croppedAreaPixels);
-  }, []);
+	//callback for when cropping is complete
+	const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+		setCroppedAreaPixels(croppedAreaPixels);
+		// console.log(croppedArea, croppedAreaPixels);
+	}, []);
 
-  // creates a image element from the url
-  const createImage = (url) =>
-    new Promise((resolve, reject) => {
-      const image = new Image();
-      image.addEventListener("load", () => resolve(image));
-      image.addEventListener("error", (error) => reject(error));
-      image.src = url;
-    });
+	// creates a image element from the url
+	const createImage = (url) =>
+		new Promise((resolve, reject) => {
+			const image = new Image();
+			image.addEventListener("load", () => resolve(image));
+			image.addEventListener("error", (error) => reject(error));
+			image.src = url;
+		});
 
-  // function to return the cropped image
-  const getCroppedImg = async (imageSrc, pixelCrop) => {
-    const image = await createImage(imageSrc);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+	// function to return the cropped image
+	const getCroppedImg = async (imageSrc, pixelCrop) => {
+		const image = await createImage(imageSrc);
+		const canvas = document.createElement("canvas");
+		const ctx = canvas.getContext("2d");
 
-    if (!ctx) {
-      return null;
-    }
+		if (!ctx) {
+			return null;
+		}
 
-    // set canvas size to match the bounding box
-    canvas.width = image.width;
-    canvas.height = image.height;
+		// set canvas size to match the bounding box
+		canvas.width = image.width;
+		canvas.height = image.height;
 
-    // draw rotated image
-    ctx.drawImage(image, 0, 0);
+		// draw rotated image
+		ctx.drawImage(image, 0, 0);
 
-    // croppedAreaPixels values are bounding box relative
-    // extract the cropped image using these values
-    const data = ctx.getImageData(
-      pixelCrop.x,
-      pixelCrop.y,
-      pixelCrop.width,
-      pixelCrop.height
-    );
+		// croppedAreaPixels values are bounding box relative
+		// extract the cropped image using these values
+		const data = ctx.getImageData(
+			pixelCrop.x,
+			pixelCrop.y,
+			pixelCrop.width,
+			pixelCrop.height
+		);
 
-    // set canvas width to final desired crop size - this will clear existing context
-    canvas.width = pixelCrop.width;
-    canvas.height = pixelCrop.height;
+		// set canvas width to final desired crop size - this will clear existing context
+		canvas.width = pixelCrop.width;
+		canvas.height = pixelCrop.height;
 
-    // paste generated rotate image at the top left corner
-    ctx.putImageData(data, 0, 0);
+		// paste generated rotate image at the top left corner
+		ctx.putImageData(data, 0, 0);
 
-    // As Base64 string
-    return canvas.toDataURL("image/jpeg");
-  };
+		// As Base64 string
+		return canvas.toDataURL("image/jpeg");
+	};
 
-  // is called whenever save button is clicked
-  const showCroppedImage = useCallback(async () => {
-    try {
-      const croppedImage = await getCroppedImg(newImage, croppedAreaPixels);
-      //   console.log("donee", { croppedImage });
-      setCroppedImage(croppedImage);
-    } catch (e) {
-      console.error(e);
-    }
-  }, [croppedAreaPixels]);
+	// is called whenever save button is clicked
+	const showCroppedImage = useCallback(async () => {
+		try {
+			const croppedImage = await getCroppedImg(newImage, croppedAreaPixels);
+			//   console.log("donee", { croppedImage });
+			setCroppedImage(croppedImage);
+		} catch (e) {
+			console.error(e);
+		}
+	}, [croppedAreaPixels]);
 
-  // handles closing of the cropper modal
-  const handleCropperClose = () => {
-    setCropperShow(false);
-    setCroppedImage(null);
-  };
+	// handles closing of the cropper modal
+	const handleCropperClose = () => {
+		setCropperShow(false);
+		setCroppedImage(null);
+	};
 
-  // dummy data
-  const user = {
-    name: "Anurag Saraswat",
-    branch: "CMPN",
-    year: "3rd",
-    followers: ["Prickvi", "Joye", "Mani"],
-    following: ["Prickvi", "Joye", "Mani", "Zope", "SortedOne"],
-    karma: 1000,
-    badges: ["1000 Karma", "Online School Graduate", "LBS 2021 Winner"],
-    societies: ["Vesit of Time"],
-  };
+	// following or unfollowing a user
+	const followUser = async () => {
+		try {
+			if (follows) {
+				const response = await axios.post(
+					`${url}/api/profile/unfollow-user`,
+					{
+						// userId: authContext.user_id,
+						followerId: params.id,
+					},
+					config
+				);
+				console.log(response.data);
+				setFollows(false);
+				return;
+			}
+			const response = await axios.post(
+				`${url}/api/profile/follow-user`,
+				{
+					// userId: authContext.user_id,
+					followerId: params.id,
+				},
+				config
+			);
+			console.log(response.data);
+			setFollows(true);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	// creating a useEffect because thera are already too much useEffects and
+	// and idk which one to use
+	//* This useEffect for checking if the user has followed and
+	//* this will give accurate result
+	//TODO: Refactor this file
+	useEffect(() => {
+		const checkStatus = async (req, res) => {
+			const response = await axios.post(
+				`${url}/api/profile/check-follow-status`,
+				{
+					// Don't need to pass userId since we are using authGuard in backend
+					// userId: authContext.user_id,
+					followerId: params.id,
+				},
+				config
+			);
+			console.log(response.data);
+			setFollows(response.data.follows);
+		};
+		checkStatus();
+	}, []);
 
-  const [userData, setUserData] = useState(null);
+	// This for updating the state, normal useEffect shit
+	useEffect(() => {}, [follows]);
 
-  // set new image data in the use stte
-  const onImageChange = (event) => {
-    // console.log(event.target.files[0]);
-    if (!event.target.files[0]) return;
-    getBase64(event.target.files[0])
-      .then((response) => setNewImage(response))
-      .catch((err) => console.log(err));
-    // console.log(newImage);
-  };
+	// dummy data
+	const user = {
+		name: "Anurag Saraswat",
+		branch: "CMPN",
+		year: "3rd",
+		followers: ["Prickvi", "Joye", "Mani"],
+		following: ["Prickvi", "Joye", "Mani", "Zope", "SortedOne"],
+		karma: 1000,
+		badges: ["1000 Karma", "Online School Graduate", "LBS 2021 Winner"],
+		societies: ["Vesit of Time"],
+	};
 
-  // handle visibility of edit image div
-  const makeEditVisible = () => {
-    if (params.id !== authContext.user_id) return;
-    const element = document.getElementById("edit-image-div");
-    element.style.visibility = "visible";
-  };
+	const [userData, setUserData] = useState(null);
 
-  const makeEditHidden = () => {
-    if (params.id !== authContext.user_id) return;
-    const element = document.getElementById("edit-image-div");
-    element.style.visibility = "hidden";
-  };
+	// set new image data in the use stte
+	const onImageChange = (event) => {
+		// console.log(event.target.files[0]);
+		if (!event.target.files[0]) return;
+		getBase64(event.target.files[0])
+			.then((response) => setNewImage(response))
+			.catch((err) => console.log(err));
+		// console.log(newImage);
+	};
 
-  // for base64 encoding image before posting to db
-  const getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
+	// handle visibility of edit image div
+	const makeEditVisible = () => {
+		if (params.id !== authContext.user_id) return;
+		const element = document.getElementById("edit-image-div");
+		element.style.visibility = "visible";
+	};
 
-  // displays cropper whenever new image is uploaded
-  useEffect(() => {
-    if (!newImage) return;
-    setCropperShow(true);
-  }, [newImage]);
+	const makeEditHidden = () => {
+		if (params.id !== authContext.user_id) return;
+		const element = document.getElementById("edit-image-div");
+		element.style.visibility = "hidden";
+	};
 
-  // adds cropped image to profile
-  useEffect(() => {
-    if (!croppedImage) return;
-    // console.log("cropped image changed");
-    setProfileImage(croppedImage);
-    const uploadProfile = async () => {
-      try {
-        const url = "http://localhost:8080";
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-          withCredentials: true,
-          credentials: "include",
-        };
-        const response = await axios.put(
-          `${url}/api/users/upload-profile`,
-          {
-            profileImgUri: croppedImage,
-          },
-          config
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    uploadProfile();
-    handleCropperClose();
-  }, [croppedImage]);
+	// for base64 encoding image before posting to db
+	const getBase64 = (file) => {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = (error) => reject(error);
+		});
+	};
 
-  // Storing profile image in local storage
-  useEffect(() => {
-    if (params.id !== authContext.user_id) return;
-    userContext.setData(userContext.username, profileImage);
-  }, [profileImage]);
+	// displays cropper whenever new image is uploaded
+	useEffect(() => {
+		if (!newImage) return;
+		setCropperShow(true);
+	}, [newImage]);
 
-  //* From the loginStatus after getting the id, it will fetch the userData and set it to useState userData
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const { data } = await axios.get(
-          // `${url}/api/users/profile`,
-          `${url}/api/users/${params.id || "profile"}`,
-          config
-        );
-        setUserData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUserData();
-  }, [params.id]);
+	// adds cropped image to profile
+	useEffect(() => {
+		if (!croppedImage) return;
+		// console.log("cropped image changed");
+		setProfileImage(croppedImage);
+		const uploadProfile = async () => {
+			try {
+				const url = "http://localhost:8080";
+				const config = {
+					headers: {
+						"Content-type": "application/json",
+					},
+					withCredentials: true,
+					credentials: "include",
+				};
+				const response = await axios.put(
+					`${url}/api/users/upload-profile`,
+					{
+						profileImgUri: croppedImage,
+					},
+					config
+				);
+				console.log(response.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		uploadProfile();
+		handleCropperClose();
+	}, [croppedImage]);
 
-  useEffect(() => {
-    if (!(userData && userData.profileImgUri)) return;
-    setProfileImage(userData.profileImgUri);
-  }, [userData]);
+	// Storing profile image in local storage
+	useEffect(() => {
+		if (params.id !== authContext.user_id) return;
+		userContext.setData(userContext.username, profileImage);
+	}, [profileImage]);
 
-  const handleFollowerClose = () => setFollowerShow(false);
-  const handleFollowerShow = () => setFollowerShow(true);
-  const handleFollowingClose = () => setFollowingShow(false);
-  const handleFollowingShow = () => setFollowingShow(true);
+	//* From the loginStatus after getting the id, it will fetch the userData and set it to useState userData
+	useEffect(() => {
+		const getUserData = async () => {
+			try {
+				const { data } = await axios.get(
+					// `${url}/api/users/profile`,
+					`${url}/api/users/${params.id || "profile"}`,
+					config
+				);
+				setUserData(data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getUserData();
+	}, [params.id]);
 
-  // Modal for the followers and following list
-  const followModal = (title, list, show, close) => {
-    return (
-      list && (
-        <Modal show={show} onHide={close} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>{title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ul>
-              {list.length === 0
-                ? `No ${title}`
-                : list.map((data, key) => <li key={key}>{data}</li>)}
-            </ul>
-          </Modal.Body>
-        </Modal>
-      )
-    );
-  };
+	useEffect(() => {
+		if (!(userData && userData.profileImgUri)) return;
+		setProfileImage(userData.profileImgUri);
+	}, [userData]);
 
-  // mapping badges onto a Component, have to add icons
-  const Badges = ((userData && userData.badges) || []).map((data, key) => {
-    return (
-      <div className="badge-info" key={key}>
-        <img className="badge-icon" src={custom_badges_map[data]} alt={data} />
-        <p className="badge-name">{data}</p>
-      </div>
-    );
-  });
+	const handleFollowerClose = () => setFollowerShow(false);
+	const handleFollowerShow = () => setFollowerShow(true);
+	const handleFollowingClose = () => setFollowingShow(false);
+	const handleFollowingShow = () => setFollowingShow(true);
 
-  // mapping societies onto a Component, have to add icons
-  const Societies = ((userData && userData.societies) || []).map(
-    (data, key) => {
-      return (
-        <div className="society-info" key={key}>
-          <img
-            className="society-icon"
-            src={society_badges_map[data]}
-            alt={data}
-          />
-          <p className="society-name">{data}</p>
-        </div>
-      );
-    }
-  );
+	// Modal for the followers and following list
+	const followModal = (title, list, show, close) => {
+		return (
+			list && (
+				<Modal show={show} onHide={close} centered>
+					<Modal.Header closeButton>
+						<Modal.Title>{title}</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<ul>
+							{list.length === 0
+								? `No ${title}`
+								: list.map((data, key) => <li key={key}>{data}</li>)}
+						</ul>
+					</Modal.Body>
+				</Modal>
+			)
+		);
+	};
 
-  return userData ? (
-    <div>
-      <Header />
-      <Container className="profile-container">
-        {followModal(
-          "Followers",
-          userData.followers,
-          followerShow,
-          handleFollowerClose
-        )}
-        {followModal(
-          "Following",
-          userData.following,
-          followingShow,
-          handleFollowingClose
-        )}
-        <Modal show={cropperShow} onHide={handleCropperClose} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Crop Image</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="modal-body-img-cropper">
-            <div className="cropper-wrapper">
-              <Cropper
-                image={newImage}
-                crop={crop}
-                zoom={zoom}
-                aspect={1}
-                onCropChange={setCrop}
-                onCropComplete={onCropComplete}
-                onZoomChange={setZoom}
-              />
-            </div>
-            <div className="controls">
-              <input
-                type="range"
-                value={zoom}
-                min={1}
-                max={3}
-                step={0.1}
-                aria-labelledby="Zoom"
-                onChange={(e) => {
-                  setZoom(e.target.value);
-                }}
-                className="zoom-range"
-              />
-              <Button
-                variant="contained"
-                color="warning"
-                onClick={showCroppedImage}
-              >
-                Save
-              </Button>
-            </div>
-            {/* <ProfilePicture image={newImage} useHelper debug /> */}
-          </Modal.Body>
-        </Modal>
-        <div className="user-info">
-          <div className="user-bio">
-            <div
-              className="user-image-wrapper"
-              onMouseEnter={makeEditVisible}
-              onMouseLeave={makeEditHidden}
-            >
-              <div className="user-image">
-                <img src={profileImage} alt="user-profile" />
-              </div>
-              {params.id === authContext.user_id ? (
-                <div className="edit-image" id="edit-image-div">
-                  <input
-                    type="file"
-                    name="profile-image"
-                    id="edit-image-input"
-                    accept="image/*"
-                    onChange={onImageChange}
-                    style={{ display: "none" }}
-                  />
-                  <label htmlFor="edit-image-input">
-                    <IconButton aria-label="add=photo" component="span">
-                      <AddAPhotoIcon fontSize="large" />
-                    </IconButton>
-                  </label>
-                </div>
-              ) : null}
-            </div>
-            <p className="user-bio-text">{yearMap[userData.year]} Year</p>
-            <p className="user-bio-text">{userData.branch}</p>
-          </div>
-          <div className="user-text">
-            <h1 className="user-name">{userData.name}</h1>
-            <div className="user-stats">
-              <p onClick={handleFollowerShow} style={{ cursor: "pointer" }}>
-                <span className="user-stat-number">
-                  {userData.followers.length}
-                </span>
-                <br />
-                Followers
-              </p>
+	// mapping badges onto a Component, have to add icons
+	const Badges = ((userData && userData.badges) || []).map((data, key) => {
+		return (
+			<div className="badge-info" key={key}>
+				<img className="badge-icon" src={custom_badges_map[data]} alt={data} />
+				<p className="badge-name">{data}</p>
+			</div>
+		);
+	});
 
-              <p onClick={handleFollowingShow} style={{ cursor: "pointer" }}>
-                <span className="user-stat-number">
-                  {userData.following.length}
-                </span>
-                <br /> Following{" "}
-              </p>
-              <p style={{ cursor: "default" }}>
-                <span className="user-stat-number">{userData.karma}</span>
-                <br /> Karma
-              </p>
-            </div>
-            {/* edit-btn if user is viewing their own profile and will replace follow-btn */}
-            <div className="profile-buttons">
-              {params.id === authContext.user_id ? (
-                <button className="edit-btn">Edit</button>
-              ) : (
-                <button className="follow-btn">Follow</button>
-              )}
-              <button className="share-profile-btn">
-                <FaShare />
-              </button>
-            </div>
-          </div>
-        </div>
+	// mapping societies onto a Component, have to add icons
+	const Societies = ((userData && userData.societies) || []).map(
+		(data, key) => {
+			return (
+				<div className="society-info" key={key}>
+					<img
+						className="society-icon"
+						src={society_badges_map[data]}
+						alt={data}
+					/>
+					<p className="society-name">{data}</p>
+				</div>
+			);
+		}
+	);
 
-        <div className="user-activity">
-          <Tabs
-            defaultActiveKey="posts"
-            id="user-activity-tabs"
-            className="mb-3"
-          >
-            <Tab eventKey="posts" title="Posts">
-              <div>
-                {posts.length > 0 ? (
-                  <ProfilePosts profilePosts={posts} />
-                ) : (
-                  <p className="profile-no-data">No Posts</p>
-                )}
-              </div>
-            </Tab>
-            <Tab eventKey="comments" title="Answers">
-              {answers.length > 0 ? (
-                <ProfileComments profileComments={answers} />
-              ) : (
-                <p className="profile-no-data">No Answers</p>
-              )}
-            </Tab>
-          </Tabs>
-        </div>
+	return userData ? (
+		<div>
+			<Header />
+			<Container className="profile-container">
+				{followModal(
+					"Followers",
+					userData.followers,
+					followerShow,
+					handleFollowerClose
+				)}
+				{followModal(
+					"Following",
+					userData.following,
+					followingShow,
+					handleFollowingClose
+				)}
+				<Modal show={cropperShow} onHide={handleCropperClose} centered>
+					<Modal.Header closeButton>
+						<Modal.Title>Crop Image</Modal.Title>
+					</Modal.Header>
+					<Modal.Body className="modal-body-img-cropper">
+						<div className="cropper-wrapper">
+							<Cropper
+								image={newImage}
+								crop={crop}
+								zoom={zoom}
+								aspect={1}
+								onCropChange={setCrop}
+								onCropComplete={onCropComplete}
+								onZoomChange={setZoom}
+							/>
+						</div>
+						<div className="controls">
+							<input
+								type="range"
+								value={zoom}
+								min={1}
+								max={3}
+								step={0.1}
+								aria-labelledby="Zoom"
+								onChange={(e) => {
+									setZoom(e.target.value);
+								}}
+								className="zoom-range"
+							/>
+							<Button
+								variant="contained"
+								color="warning"
+								onClick={showCroppedImage}
+							>
+								Save
+							</Button>
+						</div>
+						{/* <ProfilePicture image={newImage} useHelper debug /> */}
+					</Modal.Body>
+				</Modal>
+				<div className="user-info">
+					<div className="user-bio">
+						<div
+							className="user-image-wrapper"
+							onMouseEnter={makeEditVisible}
+							onMouseLeave={makeEditHidden}
+						>
+							<div className="user-image">
+								<img src={profileImage} alt="user-profile" />
+							</div>
+							{params.id === authContext.user_id ? (
+								<div className="edit-image" id="edit-image-div">
+									<input
+										type="file"
+										name="profile-image"
+										id="edit-image-input"
+										accept="image/*"
+										onChange={onImageChange}
+										style={{ display: "none" }}
+									/>
+									<label htmlFor="edit-image-input">
+										<IconButton aria-label="add=photo" component="span">
+											<AddAPhotoIcon fontSize="large" />
+										</IconButton>
+									</label>
+								</div>
+							) : null}
+						</div>
+						<p className="user-bio-text">{yearMap[userData.year]} Year</p>
+						<p className="user-bio-text">{userData.branch}</p>
+					</div>
+					<div className="user-text">
+						<h1 className="user-name">{userData.name}</h1>
+						<div className="user-stats">
+							<p onClick={handleFollowerShow} style={{ cursor: "pointer" }}>
+								<span className="user-stat-number">
+									{userData.followers.length}
+								</span>
+								<br />
+								Followers
+							</p>
 
-        <div className="user-accolades">
-          <div className="badges">
-            <h3 className="accolade-title">Badges</h3>
-            {userData.badges.length > 0 ? Badges : <p>No badges</p>}
-          </div>
-          <div className="societies">
-            <h3 className="accolade-title">Societies</h3>
-            {userData.societies.length > 0 ? (
-              Societies
-            ) : (
-              <p>Not a part of any society</p>
-            )}
-          </div>
-        </div>
-      </Container>
-    </div>
-  ) : (
-    <Loader />
-  );
+							<p onClick={handleFollowingShow} style={{ cursor: "pointer" }}>
+								<span className="user-stat-number">
+									{userData.following.length}
+								</span>
+								<br /> Following{" "}
+							</p>
+							<p style={{ cursor: "default" }}>
+								<span className="user-stat-number">{userData.karma}</span>
+								<br /> Karma
+							</p>
+						</div>
+						{/* edit-btn if user is viewing their own profile and will replace follow-btn */}
+						<div className="profile-buttons">
+							{params.id === authContext.user_id ? (
+								<button className="edit-btn">Edit</button>
+							) : (
+								<button onClick={followUser} className="follow-btn">
+									{follows ? "UnFollow" : "Follow"}
+								</button>
+							)}
+							<button className="share-profile-btn">
+								<FaShare />
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div className="user-activity">
+					<Tabs
+						defaultActiveKey="posts"
+						id="user-activity-tabs"
+						className="mb-3"
+					>
+						<Tab eventKey="posts" title="Posts">
+							<div>
+								{posts.length > 0 ? (
+									<ProfilePosts profilePosts={posts} />
+								) : (
+									<p className="profile-no-data">No Posts</p>
+								)}
+							</div>
+						</Tab>
+						<Tab eventKey="comments" title="Answers">
+							{answers.length > 0 ? (
+								<ProfileComments profileComments={answers} />
+							) : (
+								<p className="profile-no-data">No Answers</p>
+							)}
+						</Tab>
+					</Tabs>
+				</div>
+
+				<div className="user-accolades">
+					<div className="badges">
+						<h3 className="accolade-title">Badges</h3>
+						{userData.badges.length > 0 ? Badges : <p>No badges</p>}
+					</div>
+					<div className="societies">
+						<h3 className="accolade-title">Societies</h3>
+						{userData.societies.length > 0 ? (
+							Societies
+						) : (
+							<p>Not a part of any society</p>
+						)}
+					</div>
+				</div>
+			</Container>
+		</div>
+	) : (
+		<Loader />
+	);
 };
 
 export default Profile;

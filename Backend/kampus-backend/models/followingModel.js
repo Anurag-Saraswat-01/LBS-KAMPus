@@ -6,7 +6,7 @@ const followingSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "users",
 	},
-	followerId: {
+	followingId: {
 		type: Schema.Types.ObjectId,
 		ref: "users",
 	},
