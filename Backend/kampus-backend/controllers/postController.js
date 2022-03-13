@@ -126,9 +126,25 @@ const createOnePost = async (req, res) => {
 	});
 };
 
+const searchPost = async (req, res) => {
+	const searchString = req.body.text;
+	const searchResults = await Post.fuzzySearch(searchString);
+	console.log(searchResults.length);
+	if (!searchResults) {
+		return res.json({
+			success: false,
+			message: "Couldn't fetch the search results",
+		});
+	}
+	return res.json({
+		success: true,
+		results: searchResults,
+	});
+};
+
 // To delete the POst
 const deletePost = async (req, res) => {
-	const post = await findById(req.params.id);
+	const post = await Post.findById(req.params.id);
 	if (!post) {
 		return res.json({
 			message: "Couldn't find the post with given id",
@@ -142,6 +158,7 @@ const deletePost = async (req, res) => {
 
 module.exports = {
 	getOnePost,
+	searchPost,
 	getPosts,
 	createOnePost,
 	deletePost,

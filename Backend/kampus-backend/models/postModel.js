@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const mongoose_fuzzy_searching = require("mongoose-fuzzy-searching");
 const PostSchema = new Schema(
 	{
 		title: {
@@ -20,7 +20,7 @@ const PostSchema = new Schema(
 			ref: "users",
 		},
 		askedBy: String,
-		userProfile: String, 
+		userProfile: String,
 		answers: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "answers",
@@ -29,6 +29,7 @@ const PostSchema = new Schema(
 	{ timestamps: true }
 );
 
+PostSchema.plugin(mongoose_fuzzy_searching, { fields: ["title"] });
 const Post = mongoose.model("post", PostSchema);
 
 module.exports = Post;

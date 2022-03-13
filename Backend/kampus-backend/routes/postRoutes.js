@@ -4,6 +4,7 @@ const checkAuth = require("../middlewares/checkAuth");
 const {
 	getOnePost,
 	getPosts,
+	searchPost,
 	createOnePost,
 	getPostWithMaximumUpvotes,
 	deletePost,
@@ -13,10 +14,12 @@ postRouter.route("/posts").get(getPosts);
 
 postRouter.route("/posts-max-upvotes").get(getPostWithMaximumUpvotes);
 
-postRouter.route("/:id").get(getOnePost);
-
 postRouter.route("/create").post(checkAuth, createOnePost);
 
+postRouter.route("/search").get(searchPost);
+
 postRouter.route("/delete/:id").delete(deletePost);
+
+postRouter.route("/:id").get(getOnePost);
 
 module.exports = postRouter;
