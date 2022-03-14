@@ -30,9 +30,14 @@ function Sidebar() {
             {userContext.username ? userContext.username.slice(0, 1) : ""}
           </div>
         )}
-        <Link to={`/profile/${authContext.user_id}`} className="sidebar-username">
-          {userContext.username}
-        </Link>
+        {authContext.isLoggedIn && authContext.user_id ? (
+          <Link
+            to={`/profile/${authContext.user_id}`}
+            className="sidebar-username"
+          >
+            {userContext.username}
+          </Link>
+        ) : null}
         {/*^^username. did not add 'certified eggroll' coz that might need "preferred badge" type logic 
         Clicking on username can lead to profile ig*/}
       </div>
