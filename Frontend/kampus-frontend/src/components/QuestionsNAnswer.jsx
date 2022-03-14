@@ -14,6 +14,8 @@ const QuestionNAnswer = ({ category }) => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    // makes skeleton show up whenever you change branch or go to home
+    setQuestions([]);
     const getPosts = async () => {
       try {
         const url = "http://localhost:8080";
