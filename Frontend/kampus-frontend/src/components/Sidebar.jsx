@@ -3,6 +3,7 @@ import { AuthContext, UserContext } from "../api/Contexts";
 import { Link } from "react-router-dom";
 
 const branches = [
+  "General",
   "Computer",
   "Electrical",
   "Electronics and Telecommunication",
@@ -13,6 +14,7 @@ const branches = [
 ];
 
 const branches_id_map = {
+  General: "gen",
   Computer: "cmpn",
   Electrical: "el",
   "Electronics and Telecommunication": "extc",
@@ -56,7 +58,7 @@ function Sidebar() {
         <h3 className="recco-title">Branches to Follow</h3>
         <ul>
           {branches.map((data, key) => (
-            <Link to={`/explore/${branches_id_map[data]}`} key={key}>
+            <Link to={`/home/${branches_id_map[data]}`} key={key}>
               {/*i guess href will link to a feed where branch is filtered? */}
               <li>{data}</li>
             </Link>
