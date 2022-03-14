@@ -12,6 +12,16 @@ const branches = [
   "MCA",
 ];
 
+const branches_id_map = {
+  Computer: "cmpn",
+  Electrical: "el",
+  "Electronics and Telecommunication": "extc",
+  "Artificial Intelligence and Data Science": "ai_ds",
+  Instrumentation: "inst",
+  "Information Technology": "it",
+  MCA: "mca",
+};
+
 function Sidebar() {
   const authContext = useContext(AuthContext);
   const userContext = useContext(UserContext);
@@ -46,10 +56,10 @@ function Sidebar() {
         <h3 className="recco-title">Branches to Follow</h3>
         <ul>
           {branches.map((data, key) => (
-            <a href="" key={key}>
+            <Link to={`/explore/${branches_id_map[data]}`} key={key}>
               {/*i guess href will link to a feed where branch is filtered? */}
               <li>{data}</li>
-            </a>
+            </Link>
           ))}
         </ul>
       </div>
