@@ -5,6 +5,7 @@ const {
 	unfollowUser,
 	followUser,
 	getAllFollowers,
+	getAllFollowings,
 	alreadyFollows,
 } = require("../controllers/followController");
 const {
@@ -21,6 +22,10 @@ profileRouter.route("/follow-user").post(checkAuth, followUser);
 profileRouter.route("/unfollow-user").post(checkAuth, unfollowUser);
 
 profileRouter.route("/check-follow-status").post(checkAuth, alreadyFollows);
+
+profileRouter.route("/get-followers").post(getAllFollowers);
+
+profileRouter.route("/get-followings").post(getAllFollowings);
 
 profileRouter.route("/getPosts/:id").get(getAllPosts);
 

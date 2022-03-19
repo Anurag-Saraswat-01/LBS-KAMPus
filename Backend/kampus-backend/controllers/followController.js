@@ -1,22 +1,24 @@
 const Follow = require("../models/followModel");
-
+const Following = require("../models/followingModel");
 // followers: when any user follows you then userId will be you and followerId:
 // will be the person who wants to follow you
 
 const followUser = async (req, res) => {
-	const userId = res.locals.decodedId;
+	const userId = req.body.userId;
 	const followerId = req.body.followerId;
 
-	const alreadyFollows = await Follow.findOne({
-		userId: userId,
-		followerId: followerId,
-	});
-	if (alreadyFollows) {
-		return res.json({
-			success: false,
-			message: "Follower already follows you",
-		});
-	}
+	// const alreadyFollows = await Follow.findOne({
+	// 	userId: userId,
+	// 	followerId: followerId,
+	// });
+	// if (alreadyFollows) {
+	// 	return res.json({
+	// 		success: false,
+	// 		message: "Follower already follows you",
+	// 	});
+	// }
+
+	// adding user to follower model
 	const addFollower = await new Follow({
 		userId: userId,
 		followerId: followerId,
@@ -29,6 +31,8 @@ const followUser = async (req, res) => {
 			});
 		}
 	});
+
+	// once a user follows you successfully
 	console.log("Success");
 	return res.status(200).json({
 		success: true,
@@ -38,7 +42,7 @@ const followUser = async (req, res) => {
 
 //unfollowing a user same as unliking a post if already liked
 const unfollowUser = async (req, res) => {
-	const userId = res.locals.decodedId;
+	const userId = req.body.userId;
 	const followerId = req.body.followerId;
 
 	const deleteUser = await Follow.findOneAndDelete({
@@ -60,7 +64,7 @@ const unfollowUser = async (req, res) => {
 
 // To fetch all the followers of a user
 const getAllFollowers = async (req, res) => {
-	const userId = res.locals.decodedId;
+	const userId = req.body.userId;
 	const followers = await Follow.find({ userId: userId });
 	if (!followers) {
 		return res.status(300).json({
@@ -74,8 +78,23 @@ const getAllFollowers = async (req, res) => {
 	});
 };
 
+const getAllFollowings = async (req, res) => {
+	const userId = req.body.userId;
+	const followings = await Follow.find({ followerId: userId });
+	if (!followings) {
+		return res.status(300).json({
+			success: false,
+			message: "No followings to fetch",
+		});
+	}
+	return res.status(200).json({
+		success: true,
+		followings,
+	});
+};
+
 const alreadyFollows = async (req, res) => {
-	const userId = res.locals.decodedId;
+	const userId = req.body.userId;
 	const followerId = req.body.followerId;
 
 	const alreadyFollows = await Follow.findOne({
@@ -94,4 +113,10 @@ const alreadyFollows = async (req, res) => {
 	});
 };
 
-module.exports = { unfollowUser, followUser, getAllFollowers, alreadyFollows };
+module.exports = {
+	unfollowUser,
+	followUser,
+	getAllFollowers,
+	getAllFollowings,
+	alreadyFollows,
+};
