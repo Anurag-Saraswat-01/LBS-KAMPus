@@ -105,6 +105,7 @@ function App() {
                   <Route path="signin" element={<SignIn />} />
                   {/* old route for profile w/o id */}
                   {/* <Route path="profile" element={<Profile />} /> */}
+                  <Route path="home/:id" element={<Homepage />} />
                   <Route path="profile/:id" element={<Profile />} />
                   <Route path="ask" element={<AskQuestion />} />
                   <Route path="loggedout" element={<LoggedOut />} />

@@ -88,17 +88,19 @@ const Header = ({ page }) => {
                   <FaPlus className="add-post-icon" />
                 </Nav.Item>
               </Link>
-              <Nav.Item>
-                <Link to={`/profile/${authContext.user_id}`}>
-                  <Nav className="nav-link">Profile</Nav>
-                </Link>
-              </Nav.Item>
-              {authContext.isLoggedIn ? (
-                <Nav.Item>
-                  <Link to="/loggedout" onClick={handleLogout}>
-                    <Nav className="nav-link">Logout</Nav>
-                  </Link>
-                </Nav.Item>
+              {authContext.isLoggedIn && authContext.user_id ? (
+                <>
+                  <Nav.Item>
+                    <Link to={`/profile/${authContext.user_id}`}>
+                      <Nav className="nav-link">Profile</Nav>
+                    </Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Link to="/loggedout" onClick={handleLogout}>
+                      <Nav className="nav-link">Logout</Nav>
+                    </Link>
+                  </Nav.Item>
+                </>
               ) : null}
             </Nav>
           )}

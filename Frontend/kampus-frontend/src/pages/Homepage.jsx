@@ -3,8 +3,11 @@ import Sidebar from "../components/Sidebar";
 import QuestionNAnswer from "../components/QuestionsNAnswer";
 import Header from "../components/Header";
 import Comment from "../components/Comment";
+import { useParams } from "react-router-dom";
 
 function Homepage() {
+  const params = useParams();
+
   return (
     <div>
       <Header />
@@ -12,7 +15,7 @@ function Homepage() {
       <div className="homepage-container">
         <div className="post-placeholder">
           {/*Posts go here*/}
-          <QuestionNAnswer />
+          <QuestionNAnswer category={params.id}/>
           {/* to be shifted inside QuestionNAnswer 
 					<Comment />
 					<Comment /> */}

@@ -191,7 +191,7 @@ const Profile = () => {
 				const response = await axios.post(
 					`${url}/api/profile/unfollow-user`,
 					{
-						userId: authContext.user_id,
+						// userId: authContext.user_id,
 						followerId: params.id,
 					},
 					config
@@ -203,7 +203,7 @@ const Profile = () => {
 			const response = await axios.post(
 				`${url}/api/profile/follow-user`,
 				{
-					userId: authContext.user_id,
+					// userId: authContext.user_id,
 					followerId: params.id,
 				},
 				config
@@ -224,7 +224,8 @@ const Profile = () => {
 			const response = await axios.post(
 				`${url}/api/profile/check-follow-status`,
 				{
-					userId: authContext.user_id,
+					// Don't need to pass userId since we are using authGuard in backend
+					// userId: authContext.user_id,
 					followerId: params.id,
 				},
 				config

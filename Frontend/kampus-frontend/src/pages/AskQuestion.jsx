@@ -177,8 +177,9 @@ const AskQuestion = () => {
               <MenuItem value={"el"}>Electrical</MenuItem>
               <MenuItem value={"extc"}>Electronics and Communication</MenuItem>
               <MenuItem value={"it"}>Information Technology</MenuItem>
-              <MenuItem value={"instru"}>Instrumentation</MenuItem>
-              <MenuItem value={"aids"}>AIDS</MenuItem>
+              <MenuItem value={"inst"}>Instrumentation</MenuItem>
+              <MenuItem value={"ai_ds"}>AIDS</MenuItem>
+              <MenuItem value={"mca"}>MCA</MenuItem>
               {/* <MenuItem value={20}>Canteen</MenuItem>
 						<MenuItem value={30}>Hostel</MenuItem> */}
             </Select>
