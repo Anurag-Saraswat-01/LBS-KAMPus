@@ -1,9 +1,10 @@
 const Like = require("../models/likeModel");
 const Dislike = require("../models/dislikeModel");
-
+const Answer = require("../models/answerModel");
+const User = require("../models/userModel");
 const getLikes = async (req, res) => {
 	const answerId = req.body.answerId;
-	await Like.find({ answerId: answerId }).exec((err, likes) => {
+	Like.find({ answerId: answerId }).exec((err, likes) => {
 		if (!err) {
 			return res.status(200).json({
 				status: true,
@@ -24,29 +25,63 @@ const likePost = async (req, res) => {
 	const userId = res.locals.decodedId;
 	//TODO: Store the information about upvote
 	const like = await new Like({ answerId: answerId, userId: userId });
-	like.save((err, _result) => {
-		if (err) {
-			return res.status(400).json({
-				status: false,
-				error: err.message,
+
+	// like.save((err, _result) => {
+	// 	if (err) {
+	// 		return res.status(400).json({
+	// 			status: false,
+	// 			error: err.message,
+	// 		});
+	// 	}
+	// })
+	like
+		.save()
+		.then(async () => {
+			const userId = await Answer.findById(answerId);
+			await User.findOneAndUpdate(userId._id, {
+				$inc: { karma: 1 },
 			});
-		}
-		//TODO: If already downvoted then decrease the downvote and increase upvote
-		Dislike.findOneAndDelete({
-			$and: [{ answerId: answerId }, { userId: userId }],
-		}).exec((err, result) => {
-			if (err) {
-				return res.status(400).json({
-					status: false,
-				});
-			}
-			if (result) {
-				res.status(200).json({
-					status: true,
-				});
-			}
+		})
+		.then(() => {
+			Dislike.findOneAndDelete({
+				$and: [{ answerId: answerId }, { userId: userId }],
+			}).exec((err, result) => {
+				if (err) {
+					return res.status(400).json({
+						status: false,
+					});
+				}
+				if (result) {
+					res.status(200).json({
+						status: true,
+					});
+				}
+			});
 		});
-	});
+
+	// like.save((err, _result) => {
+	// 	if (err) {
+	// 		return res.status(400).json({
+	// 			status: false,
+	// 			error: err.message,
+	// 		});
+	// 	}
+	// 	//TODO: If already downvoted then decrease the downvote and increase upvote
+	// 	Dislike.findOneAndDelete({
+	// 		$and: [{ answerId: answerId }, { userId: userId }],
+	// 	}).exec((err, result) => {
+	// 		if (err) {
+	// 			return res.status(400).json({
+	// 				status: false,
+	// 			});
+	// 		}
+	// 		if (result) {
+	// 			res.status(200).json({
+	// 				status: true,
+	// 			});
+	// 		}
+	// 	});
+	// });
 };
 
 // gonna get the user id from the checkAuth middlewares
@@ -55,21 +90,41 @@ const unlikePost = async (req, res) => {
 	const answerId = req.body.answerId;
 	const userId = res.locals.decodedId;
 
-	await Like.findOneAndDelete({
+	const unlike = await Like.findOneAndDelete({
 		$and: [{ answerId: answerId }, { userId: userId }],
-	}).exec((err, _result) => {
-		if (err) {
-			return res.status(400).json({
-				status: false,
-				error: err.message,
-			});
-		} else {
-			res.json({
-				status: true,
-				message: "Unliked the post",
-			});
-		}
 	});
+	if (!unlike) {
+		return res.status(400).json({
+			status: false,
+			error: "Bad Request",
+		});
+	}
+	const user = await Answer.findById(answerId);
+	await User.findOneAndUpdate(user._id, {
+		$inc: { karma: -1 },
+	});
+
+	res.json({
+		status: true,
+		message: "Unliked the post",
+	});
+
+	// Like.findOneAndDelete({
+	// 	$and: [{ answerId: answerId }, { userId: userId }],
+	// }).exec((err, _result) => {
+	// 	if (err) {
+	// 		return res.status(400).json({
+	// 			status: false,
+	// 			error: err.message,
+	// 		});
+	// 	} else {
+
+	// 		res.json({
+	// 			status: true,
+	// 			message: "Unliked the post",
+	// 		});
+	// 	}
+	// });
 };
 
 module.exports = { getLikes, likePost, unlikePost };

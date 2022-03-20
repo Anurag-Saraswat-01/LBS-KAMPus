@@ -74,6 +74,8 @@ const Profile = () => {
 	const [croppedImage, setCroppedImage] = useState(null);
 	//for checking if a user already follows the user
 	const [follows, setFollows] = useState(false);
+	const [followerList, setFollowerList] = useState([]);
+	const [followingList, setFollowingList] = useState([]);
 	// cropper states
 	const [crop, setCrop] = useState({ x: 0, y: 0 });
 	const [zoom, setZoom] = useState(1);
@@ -191,7 +193,7 @@ const Profile = () => {
 				const response = await axios.post(
 					`${url}/api/profile/unfollow-user`,
 					{
-						// userId: authContext.user_id,
+						userId: authContext.user_id,
 						followerId: params.id,
 					},
 					config
@@ -203,7 +205,7 @@ const Profile = () => {
 			const response = await axios.post(
 				`${url}/api/profile/follow-user`,
 				{
-					// userId: authContext.user_id,
+					userId: authContext.user_id,
 					followerId: params.id,
 				},
 				config
@@ -225,7 +227,7 @@ const Profile = () => {
 				`${url}/api/profile/check-follow-status`,
 				{
 					// Don't need to pass userId since we are using authGuard in backend
-					// userId: authContext.user_id,
+					userId: authContext.user_id,
 					followerId: params.id,
 				},
 				config
@@ -352,9 +354,49 @@ const Profile = () => {
 	}, [userData]);
 
 	const handleFollowerClose = () => setFollowerShow(false);
-	const handleFollowerShow = () => setFollowerShow(true);
+	const handleFollowerShow = () => {
+		const getFollowers = async () => {
+			try {
+				const response = await axios.post(
+					// `${url}/api/users/profile`,
+					`${url}/api/profile/get-followers`,
+					{
+						userId: params.id,
+					},
+					config
+				);
+				console.log(response.data);
+				setFollowerList(response.data.followers);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getFollowers();
+		console.log(followerList);
+		setFollowerShow(true);
+	};
 	const handleFollowingClose = () => setFollowingShow(false);
-	const handleFollowingShow = () => setFollowingShow(true);
+	const handleFollowingShow = () => {
+		const getFollowings = async () => {
+			try {
+				const response = await axios.post(
+					// `${url}/api/users/profile`,
+					`${url}/api/profile/get-followings`,
+					{
+						userId: params.id,
+					},
+					config
+				);
+				console.log(response.data);
+				setFollowingList(response.data.followings);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getFollowings();
+		console.log(followingList);
+		setFollowingShow(true);
+	};
 
 	// Modal for the followers and following list
 	const followModal = (title, list, show, close) => {
@@ -494,7 +536,7 @@ const Profile = () => {
 						<div className="user-stats">
 							<p onClick={handleFollowerShow} style={{ cursor: "pointer" }}>
 								<span className="user-stat-number">
-									{userData.followers.length}
+									{userData.followersCount}
 								</span>
 								<br />
 								Followers
@@ -502,7 +544,7 @@ const Profile = () => {
 
 							<p onClick={handleFollowingShow} style={{ cursor: "pointer" }}>
 								<span className="user-stat-number">
-									{userData.following.length}
+									{userData.followingCount}
 								</span>
 								<br /> Following{" "}
 							</p>

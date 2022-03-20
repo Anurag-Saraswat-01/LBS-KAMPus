@@ -30,22 +30,22 @@ const UserSchema = new Schema(
 		year: String,
 		branch: String,
 
-		followers: [
-			{
-				type: String,
-			},
-		],
+		// followers: [
+		// 	{
+		// 		type: String,
+		// 	},
+		// ],
 		followersCount: {
 			type: Number,
 			required: true,
 			default: 0,
 		},
 
-		following: [
-			{
-				type: String,
-			},
-		],
+		// following: [
+		// 	{
+		// 		type: String,
+		// 	},
+		// ],
 		followingCount: {
 			type: Number,
 			required: true,

@@ -7,6 +7,7 @@ const {
 	getExistingUsers,
 	uploadProfilePicture,
 	isLoggedIn,
+	leaderBoard,
 } = require("../controllers/userController");
 const checkAuth = require("../middlewares/checkAuth");
 
@@ -19,6 +20,8 @@ router.route("/upload-profile").put(checkAuth, uploadProfilePicture);
 router.route("/").get(getExistingUsers);
 
 router.route("/profile").get(checkAuth, getOneExistingUser);
+
+router.route("/leaderboard").get(leaderBoard);
 
 router.route("/:id").get(getOneExistingUser);
 
