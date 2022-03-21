@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext, UserContext } from "../api/Contexts";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const branches = [
   "General",
@@ -25,6 +25,7 @@ const branches_id_map = {
 };
 
 function Sidebar() {
+  const location = useLocation();
   const authContext = useContext(AuthContext);
   const userContext = useContext(UserContext);
   return (
@@ -58,7 +59,15 @@ function Sidebar() {
         <h3 className="recco-title">Branches to Follow</h3>
         <ul>
           {branches.map((data, key) => (
-            <Link to={`/home/${branches_id_map[data]}`} key={key}>
+            <Link
+              to={`/home/${branches_id_map[data]}`}
+              key={key}
+              className={`${
+                location.pathname == `/home/${branches_id_map[data]}`
+                  ? "recco-active"
+                  : ""
+              }`}
+            >
               {/*i guess href will link to a feed where branch is filtered? */}
               <li>{data}</li>
             </Link>
