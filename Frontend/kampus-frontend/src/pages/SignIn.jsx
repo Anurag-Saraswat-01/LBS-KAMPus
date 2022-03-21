@@ -13,7 +13,7 @@ import { AuthContext, UserContext } from "../api/Contexts";
 // const cookies = new Cookies();
 const SignIn = () => {
   const authContext = useContext(AuthContext);
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
   //State that checks if youre waiting for response after submit
   const [waitingForRes, setWaitingForRes] = useState(false);
   //* gets the message and type of error from original page
@@ -79,14 +79,15 @@ const SignIn = () => {
         loginStatus: response.data.loginStatus,
         username: response.data.username,
         userImg: response.data.userImg,
+        userId: response.data.userId,
       };
       // console.log(status);
       if (status.loginStatus) {
         // right now this is just setting loginstatus, can modify login function to take in id as a parameter and modify the userID context
-        authContext.login();
+        authContext.login(status.userId);
         //TODO: call the backend to return the username and image and store it in:
         // did already
-        userContext.setData(status.username, status.userImg)
+        userContext.setData(status.username, status.userImg);
       }
 
       response.data.loginStatus && navigate("/home");

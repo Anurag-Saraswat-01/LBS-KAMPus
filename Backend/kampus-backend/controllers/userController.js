@@ -67,6 +67,7 @@ const loginUser = async (req, res) => {
 			loginStatus: true,
 			username: existingUser.name,
 			userImg: existingUser.profileImgUri,
+			userId: existingUser._id,
 		});
 	} else {
 		return res.status(404).json({

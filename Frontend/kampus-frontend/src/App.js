@@ -34,8 +34,9 @@ function App() {
   }, []);
 
   // functions that get passed into context provider, that change the state of loggedin to true or false
-  const login = () => {
+  const login = (id) => {
     setLoggedin(true);
+    setUserId(id);
   };
   const logout = () => {
     setLoggedin(false);
@@ -77,7 +78,7 @@ function App() {
     // This is a component that provides the login data to all components that need it, provided they use UseContext
     <AuthContext.Provider
       value={{
-        user_id: userId, 
+        user_id: userId,
         isLoggedIn: loggedin,
         login: login,
         logout: logout,
