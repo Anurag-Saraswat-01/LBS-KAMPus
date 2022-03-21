@@ -161,10 +161,21 @@ const createOnePost = async (req, res) => {
 	});
 };
 
+const escapeRegex = (text) => {
+	return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
 const searchPost = async (req, res) => {
 	const searchString = req.body.text;
-	const searchResults = await Post.fuzzySearch(searchString);
+	// const regex = new RegExp(escapeRegex(searchString), "gi");
+	// const result = await Post.find({ title: regex });
+	// console.log("result: " + result.length);
+	console.log(searchString);
+	const searchResults = await Post.fuzzySearch({ query: searchString });
 	console.log(searchResults.length);
+	await Post.fuzzySearch("floors").then((results) =>
+		console.log(results.length)
+	);
 	if (!searchResults) {
 		return res.json({
 			success: false,

@@ -11,7 +11,7 @@ import axios from "axios";
 
 // Answers section maps the answer part
 
-const Answers = ({ answer }) => {
+const Answers = ({ answer, questionId }) => {
   //! UseState to control the read more function
   // still work in progress
   const [readMore, setReadMore] = useState(false);
@@ -19,20 +19,20 @@ const Answers = ({ answer }) => {
   const [displayComments, setDisplayComments] = useState(false);
   const [comments, setComments] = useState([]);
 
-  // toggles display of comments
-  const toggleDisplayComments = () => {
-    setDisplayComments(!displayComments);
-    console.log("toggle", displayComments);
-  };
+	// toggles display of comments
+	const toggleDisplayComments = () => {
+		setDisplayComments(!displayComments);
+		console.log("toggle", displayComments);
+	};
 
-  // ButtonHandler will handle the click on Read more button
-  const buttonHandler = () => {
-    if (readMore) {
-      setReadMore(false);
-    } else {
-      setReadMore(true);
-    }
-  };
+	// ButtonHandler will handle the click on Read more button
+	const buttonHandler = () => {
+		if (readMore) {
+			setReadMore(false);
+		} else {
+			setReadMore(true);
+		}
+	};
 
   useEffect(() => {
     const getComments = async () => {
@@ -99,6 +99,7 @@ const Answers = ({ answer }) => {
         <AnswerBar
           toggleDisplayComments={toggleDisplayComments}
           answer={answer}
+          questionId={questionId}
         />
         <hr className="lineBreak" />
         {/* displayComments to toggle the comments with comment icon */}
