@@ -3,7 +3,7 @@ import CommentBar from "./CommentBar";
 import { CommentPersonInfo } from "./CommentPersonInfo";
 import Reply from "./Reply";
 
-function Comment({ comment }) {
+function Comment({ comment, questionId }) {
   /* Logic is to have a main Comments component (or just use the posts component)
       that will call this comment component for each item fetched from backend
     Can replace each item with data fetched from backend. Maybe pass thru as props when rendering. */
@@ -19,11 +19,13 @@ function Comment({ comment }) {
         date={comment.createdAt}
       />
       <div className="comment-body">
-        {comment.tagged && <span>{comment.tagged} </span>}
-        <p className="comment-text">{comment.commentBody}</p>
+        <p className="comment-text">
+          {comment.tagged && <span>@{comment.tagged} </span>}
+          {comment.commentBody}
+        </p>
         {/*TODO: Need to put comment bar with only likes and dislike*/}
       </div>
-      <CommentBar comment={comment}/>
+      <CommentBar comment={comment} questionId={questionId} />
       {/* TODO: Upvote button and reply button. votes-replies is just a placeholder name, change it. */}
       {/* <Reply />
       <Reply /> */}

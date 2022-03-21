@@ -106,7 +106,7 @@ const Answers = ({ answer, questionId }) => {
         {displayComments ? (
           <div className="comment-container">
             {comments
-              ? comments.map((data, key) => <Comment comment={data} key={key} />)
+              ? comments.map((data, key) => <Comment comment={data} questionId={questionId} key={key} />)
               : null}
           </div>
         ) : null}

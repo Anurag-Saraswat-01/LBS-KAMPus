@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { IoArrowRedoSharp } from "react-icons/io5";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
+import { TextField, Button } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../css/Comments.css";
 // import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import CommentIcon from "@mui/icons-material/Comment";
 
-const CommentBar = ({ answer, toggleDisplayComments }) => {
+const CommentBar = ({ comment, questionId }) => {
+  const navigate = useNavigate();
+
   const likeStyle = (color) => {
     return {
       fill: color,
@@ -23,6 +27,39 @@ const CommentBar = ({ answer, toggleDisplayComments }) => {
     downvoted: false,
     downvotesNum: 0,
   });
+  const [reply, setReply] = useState(null);
+
+  const handleReply = (e) => {
+    setReply(e.target.value);
+  };
+
+  const submitReply = async () => {
+    if (reply !== "") {
+      try {
+        const url = "http://localhost:8080";
+        const config = {
+          headers: {
+            "Content-type": "application/json",
+          },
+          withCredentials: true,
+          credentials: "include",
+        };
+        const response = await axios.post(
+          `${url}/api/comments/make-comment/${comment.comment_to}`,
+          {
+            commentBody: reply,
+            tag: comment.commentedBy.commentedName,
+          },
+          config
+        );
+        console.log(response.data);
+        response && navigate(`/post/${questionId}`);
+      } catch (err) {
+        console.log("Something went wrong!");
+        console.log(err);
+      }
+    }
+  };
 
   //state to show or hide the add new comment section
   const [displayCommentSection, setDisplayCommentSection] = useState(false);
@@ -41,7 +78,7 @@ const CommentBar = ({ answer, toggleDisplayComments }) => {
         //same funda as in app.js, dont need to use .then inside an async func
         const getUpvotes = await axios.post(
           `${url}/api/ratings/upasdavotes`,
-          { answerId: answer._id },
+          { answerId: comment._id },
           config
         );
         // console.log(getUpvotes.data);
@@ -56,7 +93,7 @@ const CommentBar = ({ answer, toggleDisplayComments }) => {
 
         const getDownvotes = await axios.post(
           `${url}/api/ratings/downvsasdotes`,
-          { answerId: answer._id },
+          { answerId: comment._id },
           config
         );
         // console.log(getDownvotes.data);
@@ -164,7 +201,7 @@ const CommentBar = ({ answer, toggleDisplayComments }) => {
       <div className=" comment-bar d-flex justify-content-between">
         <div className="d-flex justify-content-start align-items-center">
           <div
-            onClick={() => upvote(answer._id)}
+            onClick={() => upvote(comment._id)}
             className="comment-likes clickable d-flex align-items-center"
           >
             <BiUpvote
@@ -177,7 +214,7 @@ const CommentBar = ({ answer, toggleDisplayComments }) => {
             }
           </div>
           <div
-            onClick={() => downvote(answer._id)}
+            onClick={() => downvote(comment._id)}
             className="comment-dislikes clickable d-flex align-items-center"
           >
             <BiDownvote
@@ -191,11 +228,43 @@ const CommentBar = ({ answer, toggleDisplayComments }) => {
           </div>
         </div>
         {/* SHARE */}
-        <div className="comment-share d-flex justify-content-start align-items-center">
+        <div
+          className="comment-share d-flex justify-content-start align-items-center"
+          onClick={() => setDisplayCommentSection(!displayCommentSection)}
+        >
           <div className="comment-share-icon rounded-pill me-2 d-flex align-items-center">
             <IoArrowRedoSharp style={likeStyle("black")} />
           </div>
           Reply
+        </div>
+      </div>
+      <div
+        className="comment-section"
+        style={{ display: displayCommentSection ? "flex" : "none" }}
+      >
+        <div className="write-comment">
+          <TextField
+            id="outlined-textarea"
+            label=""
+            placeholder="Write a Comment"
+            maxRows={4}
+            value={reply}
+            onChange={handleReply}
+            variant="outlined"
+            multiline
+          />
+        </div>
+        <div
+          className="askQuestion__post"
+          style={{ width: "100%", padding: 0 }}
+        >
+          <Button
+            className="askQuestion_button"
+            variant="outlined"
+            onClick={submitReply}
+          >
+            Submit
+          </Button>
         </div>
       </div>
     </div>
