@@ -62,73 +62,74 @@ const Comment = require("../models/commentModel");
 // };
 
 const addAnswer = async (req, res) => {
-	console.log("new add answer request");
-	const question_id = req.params.id;
-	const answerBody = req.body.answerBody;
-	const answeredBy = res.locals.decodedId;
-	console.log(answeredBy);
-	const user = await User.findById(answeredBy);
-	// console.log(question_id);
-	// console.log(answerBody);
-	const answer = await Answer.create({
-		question_id: question_id,
-		answeredBy: user.name,
-		answerBody: answerBody,
-		userProfile: user.profileImgUri,
-		answeredByUserId: user._id,
-	});
-	if (!answer) {
-		return res.status(403).json({
-			status: false,
-			message: "Answer couldn't be added",
-		});
-	}
-	// Updating the karma points for answering a post
-	await User.findByIdAndUpdate({ _id: user._id }, { $inc: { karma: 5 } });
-	return res.status(201).json({
-		status: true,
-		message: "Answer added successfully",
-	});
+  console.log("new add answer request");
+  const question_id = req.params.id;
+  const answerBody = req.body.answerBody;
+  const answeredBy = res.locals.decodedId;
+  console.log(answeredBy);
+  const user = await User.findById(answeredBy);
+  // console.log(question_id);
+  // console.log(answerBody);
+  const answer = await Answer.create({
+    question_id: question_id,
+    answeredBy: user.name,
+    answerBody: answerBody,
+    userProfile: user.profileImgUri,
+    answeredByUserId: user._id,
+  });
+  if (!answer) {
+    return res.status(403).json({
+      status: false,
+      message: "Answer couldn't be added",
+    });
+  }
+  // Updating the karma points for answering a post
+  await User.findByIdAndUpdate({ _id: user._id }, { $inc: { karma: 5 } });
+  return res.status(201).json({
+    status: true,
+    message: "Answer added successfully",
+  });
 };
 
 // to get comments to the answer
 const getComments_to = async (req, res) => {
-	const answer_id = new mongoose.Types.ObjectId(req.params.id);
-	const userid = res.locals.decodedId;
+  const answer_id = new mongoose.Types.ObjectId(req.params.id);
+  //   console.log(answer_id);
+  // const userid = res.locals.decodedId;
 
-	const comments = await Comment.aggregate([
-		{
-			$match: {
-				_id: answer_id,
-			},
-		},
-		//   {
-		// 	$lookup: {
-		// 	  from: "comments",
-		// 	  localField: "_id",
-		// 	  foreignField: "comment_to",
-		// 	  as: "result",
-		// 	}
-		//   },
-	]).allowDiskUse(true);
+  const comments = await Comment.aggregate([
+    {
+      $match: {
+        comment_to: answer_id,
+      },
+    },
+    // {
+    //   $lookup: {
+    //     from: "comments",
+    //     localField: "_id",
+    //     foreignField: "comment_to",
+    //     as: "result",
+    //   },
+    // },
+  ]).allowDiskUse(true);
 
-	// console.log(comments);
+  //   console.log("Answer Controller:", comments);
 
-	if (!comments) {
-		return res.status(403).json({
-			status: false,
-			message: "comment couldn't be fetched",
-		});
-	} else {
-		return res.json(comments);
-	}
+  if (!comments) {
+    return res.status(403).json({
+      status: false,
+      message: "comment couldn't be fetched",
+    });
+  } else {
+    return res.json(comments);
+  }
 };
 
 module.exports = {
-	addAnswer,
-	// upvoteAnswer,
-	// downvoteAnswer,
-	getComments_to,
+  addAnswer,
+  // upvoteAnswer,
+  // downvoteAnswer,
+  getComments_to,
 };
 
 // update the karma points for upvoting

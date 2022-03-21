@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { answers } from "../api/postData";
 import { PersonInfo } from "./PersonInfo";
 import { Container } from "react-bootstrap";
@@ -6,6 +6,7 @@ import AnswerBar from "./AnswerBar";
 import Button from "@mui/material/Button";
 import moment from "moment";
 import Comment from "./Comment";
+import axios from "axios";
 // import Parser from 'html-react-parser';
 
 // Answers section maps the answer part
@@ -16,6 +17,7 @@ const Answers = ({ answer }) => {
   const [readMore, setReadMore] = useState(false);
   // state to show or hide the comments
   const [displayComments, setDisplayComments] = useState(false);
+  const [comments, setComments] = useState([]);
 
   // toggles display of comments
   const toggleDisplayComments = () => {
@@ -31,6 +33,39 @@ const Answers = ({ answer }) => {
       setReadMore(true);
     }
   };
+
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const url = "http://localhost:8080";
+        const config = {
+          headers: {
+            "Content-type": "application/json",
+          },
+          withCredentials: true,
+          credentials: "include",
+        };
+        // same funda as in app.js, dont need to use .then inside an async func
+        // if category exists it call sends request to category route else normal post route
+        const response = await axios.get(
+          `${url}/api/answers/get/comments/${answer._id}`,
+          config
+        );
+        // console.log(response.data);
+        // console.log(response.data[0].allAnswers[0]);
+        setComments(response.data);
+        // setLoading(false);
+      } catch (err) {
+        console.log("Something went wrong");
+        console.log(err);
+      }
+    };
+    getComments();
+  }, []);
+
+  useEffect(() => {
+    console.log(comments);
+  }, [comments]);
 
   // Mapping the answers from the test api
   // return answers.map((answer, key) => {
@@ -69,8 +104,9 @@ const Answers = ({ answer }) => {
         {/* displayComments to toggle the comments with comment icon */}
         {displayComments ? (
           <div className="comment-container">
-            <Comment />
-            <Comment />
+            {comments
+              ? comments.map((data, key) => <Comment comment={data} key={key} />)
+              : null}
           </div>
         ) : null}
       </Container>

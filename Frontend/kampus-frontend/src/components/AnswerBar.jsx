@@ -4,12 +4,15 @@ import { BiUpvote, BiDownvote } from "react-icons/bi";
 import axios from "axios";
 import { MdComment } from "react-icons/md";
 import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "../css/Comments.css";
 // import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import CommentIcon from "@mui/icons-material/Comment";
 
 const AnswerBar = ({ answer, toggleDisplayComments }) => {
+  const navigate = useNavigate();
+
   const likeStyle = (color) => {
     return {
       fill: color,
@@ -39,6 +42,33 @@ const AnswerBar = ({ answer, toggleDisplayComments }) => {
   const toggleCommentSection = () => {
     setDisplayCommentSection(!displayCommentSection);
     toggleDisplayComments();
+  };
+
+  const submitPost = async () => {
+    if (comment !== "") {
+      try {
+        const url = "http://localhost:8080";
+        const config = {
+          headers: {
+            "Content-type": "application/json",
+          },
+          withCredentials: true,
+          credentials: "include",
+        };
+        const response = await axios.post(
+          `${url}/api/comments/make-comment/${answer._id}`,
+          {
+            commentBody: comment,
+          },
+          config
+        );
+        console.log(response.data);
+        response && navigate(`/post/${answer.question_id}`);
+      } catch (err) {
+        console.log("Something went wrong!");
+        console.log(err);
+      }
+    }
   };
 
   useEffect(() => {
@@ -240,7 +270,7 @@ const AnswerBar = ({ answer, toggleDisplayComments }) => {
           <Button
             className="askQuestion_button"
             variant="outlined"
-            // onClick={submitPost}
+            onClick={submitPost}
           >
             Submit
           </Button>

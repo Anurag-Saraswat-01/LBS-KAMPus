@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import moment from "moment";
 
 // A component to show Username and date on which question or answer is given
 export const CommentPersonInfo = (props) => {
@@ -20,7 +21,7 @@ export const CommentPersonInfo = (props) => {
         <p className="mb-0">{props.userName}</p>
       </div>
       <p className="mb-0 d-flex align-items-center comment-date">
-        {props.date}
+        {moment(props.date).format("Do MMMM YYYY")}
       </p>
     </div>
   );
