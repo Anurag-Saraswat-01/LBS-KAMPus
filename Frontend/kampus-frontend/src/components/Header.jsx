@@ -37,6 +37,8 @@ const Header = ({ page }) => {
       console.log(error);
     }
   };
+
+  console.log(authContext.isLoggedIn, authContext.user_id)
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
