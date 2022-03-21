@@ -25,63 +25,30 @@ const likePost = async (req, res) => {
 	const userId = res.locals.decodedId;
 	//TODO: Store the information about upvote
 	const like = await new Like({ answerId: answerId, userId: userId });
-
-	// like.save((err, _result) => {
-	// 	if (err) {
-	// 		return res.status(400).json({
-	// 			status: false,
-	// 			error: err.message,
-	// 		});
-	// 	}
-	// })
 	like
 		.save()
-		.then(async () => {
-			const userId = await Answer.findById(answerId);
-			await User.findOneAndUpdate(userId._id, {
-				$inc: { karma: 1 },
+		.then(() => {
+			res.status(200).json({
+				message: "Upvoted the post",
 			});
 		})
-		.then(() => {
-			Dislike.findOneAndDelete({
+		.then(async () => {
+			// first getting the user who posted the answer and then updating his karma
+			const answer = await Answer.findById(answerId);
+			const update = await User.findOneAndUpdate(
+				{ _id: answer.answeredByUserId },
+				{
+					$inc: { karma: 1 },
+				}
+			);
+			console.log("Updated karma's of " + update.name);
+			const dislike = await Dislike.findOneAndDelete({
 				$and: [{ answerId: answerId }, { userId: userId }],
-			}).exec((err, result) => {
-				if (err) {
-					return res.status(400).json({
-						status: false,
-					});
-				}
-				if (result) {
-					res.status(200).json({
-						status: true,
-					});
-				}
 			});
+		})
+		.catch((err) => {
+			console.log(err);
 		});
-
-	// like.save((err, _result) => {
-	// 	if (err) {
-	// 		return res.status(400).json({
-	// 			status: false,
-	// 			error: err.message,
-	// 		});
-	// 	}
-	// 	//TODO: If already downvoted then decrease the downvote and increase upvote
-	// 	Dislike.findOneAndDelete({
-	// 		$and: [{ answerId: answerId }, { userId: userId }],
-	// 	}).exec((err, result) => {
-	// 		if (err) {
-	// 			return res.status(400).json({
-	// 				status: false,
-	// 			});
-	// 		}
-	// 		if (result) {
-	// 			res.status(200).json({
-	// 				status: true,
-	// 			});
-	// 		}
-	// 	});
-	// });
 };
 
 // gonna get the user id from the checkAuth middlewares
@@ -100,31 +67,17 @@ const unlikePost = async (req, res) => {
 		});
 	}
 	const user = await Answer.findById(answerId);
-	await User.findOneAndUpdate(user._id, {
-		$inc: { karma: -1 },
-	});
+	await User.findOneAndUpdate(
+		{ _id: user.answeredByUserId },
+		{
+			$inc: { karma: -1 },
+		}
+	);
 
 	res.json({
 		status: true,
 		message: "Unliked the post",
 	});
-
-	// Like.findOneAndDelete({
-	// 	$and: [{ answerId: answerId }, { userId: userId }],
-	// }).exec((err, _result) => {
-	// 	if (err) {
-	// 		return res.status(400).json({
-	// 			status: false,
-	// 			error: err.message,
-	// 		});
-	// 	} else {
-
-	// 		res.json({
-	// 			status: true,
-	// 			message: "Unliked the post",
-	// 		});
-	// 	}
-	// });
 };
 
 module.exports = { getLikes, likePost, unlikePost };

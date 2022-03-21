@@ -186,6 +186,12 @@ const Profile = () => {
     setCroppedImage(null);
   };
 
+  // copies the link to the question to clipboard
+  const copyToClipboard = () => {
+    // console.log(questionId);
+    navigator.clipboard.writeText(`http://localhost:3000/profile/${params.id}`);
+  };
+
   // following or unfollowing a user
   const followUser = async () => {
     try {
@@ -562,7 +568,7 @@ const Profile = () => {
                   {follows ? "UnFollow" : "Follow"}
                 </button>
               )}
-              <button className="share-profile-btn">
+              <button onClick={copyToClipboard} className="share-profile-btn">
                 <FaShare />
               </button>
             </div>
