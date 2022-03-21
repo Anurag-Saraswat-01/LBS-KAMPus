@@ -1,0 +1,103 @@
+.ldbd-btn {
+  position: absolute;
+  bottom: 2vw;
+  right: 2vw;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.8em;
+  background-color: var(--navbar);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+  animation: wiggle 0.5s ease 2;
+}
+.ldbd-btn svg {
+  transition: 0.2s ease;
+}
+.ldbd-btn:hover {
+  animation: wiggle 0.5s ease infinite;
+  /* transform: scale(1.2); */
+  animation-direction: normal;
+}
+.ldbd-btn:hover svg {
+  fill: var(--alt-green-text);
+}
+
+@keyframes wiggle {
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.ldbd-box {
+  overflow-y: scroll;
+}
+.ldbd-box p,
+.ldbd-box h2 {
+  font-family: "Montserrat";
+  text-align: center;
+}
+.ldbd-box h2 {
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  border-bottom: 2px var(--alt-green-text) solid;
+  padding: 0 0 1rem 0;
+}
+
+.ldbd-user {
+  text-align: left;
+  display: grid;
+  grid-template-columns: 0.1fr 0.3fr 1fr 0.3fr;
+  justify-items: start;
+  align-items: center;
+  margin: 1rem;
+  background-color: var(--background);
+  padding: 1rem;
+  border-radius: 10px;
+}
+.ldbd-userlist > .ldbd-user:nth-child(1) {
+  background-color: rgba(64, 199, 64, 0.664);
+}
+.ldbd-userlist > .ldbd-user:nth-child(2) {
+  background-color: rgba(174, 199, 64, 0.664);
+}
+.ldbd-userlist > .ldbd-user:nth-child(3) {
+  background-color: rgba(199, 156, 64, 0.664);
+}
+.ldbd-userlist > .ldbd-user:nth-child(1) > span:first-child {
+  font-size: 1.8rem;
+}
+.ldbd-userlist > .ldbd-user:nth-child(2) > span:first-child {
+  font-size: 1.5rem;
+}
+.ldbd-userlist > .ldbd-user:nth-child(3) > span:first-child {
+  font-size: 1.2rem;
+}
+.ldbd-user-info {
+  display: flex;
+  flex-direction: column;
+}
+.ldbd-user-info > a {
+  color: inherit;
+  transition: 0.1s ease;
+  border-radius: 10px;
+}
+.ldbd-user-info > a:hover {
+  color: var(--alt-green-text);
+  padding: 0.2rem 0.1rem;
+  background-color: rgba(0, 0, 0, 0.37);
+}
+.ldbd-user-info span:nth-child(2) {
+  text-transform: uppercase;
+}
