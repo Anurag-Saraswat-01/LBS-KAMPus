@@ -44,12 +44,12 @@ main()
 	.catch((err) => console.log(err));
 
 async function main() {
-	const options = {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		// useCreateIndex: true,
-	};
-	await mongoose.connect(process.env.MONGODB_URI, options);
+	// const options = {
+	// 	useNewUrlParser: true,
+	// 	useUnifiedTopology: true,
+	// 	useCreateIndex: true,
+	// };
+	await mongoose.connect(process.env.MONGODB_URI);
 }
 
 app.use("/api/users", userRoutes);

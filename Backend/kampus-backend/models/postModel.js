@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = require("mongoose");
 const mongoose_fuzzy_searching = require("mongoose-fuzzy-searching");
 const PostSchema = new Schema(
 	{
@@ -30,6 +30,6 @@ const PostSchema = new Schema(
 );
 
 PostSchema.plugin(mongoose_fuzzy_searching, { fields: ["title"] });
-const Post = mongoose.model("post", PostSchema);
+const Post = mongoose.model("Posts", PostSchema);
 
 module.exports = Post;
