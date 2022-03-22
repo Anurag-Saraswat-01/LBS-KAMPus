@@ -12,9 +12,29 @@ import {
 import Header from "../components/Header";
 import axios from "axios";
 import { AuthContext } from "../api/Contexts";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 //TODO: Make the page responsive
-
+const modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["link", "image", "video"],
+    ["code-block"],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};
 const AskQuestion = () => {
   //* To redirect the user if loggedin status is false
   const navigate = useNavigate();
@@ -43,6 +63,7 @@ const AskQuestion = () => {
     error: "Sorry couldn't post the Question, please try again.",
     success: "Question has been posted successfully.",
     warning: "Department and Title are required.",
+    info: "You have earned a new badge"
   };
 
   //* will be triggered once and will check if the user is logged in
@@ -76,8 +97,8 @@ const AskQuestion = () => {
     setTitle(event.target.value);
   };
 
-  const handleBodyChange = (event) => {
-    setBody(event.target.value);
+  const handleBodyChange = (value) => {
+    setBody(value);
   };
 
   //   To do: navigate to the particular post's page when successfully posted
@@ -111,10 +132,17 @@ const AskQuestion = () => {
         console.log(response.status);
         console.log(response);
         if (response) {
-          setAlert({
-            show: true,
-            type: "success",
-          });
+          if (response.badge) {
+            setAlert({
+              show: true,
+              type: "info",
+            });
+          } else {
+            setAlert({
+              show: true,
+              type: "success",
+            });
+          }   
           setTimeout(() => {
             setAlert({
               show: false,
@@ -157,7 +185,7 @@ const AskQuestion = () => {
     <div className="askQuestion">
       <Header />
       {alert.show && (
-        <Alert severity={alert.type}> {alertMessages[alert.type]} </Alert>
+        <Alert severity={alert.type}> { alertMessages[alert.type]} </Alert>
       )}
       <div className="askQuestion__ques">
         <h2>Ask a Question</h2>
@@ -195,7 +223,7 @@ const AskQuestion = () => {
             variant="outlined"
             className="askQuestion__title"
           />
-          <TextField
+          {/* <TextField
             fullWidth
             id="outlined-basic"
             label="Body"
@@ -206,8 +234,14 @@ const AskQuestion = () => {
             minRows={6}
             maxRows={15}
             className="askQuestion__body"
+          /> */}
+          <ReactQuill
+            // formats={formats}
+            modules={modules}
+            value={body}
+            theme="snow"
+            onChange={handleBodyChange}
           />
-
           <div className="askQuestion__post">
             <Button
               className="askQuestion_button"
