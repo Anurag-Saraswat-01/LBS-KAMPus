@@ -4,22 +4,10 @@ const Answer = require("../models/answerModel");
 const mongoose = require("mongoose");
 
 const getAllPosts = async (req, res) => {
-  console.log(req.params)
+  // console.log(req.params)
   const userId = req.params.id || res.locals.decodedId;
   const posts = await Post.find({ userId: userId });
-  // console.log(post);
-  // const posts = await User.aggregate([
-  //   {
-  //     $lookup: {
-  //       from: "posts",
-  //       localField: '_id',
-  //       foreignField: 'userId',
-  //       as: "post"
-  //     }
-  //   },
-  //   {$sort: {createdAt: -1}},
-  //   {$match: {_id: new mongoose.Types.ObjectId(userId)}}
-  // ]);
+  
   if (!posts) {
     return res.status(400).json({
       success: false,

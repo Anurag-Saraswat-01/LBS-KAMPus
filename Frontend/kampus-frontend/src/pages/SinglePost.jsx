@@ -12,7 +12,7 @@ import AnswerCount from "../components/AnswerCount";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
-const SinglePost = () => {
+const SinglePost = ({ results, setResults }) => {
   const params = useParams();
   const [question, setQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -65,9 +65,9 @@ const SinglePost = () => {
           <Container className="questionSection">
             <PersonInfo
               userName={question.askedBy}
-              followButton={true}
               date={moment(question.createdAt).format("Do MMMM YYYY")}
               userProfile={question.userProfile}
+              userId={question.userId}
             />
             <Link to={`/post/${question._id}`}>
               <h3 className="question-title">
@@ -76,7 +76,9 @@ const SinglePost = () => {
               </h3>
             </Link>
 
-            <p className="question-body">{question.body}</p>
+            <p className="question-body" dangerouslySetInnerHTML={{
+              __html: question.body
+            }}></p>
           </Container>
           <hr className="lineBreak" />
 
@@ -91,7 +93,7 @@ const SinglePost = () => {
 
   return (
     <div>
-      <Header />
+      <Header results={results} setResults={setResults} />
       <Sidebar />
       <div className="homepage-container">
         <div className="post-placeholder">{questionCard()}</div>

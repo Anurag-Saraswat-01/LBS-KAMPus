@@ -13,14 +13,19 @@
 
 .ql-editor {
   height: 45vh;
-  background-color: black;
+  background-color: var(--navbar);
   overflow: scroll;
 }
 
 .ql-editor > * {
   color: white;
 }
-
+.ql-container.ql-snow{
+  border: none;
+}
+.quill {
+  margin: 1rem;
+}
 /* .ql-editor p {
 	display: flex;
 	justify-content: center;

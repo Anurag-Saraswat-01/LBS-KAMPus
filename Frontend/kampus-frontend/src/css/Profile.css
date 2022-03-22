@@ -313,9 +313,14 @@
   display: flex;
   justify-content: space-between;
 }
-.profile-post-ans-body > p {
+.absolute-madlad, .absolute-madlad > * {
   color: grey;
   margin: 0;
+  font-size: 1rem;
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
 }
 .profile-post-ans-body > p:nth-child(2) {
   color: var(--alt-green-text);
@@ -347,4 +352,28 @@
   margin-left: 2em;
   color: rgba(255, 255, 255, 0.829);
   font-family: "Quicksand";
+}
+.bruhmoment .modal-content{
+  margin: auto;
+}
+.followmodal-item {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  align-items: center;
+  margin: 1rem;
+}
+.followmodal-item a {
+  color: white !important;
+  font-size: 1.5rem;
+}
+.followmodal-item a:hover {
+  color: var(--alt-green-text) !important;
+}
+.followmodal-item img {
+  height: 60px;
+  width: 60px;
+  aspect-ratio: 1;
+}
+.btn-close {
+  color:white;
 }

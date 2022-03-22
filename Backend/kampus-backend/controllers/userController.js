@@ -81,7 +81,7 @@ const loginUser = async (req, res) => {
 // @desc: Gets all the users
 const getExistingUsers = async (req, res) => {
 	const users = await User.find({});
-	console.log(users);
+	// console.log(users);
 	if (!users) {
 		return res.status(404).json({
 			users,

@@ -139,12 +139,21 @@ ul {
   margin: 2% 0;
 }
 
-.landing-signup,
-.landing-signup a {
+.landing-signup{
+  margin-top: 1em;
   color: white;
-  text-decoration: none;
+  /* text-decoration: none; */
+  /* text-decoration: underline */
 }
-
+.landing-signup a {
+  color: var(--green-text);
+  background-color: #202020;
+  padding: 0.2rem 0.4rem;
+  border-radius: 10px;
+}
+.landing-signup a:hover {
+  color: var(--alt-green-text) !important;
+}
 /* Homepage CSS */
 .homepage-container {
   /* display: grid;
@@ -305,14 +314,13 @@ a[href="/signin"]:hover {
   align-items: center;
 }
 .follow .followBtn {
-  width: 60px;
   height: 30px;
   font-size: 10px;
   padding-left: 8px;
   background-color: var(--navbar);
   color: #84c577;
   border: 2px solid var(--alt-green-text);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border-radius: 20px;
   font-family: "Quicksand", sans-serif;
   transition: 0.2s ease;
@@ -403,6 +411,21 @@ a[href="/signin"]:hover {
 .dislikes .downvote-text {
   color: #ff5353;
 }
+.share-tooltip {
+  position: absolute;
+bottom: 40px;
+background: #ffffffcc;
+border-radius: 20px;
+width: auto;
+font-weight: 600;
+font-family: 'Montserrat';
+text-align: center;
+font-size: 1rem;
+margin: auto;
+padding: 1rem;
+color: black;
+}
+
 .shareIcon {
   width: 45px;
   background-color: #84c577;
@@ -417,6 +440,7 @@ a[href="/signin"]:hover {
   padding-inline: 0.5rem;
   border-radius: 10px;
   color: var(--light-text);
+  position: relative;
 }
 .share:hover {
   background-color: var(--background);
@@ -578,4 +602,17 @@ a[href="/signin"]:hover {
   bottom: -40px;
   font-family: "Montserrat";
   color: #f5bd00;
+}
+.searchresults__notfound {
+  margin: 2rem 0;
+  font-family: "Mclaren", cursive;
+}
+
+.comment-text span {
+  color: var(--green-text);
+}
+
+.comment-personInfo a,
+.comment-personInfo a:hover {
+  color: var(--green-text);
 }

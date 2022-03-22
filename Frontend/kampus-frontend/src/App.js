@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn";
 import SinglePost from "./pages/SinglePost";
 import LoggedOut from "./pages/LoggedOut";
 import AskQuestion from "./pages/AskQuestion";
+import SearchResults from "./pages/SearchResults";
 import AnswerModal from "./components/AnswerModal";
 import Loader from "./components/Loader";
 import { useState, useEffect, createContext } from "react";
@@ -21,6 +22,8 @@ function App() {
   const [userData, setUserData] = useState({ username: null, userImg: null });
   // stores if login status has been returned or not
   const [waitingForResponse, setWaitingForResponse] = useState(true);
+  // stores the search results and passes it to search page
+  const [searchResults, setSearchResults] = useState([]);
   // if user is logged in, state to store their user_id for data fetching
   // calling loginstatus to see if a user is logged in. If they are, their id is stored, and loggedin is set to true
   // If they arent, loggedin is false and id is null
@@ -32,6 +35,9 @@ function App() {
       setWaitingForResponse(false);
     });
   }, []);
+
+  console.log("Search results");
+  console.log(searchResults);
 
   // functions that get passed into context provider, that change the state of loggedin to true or false
   const login = (id) => {
@@ -100,17 +106,50 @@ function App() {
               {loggedin ? (
                 <Routes>
                   <Route path="/" element={<Landing />} />
-                  <Route path="home" element={<Homepage />} />
-                  <Route path="post/:id" element={<SinglePost />} />
+                  <Route
+                    path="home"
+                    element={
+                      <Homepage
+                        results={searchResults}
+                        setResults={setSearchResults}
+                      />
+                    }
+                  />
+                  <Route
+                    path="post/:id"
+                    element={
+                      <SinglePost
+                        results={searchResults}
+                        setResults={setSearchResults}
+                      />
+                    }
+                  />
                   <Route path="signup" element={<SignUp />} />
                   <Route path="signin" element={<SignIn />} />
                   {/* old route for profile w/o id */}
                   {/* <Route path="profile" element={<Profile />} /> */}
-                  <Route path="home/:id" element={<Homepage />} />
+                  <Route
+                    path="home/:id"
+                    element={
+                      <Homepage
+                        results={searchResults}
+                        setResults={setSearchResults}
+                      />
+                    }
+                  />
                   <Route path="profile/:id" element={<Profile />} />
                   <Route path="ask" element={<AskQuestion />} />
                   <Route path="loggedout" element={<LoggedOut />} />
                   <Route path="answer" element={<AnswerModal />} />
+                  <Route
+                    path="home/search-results"
+                    element={
+                      <SearchResults
+                        results={searchResults}
+                        setResults={setSearchResults}
+                      />
+                    }
+                  />
                 </Routes>
               ) : (
                 // If not logged in, only allow access to select routes. Remaining redirect to signin

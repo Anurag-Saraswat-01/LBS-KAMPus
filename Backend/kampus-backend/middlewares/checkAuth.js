@@ -12,7 +12,7 @@ const checkAuth = (req, res, next) => {
 					isLogggedIn: false,
 				});
 			} else {
-				console.log(decodedId);
+				// console.log(decodedId);
 				res.locals.isLogggedIn = true;
 				res.locals.decodedId = decodedId.id;
 				next();

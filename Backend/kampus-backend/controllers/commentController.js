@@ -14,8 +14,7 @@ const makeComment = async (req, res) => {
   if (mongoose.Types.ObjectId(commentedBy)) {
     user = await User.findById(commentedBy);
   }
-  console.log(user);
-
+  // console.log(user);
   const comment = await Comment.create({
     commentBody: body,
     comment_to: ans_id,
@@ -27,6 +26,7 @@ const makeComment = async (req, res) => {
     },
   });
   if (comment) {
+    console.log("New comment added")
     return res.status(201).json({
       status: true,
       message: "comment added successfully",
@@ -39,37 +39,6 @@ const makeComment = async (req, res) => {
   }
 };
 
-// const getComments_to = async(req,res)=>{
-//   const answer_id = new mongoose.Types.ObjectId(req.params.id);
-//   const userid = res.locals.decodedId;
-
-//   const comments = Comment.aggregate([
-//     {
-//       $lookup: {
-//         // $from:
-//       }
-//     },
-//     // {
-//     //   $match: {
-//     //     comment_to: answer_id
-//     //   }
-//     // }
-//   ])
-
-//   if(comments){
-//     return res.status(201).json({
-//       comments
-//     })
-//   }else {
-//     return res.status(403).json({
-//       status: false,
-//       message: "comment couldn't be fetched",
-//     });
-//   }
-
-// }
-
 module.exports = {
   makeComment,
-  // getComments_to,
 };

@@ -19,8 +19,8 @@ const Landing = () => {
           <button className="landing-signin-btn">Sign In</button>
         </Link>
         <p className="landing-signup">
-          Not a member?
-          <Link to="/signup"> Sign Up </Link>
+          {'Not a member? '} 
+          <Link to="/signup">Sign Up </Link>
         </p>
         <p className="ves-bs">An LBS project created by students of VESIT</p>
       </Container>

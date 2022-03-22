@@ -22,9 +22,9 @@ const corsOptions = {
 	// origin: "*",
 	credentials: true,
 	origin: (origin, callback) => {
-		console.log(origin);
+		// console.log(origin);
 		if (whitelist.includes(origin)) {
-			console.log("Includes");
+			// console.log("Includes");
 			return callback(null, true);
 		}
 		callback(new Error("Not allowed by CORS"));

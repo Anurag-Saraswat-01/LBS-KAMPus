@@ -1,75 +1,17 @@
 const mongoose = require("mongoose");
-// const Post = require("../models/postModel");
 const User = require("../models/userModel");
 const Answer = require("../models/answerModel");
 const Comment = require("../models/commentModel");
-
-// Upvoting the answer
-// const upvoteAnswer = async (req, res) => {
-// 	console.log("Upvoting the answer.....");
-// 	const answerId = req.params.id;
-// 	// $inc increments the value of field by the number provided
-// 	const upvote = await Answer.findByIdAndUpdate(
-// 		answerId,
-// 		{
-// 			$inc: {
-// 				upvotes: 1,
-// 			},
-// 		},
-// 		{ new: true }
-// 	);
-
-// 	if (upvote) {
-// 		res.status(201).json({
-// 			status: true,
-// 			upvotes: upvote.upvotes,
-// 			downvotes: upvote.downvotes,
-// 		});
-// 	} else {
-// 		res.status(403).json({
-// 			status: false,
-// 			message: "Failed to upvote the answer",
-// 		});
-// 	}
-// };
-
-// // To downvote the answer
-// const downvoteAnswer = async (req, res) => {
-// 	console.log("Downvoting the answer.....");
-// 	const answerId = req.params.id;
-// 	const downvote = await Answer.findByIdAndUpdate(
-// 		answerId,
-// 		{
-// 			$inc: {
-// 				downvotes: 1,
-// 			},
-// 		},
-// 		{ new: true }
-// 	);
-
-// 	if (downvote) {
-// 		res.status(201).json({
-// 			status: true,
-// 			upvotes: downvote.upvotes,
-// 			downvotes: downvote.downvotes,
-// 		});
-// 	} else {
-// 		res.status(403).json({
-// 			status: false,
-// 			message: "Failed to downvote the answer",
-// 		});
-// 	}
-// };
+const assignBadges = require("../utils/assignBadges");
 
 const addAnswer = async (req, res) => {
-  console.log("new add answer request");
+  console.log("new Add Answer request");
   const question_id = req.params.id;
   const answerBody = req.body.answerBody;
   const answeredBy = res.locals.decodedId;
-  console.log(answeredBy);
+  // console.log(answeredBy);
   const user = await User.findById(answeredBy);
-  // console.log(question_id);
-  // console.log(answerBody);
+
   const answer = await Answer.create({
     question_id: question_id,
     answeredBy: user.name,
@@ -84,7 +26,23 @@ const addAnswer = async (req, res) => {
     });
   }
   // Updating the karma points for answering a post
-  await User.findByIdAndUpdate({ _id: user._id }, { $inc: { karma: 5 } });
+  if (user.answerCount === 0) {
+    await User.findByIdAndUpdate(
+      { _id: user._id },
+      {
+        $set: { badges: [...user.badges, "New Replier"] },
+        $inc: { karma: 5, answerCount: 1 },
+      }
+    );
+    console.log("You earned new Replier badge");
+  } else {
+    await User.findByIdAndUpdate(
+      { _id: user._id },
+      { $inc: { karma: 5, answerCount: 1 } }
+    );
+  }
+
+  assignBadges(user._id, user.karma, user.badges);
   return res.status(201).json({
     status: true,
     message: "Answer added successfully",
@@ -94,8 +52,6 @@ const addAnswer = async (req, res) => {
 // to get comments to the answer
 const getComments_to = async (req, res) => {
   const answer_id = new mongoose.Types.ObjectId(req.params.id);
-  //   console.log(answer_id);
-  // const userid = res.locals.decodedId;
 
   const comments = await Comment.aggregate([
     {
@@ -103,18 +59,9 @@ const getComments_to = async (req, res) => {
         comment_to: answer_id,
       },
     },
-    // {
-    //   $lookup: {
-    //     from: "comments",
-    //     localField: "_id",
-    //     foreignField: "comment_to",
-    //     as: "result",
-    //   },
-    // },
+    
   ]).allowDiskUse(true);
-
   //   console.log("Answer Controller:", comments);
-
   if (!comments) {
     return res.status(403).json({
       status: false,
@@ -127,14 +74,6 @@ const getComments_to = async (req, res) => {
 
 module.exports = {
   addAnswer,
-  // upvoteAnswer,
-  // downvoteAnswer,
   getComments_to,
 };
 
-// update the karma points for upvoting
-// const userId = Answer.findById(answerId);
-// User.findOneAndUpdate({ _id: userId._id }, { $inc: { karma: 1 } });
-
-// adding karma points
-// User.findOneAndUpdate({ _id: userId._id }, { $inc: { karma: -2 } });

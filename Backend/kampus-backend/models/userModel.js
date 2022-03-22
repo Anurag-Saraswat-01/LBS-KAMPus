@@ -56,16 +56,19 @@ const UserSchema = new Schema(
 			type: Number,
 			default: 0,
 		},
+		answerCount: {
+			type: Number,
+			default: 0,
+		},
 		badges: [
 			{
 				type: String,
 			},
 		],
-		posts: [
-			{
-				type: String,
-			},
-		],
+		posts: {
+			type: Number,
+			default: 0
+		},
 		societies: [
 			{
 				type: String,

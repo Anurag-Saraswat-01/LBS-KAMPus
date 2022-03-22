@@ -12,7 +12,6 @@ import "../css/Comments.css";
 
 const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
   const navigate = useNavigate();
-
   const likeStyle = (color) => {
     return {
       fill: color,
@@ -30,6 +29,7 @@ const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
   });
   // state for comment ka text
   const [comment, setComment] = useState("");
+  const [showTooltip, setShowTooltip] = useState(false);
   //state to show or hide the add new comment section
   const [displayCommentSection, setDisplayCommentSection] = useState(false);
 
@@ -59,6 +59,7 @@ const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
           `${url}/api/comments/make-comment/${answer._id}`,
           {
             commentBody: comment,
+            tag: answer.answeredBy,
           },
           config
         );
@@ -75,6 +76,8 @@ const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
   const copyToClipboard = () => {
     // console.log(questionId);
     navigator.clipboard.writeText(`http://localhost:3000/post/${questionId}`);
+    setShowTooltip(true);
+    setTimeout(() => setShowTooltip(false), 2000);
   };
 
   useEffect(() => {
@@ -236,7 +239,8 @@ const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
         <div
           onClick={copyToClipboard}
           className="share d-flex justify-content-start align-items-center"
-        >
+          >
+          {showTooltip && <span className='share-tooltip'>Copied to clipboard!</span>}
           <div className="shareIcon rounded-pill me-2 d-flex align-items-center">
             <IoArrowRedoSharp style={likeStyle("black")} />
           </div>

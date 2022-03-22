@@ -11,7 +11,9 @@ function ProfilePost({ title, date, body, category, post_id }) {
         </div>
       </Link>
       <div className="profile-post-ans-body">
-        <p>{body.substring(0, 50) + "..."}</p>
+        <p className="absolute-madlad" dangerouslySetInnerHTML={{
+              __html: body.substring(0, 50)
+            }}></p>
         <p>{category}</p>
       </div>
       <hr className="linebreak" />

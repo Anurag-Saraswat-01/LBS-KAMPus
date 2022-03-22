@@ -1,7 +1,6 @@
 import React from "react";
 import CommentBar from "./CommentBar";
 import { CommentPersonInfo } from "./CommentPersonInfo";
-import Reply from "./Reply";
 
 function Comment({ comment, questionId }) {
   /* Logic is to have a main Comments component (or just use the posts component)
@@ -17,6 +16,7 @@ function Comment({ comment, questionId }) {
         userName={comment.commentedBy.commentedName}
         userProfile={comment.commentedBy.commentedImg}
         date={comment.createdAt}
+        userId={comment.commentedBy.commentedId}
       />
       <div className="comment-body">
         <p className="comment-text">

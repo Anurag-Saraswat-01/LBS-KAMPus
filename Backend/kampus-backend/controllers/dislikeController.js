@@ -9,7 +9,7 @@ const getDislikes = async (req, res) => {
 
 	Dislike.find({ answerId: answerId })
 		.then((dislikes) => {
-			console.log(dislikes);
+			// console.log(dislikes);
 			return res.status(200).json({
 				status: true,
 				dislikes: dislikes,

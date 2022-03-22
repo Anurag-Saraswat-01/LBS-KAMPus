@@ -70,11 +70,13 @@ const QuestionNAnswer = ({ category }) => {
 						</h3>
 					</Link>
 
-					<p className="question-body">{data.body}</p>
+					<p className="question-body" dangerouslySetInnerHTML={{
+              __html: data.body
+            }}></p>
 				</Container>
 				<hr className="lineBreak" />
 
-				<AnswerCount data={data} count={data.allAnswers.length} />
+				<AnswerCount data={data} count={data.allAnswers.length}/>
 				{data.allAnswers.slice(0, 1).map((answer, key) => (
 					<Answers key={key} answer={answer} questionId={data._id} />
 				))}

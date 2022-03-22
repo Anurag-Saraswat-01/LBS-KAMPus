@@ -2,6 +2,8 @@ const Like = require("../models/likeModel");
 const Dislike = require("../models/dislikeModel");
 const Answer = require("../models/answerModel");
 const User = require("../models/userModel");
+const assignBadges = require("../utils/assignBadges");
+
 const getLikes = async (req, res) => {
 	const answerId = req.body.answerId;
 	Like.find({ answerId: answerId }).exec((err, likes) => {
@@ -45,6 +47,8 @@ const likePost = async (req, res) => {
 			const dislike = await Dislike.findOneAndDelete({
 				$and: [{ answerId: answerId }, { userId: userId }],
 			});
+
+			assignBadges(answer.answeredByUserId, update.karma, update.badges);
 		})
 		.catch((err) => {
 			console.log(err);

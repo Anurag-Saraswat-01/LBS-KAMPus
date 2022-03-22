@@ -18,7 +18,7 @@ import ProfilePosts from "../components/ProfilePosts";
 import "../css/Profile.css";
 import ProfileComments from "../components/ProfileComments";
 import { custom_badges_map, society_badges_map } from "../api/iconData";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const yearMap = {
   FE: "First",
@@ -27,40 +27,6 @@ const yearMap = {
   BE: "Fourth",
 };
 // temp post data
-const profilePosts = [
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-  { title: "Bruh", date: "20th jan 2020", count: 2 },
-];
-const profileComments = [
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-  {
-    title: "Bruh",
-    date: "20th jan 2020",
-    comment: "I am the bruh, but the bro",
-  },
-];
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -95,6 +61,8 @@ const Profile = () => {
 
   // for getting posts and answers
   useEffect(() => {
+    setFollowerShow(false)
+    setFollowingShow(false)
     const getPosts = async () => {
       try {
         const response = await axios.get(
@@ -351,16 +319,6 @@ const Profile = () => {
         console.log(error);
       }
     };
-    getUserData();
-  }, [params.id]);
-
-  useEffect(() => {
-    if (!(userData && userData.profileImgUri)) return;
-    setProfileImage(userData.profileImgUri);
-  }, [userData]);
-
-  const handleFollowerClose = () => setFollowerShow(false);
-  const handleFollowerShow = () => {
     const getFollowers = async () => {
       try {
         const response = await axios.post(
@@ -372,17 +330,11 @@ const Profile = () => {
           config
         );
         console.log(response.data);
-        setFollowerList(response.data.followers);
+        setFollowerList(response.data.allFollowers);
       } catch (error) {
         console.log(error);
       }
     };
-    getFollowers();
-    console.log(followerList);
-    setFollowerShow(true);
-  };
-  const handleFollowingClose = () => setFollowingShow(false);
-  const handleFollowingShow = () => {
     const getFollowings = async () => {
       try {
         const response = await axios.post(
@@ -394,12 +346,31 @@ const Profile = () => {
           config
         );
         console.log(response.data);
-        setFollowingList(response.data.followings);
+        setFollowingList(response.data.allFollowings);
       } catch (error) {
         console.log(error);
       }
     };
+    getUserData();
     getFollowings();
+    getFollowers();
+    
+  }, [params.id]);
+
+  useEffect(() => {
+    if (!(userData && userData.profileImgUri)) return;
+    setProfileImage(userData.profileImgUri);
+  }, [userData]);
+
+  const handleFollowerClose = () => setFollowerShow(false);
+  const handleFollowerShow = () => {
+    
+    console.log(followerList);
+    setFollowerShow(true);
+  };
+  const handleFollowingClose = () => setFollowingShow(false);
+  const handleFollowingShow = () => {
+    
     console.log(followingList);
     setFollowingShow(true);
   };
@@ -408,7 +379,7 @@ const Profile = () => {
   const followModal = (title, list, show, close) => {
     return (
       list && (
-        <Modal show={show} onHide={close} centered>
+        <Modal show={show} onHide={close} centered className='bruhmoment'>
           <Modal.Header closeButton>
             <Modal.Title>{title}</Modal.Title>
           </Modal.Header>
@@ -416,7 +387,11 @@ const Profile = () => {
             <ul>
               {list.length === 0
                 ? `No ${title}`
-                : list.map((data, key) => <li key={key}>{data}</li>)}
+                : list.map((data, key) => 
+                <li className='followmodal-item' key={key}>
+                  <img className='answer-user-img' src={data.img}/>
+                  <Link to={`/profile/${data._id}`}>{data.name}</Link>
+                </li>)}
             </ul>
           </Modal.Body>
         </Modal>
@@ -456,13 +431,13 @@ const Profile = () => {
       <Container className="profile-container">
         {followModal(
           "Followers",
-          userData.followers,
+          followerList,
           followerShow,
           handleFollowerClose
         )}
         {followModal(
           "Following",
-          userData.following,
+          followingList,
           followingShow,
           handleFollowingClose
         )}

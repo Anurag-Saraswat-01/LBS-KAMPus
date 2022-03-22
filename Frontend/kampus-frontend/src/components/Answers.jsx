@@ -74,7 +74,6 @@ const Answers = ({ answer, questionId }) => {
       <Container className="answers p-2">
         <PersonInfo
           userName={answer.answeredBy || "Mjfkkds"}
-          followButton={false}
           date={moment(answer.createdAt).format("Do MMMM YYYY")}
           userProfile={answer.userProfile}
           userId={answer.answeredByUserId}
