@@ -61,8 +61,8 @@ const Profile = () => {
 
   // for getting posts and answers
   useEffect(() => {
-    setFollowerShow(false)
-    setFollowingShow(false)
+    setFollowerShow(false);
+    setFollowingShow(false);
     const getPosts = async () => {
       try {
         const response = await axios.get(
@@ -354,7 +354,6 @@ const Profile = () => {
     getUserData();
     getFollowings();
     getFollowers();
-    
   }, [params.id]);
 
   useEffect(() => {
@@ -364,13 +363,11 @@ const Profile = () => {
 
   const handleFollowerClose = () => setFollowerShow(false);
   const handleFollowerShow = () => {
-    
     console.log(followerList);
     setFollowerShow(true);
   };
   const handleFollowingClose = () => setFollowingShow(false);
   const handleFollowingShow = () => {
-    
     console.log(followingList);
     setFollowingShow(true);
   };
@@ -379,7 +376,7 @@ const Profile = () => {
   const followModal = (title, list, show, close) => {
     return (
       list && (
-        <Modal show={show} onHide={close} centered className='bruhmoment'>
+        <Modal show={show} onHide={close} centered className="bruhmoment">
           <Modal.Header closeButton>
             <Modal.Title>{title}</Modal.Title>
           </Modal.Header>
@@ -387,11 +384,12 @@ const Profile = () => {
             <ul>
               {list.length === 0
                 ? `No ${title}`
-                : list.map((data, key) => 
-                <li className='followmodal-item' key={key}>
-                  <img className='answer-user-img' src={data.img}/>
-                  <Link to={`/profile/${data._id}`}>{data.name}</Link>
-                </li>)}
+                : list.map((data, key) => (
+                    <li className="followmodal-item" key={key}>
+                      <img className="answer-user-img" src={data.img} />
+                      <Link to={`/profile/${data._id}`}>{data.name}</Link>
+                    </li>
+                  ))}
             </ul>
           </Modal.Body>
         </Modal>

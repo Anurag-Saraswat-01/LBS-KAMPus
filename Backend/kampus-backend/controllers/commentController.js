@@ -26,10 +26,11 @@ const makeComment = async (req, res) => {
     },
   });
   if (comment) {
-    console.log("New comment added")
+    console.log("New comment added");
     return res.status(201).json({
       status: true,
       message: "comment added successfully",
+      comment: comment,
     });
   } else {
     return res.status(403).json({

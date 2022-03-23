@@ -18,21 +18,22 @@ const Answers = ({ answer, questionId }) => {
   // state to show or hide the comments
   const [displayComments, setDisplayComments] = useState(false);
   const [comments, setComments] = useState([]);
+  const [extracomments, setExtracomments] = useState([]);
 
-	// toggles display of comments
-	const toggleDisplayComments = () => {
-		setDisplayComments(!displayComments);
-		console.log("toggle", displayComments);
-	};
+  // toggles display of comments
+  const toggleDisplayComments = () => {
+    setDisplayComments(!displayComments);
+    console.log("toggle", displayComments);
+  };
 
-	// ButtonHandler will handle the click on Read more button
-	const buttonHandler = () => {
-		if (readMore) {
-			setReadMore(false);
-		} else {
-			setReadMore(true);
-		}
-	};
+  // ButtonHandler will handle the click on Read more button
+  const buttonHandler = () => {
+    if (readMore) {
+      setReadMore(false);
+    } else {
+      setReadMore(true);
+    }
+  };
 
   useEffect(() => {
     const getComments = async () => {
@@ -65,7 +66,8 @@ const Answers = ({ answer, questionId }) => {
 
   useEffect(() => {
     console.log(comments);
-  }, [comments]);
+    setComments([...comments, extracomments]);
+  }, [extracomments]);
 
   // Mapping the answers from the test api
   // return answers.map((answer, key) => {
@@ -99,13 +101,16 @@ const Answers = ({ answer, questionId }) => {
           toggleDisplayComments={toggleDisplayComments}
           answer={answer}
           questionId={questionId}
+          setExtracomments={setExtracomments}
         />
         <hr className="lineBreak" />
         {/* displayComments to toggle the comments with comment icon */}
         {displayComments ? (
           <div className="comment-container">
             {comments
-              ? comments.map((data, key) => <Comment comment={data} questionId={questionId} key={key} />)
+              ? comments.map((data, key) => (
+                  <Comment comment={data} questionId={questionId} key={key} />
+                ))
               : null}
           </div>
         ) : null}

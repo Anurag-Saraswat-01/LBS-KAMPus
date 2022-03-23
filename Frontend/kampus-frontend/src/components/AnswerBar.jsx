@@ -4,14 +4,20 @@ import { BiUpvote, BiDownvote } from "react-icons/bi";
 import axios from "axios";
 import { MdComment } from "react-icons/md";
 import { TextField, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../css/Comments.css";
 // import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import CommentIcon from "@mui/icons-material/Comment";
 
-const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
+const AnswerBar = ({
+  answer,
+  toggleDisplayComments,
+  questionId,
+  setExtracomments,
+}) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const likeStyle = (color) => {
     return {
       fill: color,
@@ -30,6 +36,7 @@ const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
   // state for comment ka text
   const [comment, setComment] = useState("");
   const [showTooltip, setShowTooltip] = useState(false);
+  // const [shouldReload, setShouldReload] = useState(false);
   //state to show or hide the add new comment section
   const [displayCommentSection, setDisplayCommentSection] = useState(false);
 
@@ -64,6 +71,10 @@ const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
           config
         );
         console.log(response.data);
+
+        // if (location.pathname === `/post/${answer.question_id}`) {
+        //   window.location.reload();
+        setExtracomments(response.data.comment);
         response && navigate(`/post/${answer.question_id}`);
       } catch (err) {
         console.log("Something went wrong!");
@@ -71,7 +82,6 @@ const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
       }
     }
   };
-
   // copies the link to the question to clipboard
   const copyToClipboard = () => {
     // console.log(questionId);
@@ -239,8 +249,10 @@ const AnswerBar = ({ answer, toggleDisplayComments, questionId }) => {
         <div
           onClick={copyToClipboard}
           className="share d-flex justify-content-start align-items-center"
-          >
-          {showTooltip && <span className='share-tooltip'>Copied to clipboard!</span>}
+        >
+          {showTooltip && (
+            <span className="share-tooltip">Copied to clipboard!</span>
+          )}
           <div className="shareIcon rounded-pill me-2 d-flex align-items-center">
             <IoArrowRedoSharp style={likeStyle("black")} />
           </div>

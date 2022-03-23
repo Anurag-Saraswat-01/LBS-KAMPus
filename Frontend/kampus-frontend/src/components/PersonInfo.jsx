@@ -11,7 +11,7 @@ export const PersonInfo = (props) => {
   const authContext = useContext(AuthContext);
 
   const handleClick = async () => {
-    console.log('click');
+    console.log("click");
     try {
       const url = "http://localhost:8080";
       const config = {
@@ -94,14 +94,11 @@ export const PersonInfo = (props) => {
           <p className="mb-0">{props.userName}</p>
         </Link>
         {props.userName === userContext.username || (
-          <Button
-            size="60x30"
-            className="followBtn"
-            variant="text"
-            onClick={() => handleClick()}
-          >
-            {isFollowing ? "Unfollow" : "Follow"}
-          </Button>
+          <Link to={`/profile/${props.userId}`}>
+            <Button size="60x30" className="followBtn" variant="text">
+              {isFollowing ? "Unfollow" : "Follow"}
+            </Button>
+          </Link>
         )}
       </div>
       <p className="mb-0 d-flex align-items-center date">{props.date}</p>

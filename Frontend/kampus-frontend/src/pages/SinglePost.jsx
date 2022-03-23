@@ -16,7 +16,6 @@ const SinglePost = ({ results, setResults }) => {
   const params = useParams();
   const [question, setQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -76,9 +75,12 @@ const SinglePost = ({ results, setResults }) => {
               </h3>
             </Link>
 
-            <p className="question-body" dangerouslySetInnerHTML={{
-              __html: question.body
-            }}></p>
+            <p
+              className="question-body"
+              dangerouslySetInnerHTML={{
+                __html: question.body,
+              }}
+            ></p>
           </Container>
           <hr className="lineBreak" />
 
