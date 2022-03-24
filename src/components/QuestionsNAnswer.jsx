@@ -18,7 +18,7 @@ const QuestionNAnswer = ({ category }) => {
 		setQuestions([]);
 		const getPosts = async () => {
 			try {
-				const url = "http://localhost:8080";
+				const url = "https://lbs-kampus.herokuapp.com";
 				const config = {
 					headers: {
 						"Content-type": "application/json",

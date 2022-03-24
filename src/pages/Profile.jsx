@@ -50,7 +50,7 @@ const Profile = () => {
   //authContext allows access to user details (logged in or not)
   const authContext = useContext(AuthContext);
   const userContext = useContext(UserContext);
-  const url = "http://localhost:8080";
+  const url = "https://lbs-kampus.herokuapp.com";
   const config = {
     headers: {
       "Content-type": "application/json",
@@ -275,7 +275,7 @@ const Profile = () => {
     setProfileImage(croppedImage);
     const uploadProfile = async () => {
       try {
-        const url = "http://localhost:8080";
+        const url = "https://lbs-kampus.herokuapp.com";
         const config = {
           headers: {
             "Content-type": "application/json",

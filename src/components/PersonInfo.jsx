@@ -13,7 +13,7 @@ export const PersonInfo = (props) => {
   const handleClick = async () => {
     console.log("click");
     try {
-      const url = "http://localhost:8080";
+      const url = "https://lbs-kampus.herokuapp.com";
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -52,7 +52,7 @@ export const PersonInfo = (props) => {
   useEffect(() => {
     const checkFollowStatus = async () => {
       try {
-        const url = "http://localhost:8080";
+        const url = "https://lbs-kampus.herokuapp.com";
         const config = {
           headers: {
             "Content-type": "application/json",

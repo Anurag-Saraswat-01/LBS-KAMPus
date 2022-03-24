@@ -28,7 +28,7 @@ const Header = ({ page, results, setResults }) => {
     }
     // console.log("Search function called");
     try {
-      const url = "http://localhost:8080";
+      const url = "https://lbs-kampus.herokuapp.com";
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -55,7 +55,7 @@ const Header = ({ page, results, setResults }) => {
   const handleLogout = async (event) => {
     event.preventDefault();
     try {
-      const url = "http://localhost:8080";
+      const url = "https://lbs-kampus.herokuapp.com";
       const config = {
         headers: {
           "Content-type": "application/json",

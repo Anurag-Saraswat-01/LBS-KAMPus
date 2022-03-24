@@ -24,7 +24,7 @@ const CommentBar = ({ comment, questionId }) => {
   const submitReply = async () => {
     if (reply !== "") {
       try {
-        const url = "http://localhost:8080";
+        const url = "https://lbs-kampus.herokuapp.com";
         const config = {
           headers: {
             "Content-type": "application/json",

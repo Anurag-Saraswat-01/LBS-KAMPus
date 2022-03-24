@@ -70,7 +70,7 @@ const SignUp = () => {
       branch: department,
     });
     try {
-      const url = "http://localhost:8080";
+      const url = "https://lbs-kampus.herokuapp.com";
       const config = {
         headers: {
           "Content-type": "application/json",

@@ -54,7 +54,7 @@ const AnswerBar = ({
   const submitComment = async () => {
     if (comment !== "") {
       try {
-        const url = "http://localhost:8080";
+        const url = "https://lbs-kampus.herokuapp.com";
         const config = {
           headers: {
             "Content-type": "application/json",
@@ -93,7 +93,7 @@ const AnswerBar = ({
   useEffect(() => {
     const getRatings = async () => {
       try {
-        const url = "http://localhost:8080";
+        const url = "https://lbs-kampus.herokuapp.com";
         const config = {
           headers: {
             "Content-type": "application/json",
@@ -162,7 +162,7 @@ const AnswerBar = ({
       });
     }
     try {
-      const url = "http://localhost:8080";
+      const url = "https://lbs-kampus.herokuapp.com";
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -195,7 +195,7 @@ const AnswerBar = ({
       });
     }
     try {
-      const url = "http://localhost:8080";
+      const url = "https://lbs-kampus.herokuapp.com";
       const config = {
         headers: {
           "Content-type": "application/json",

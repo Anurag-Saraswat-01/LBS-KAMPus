@@ -69,7 +69,7 @@ const AnswerModal = ({ open, setOpen, data }) => {
     if (text !== "") {
       try {
         setOpen(false);
-        const url = "http://localhost:8080";
+        const url = "https://lbs-kampus.herokuapp.com";
         const config = {
           headers: {
             "Content-type": "application/json",
