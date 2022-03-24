@@ -86,7 +86,7 @@ const SinglePost = ({ results, setResults }) => {
 
           <AnswerCount data={question} count={question.allAnswers.length} />
           {question.allAnswers.map((answer, key) => (
-            <Answers key={key} answer={answer} />
+            <Answers key={key} answer={answer} questionId={question._id} />
           ))}
         </div>
       </Container>
