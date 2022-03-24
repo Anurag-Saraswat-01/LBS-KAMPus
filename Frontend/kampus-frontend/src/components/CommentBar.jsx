@@ -41,6 +41,7 @@ const CommentBar = ({ comment, questionId }) => {
           config
         );
         console.log(response.data);
+        setReply("");
         response && navigate(`/post/${questionId}`);
       } catch (err) {
         console.log("Something went wrong!");

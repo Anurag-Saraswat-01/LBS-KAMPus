@@ -71,7 +71,7 @@ const AnswerBar = ({
           config
         );
         console.log(response.data);
-
+        setComment("");
         // if (location.pathname === `/post/${answer.question_id}`) {
         //   window.location.reload();
         setExtracomments(response.data.comment);

@@ -32,6 +32,7 @@ a {
 }
 body {
   background-color: var(--background) !important;
+  overflow-x: hidden;
 }
 /* using ul directly coz i cba to make classes for this and i dont think anyone wants list-style anyway */
 ul {
