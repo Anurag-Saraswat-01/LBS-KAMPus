@@ -183,7 +183,7 @@ ul {
 .sidebar-user-info {
   color: var(--alt-green-text);
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 2em;
   gap: 2rem;

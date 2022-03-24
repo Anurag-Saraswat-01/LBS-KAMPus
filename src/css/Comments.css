@@ -204,7 +204,7 @@
 .reply-user-info {
   color: var(--alt-green-text);
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   /* padding: 1em 2em; */
 }
