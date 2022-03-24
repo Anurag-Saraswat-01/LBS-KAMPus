@@ -16,7 +16,7 @@ const cookieParser = require("cookie-parser");
 const User = require("./models/userModel");
 
 // For cross-sharing the data
-const whitelist = ["http://localhost:3000", "http://localhost:8080"];
+const whitelist = ["http://localhost:3000", "http://localhost:8080", "https://lbs-kampus.herokuapp.com"];
 
 const corsOptions = {
 	// origin: "*",
@@ -30,7 +30,7 @@ const corsOptions = {
 		callback(new Error("Not allowed by CORS"));
 	},
 };
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 // !cookieParser;
 app.use(cookieParser());
 
