@@ -2,9 +2,10 @@
 	"name": "lbsbackend",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "app.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon app.js"
 	},
 	"author": "",
 	"license": "ISC",
@@ -17,5 +18,9 @@
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^6.1.5",
 		"mongoose-fuzzy-searching": "^2.0.2"
+	},
+	"engines": {
+		"node": "16.x",
+		"npm": "8.x"
 	}
 }
