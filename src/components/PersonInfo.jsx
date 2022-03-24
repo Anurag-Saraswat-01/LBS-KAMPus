@@ -10,45 +10,45 @@ export const PersonInfo = (props) => {
   const userContext = useContext(UserContext);
   const authContext = useContext(AuthContext);
 
-  const handleClick = async () => {
-    console.log("click");
-    try {
-      const url = "https://lbs-kampus.herokuapp.com";
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-        withCredentials: true,
-        credentials: "include",
-      };
-      if (isFollowing) {
-        const response = await axios.post(
-          `${url}/api/profile/unfollow-user`,
-          {
-            userId: authContext.user_id,
-            followerId: props.userId,
-          },
-          config
-        );
-        console.log(response.data);
-        setIsFollowing(false);
-        return;
-      }
-      const response = await axios.post(
-        `${url}/api/profile/follow-user`,
-        {
-          userId: authContext.user_id,
-          followerId: props.userId,
-        },
-        config
-      );
-      console.log(response.data);
-      setIsFollowing(true);
-    } catch (err) {
-      console.log(err);
-      setIsFollowing(!isFollowing);
-    }
-  };
+  // const handleClick = async () => {
+  //   console.log("click");
+  //   try {
+  //     const url = "https://lbs-kampus.herokuapp.com";
+  //     const config = {
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       withCredentials: true,
+  //       credentials: "include",
+  //     };
+  //     if (isFollowing) {
+  //       const response = await axios.post(
+  //         `${url}/api/profile/unfollow-user`,
+  //         {
+  //           userId: authContext.user_id,
+  //           followerId: props.userId,
+  //         },
+  //         config
+  //       );
+  //       console.log(response.data);
+  //       setIsFollowing(false);
+  //       return;
+  //     }
+  //     const response = await axios.post(
+  //       `${url}/api/profile/follow-user`,
+  //       {
+  //         userId: authContext.user_id,
+  //         followerId: props.userId,
+  //       },
+  //       config
+  //     );
+  //     console.log(response.data);
+  //     setIsFollowing(true);
+  //   } catch (err) {
+  //     console.log(err);
+  //     setIsFollowing(!isFollowing);
+  //   }
+  // };
   useEffect(() => {
     const checkFollowStatus = async () => {
       try {
@@ -74,6 +74,7 @@ export const PersonInfo = (props) => {
       }
     };
     checkFollowStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

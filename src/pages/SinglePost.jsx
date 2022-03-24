@@ -10,7 +10,6 @@ import Skeleton from "../components/postSkeleton";
 import { PersonInfo } from "../components/PersonInfo";
 import AnswerCount from "../components/AnswerCount";
 import { Link } from "react-router-dom";
-import Loader from "../components/Loader";
 
 const SinglePost = ({ results, setResults }) => {
   const params = useParams();
@@ -42,7 +41,7 @@ const SinglePost = ({ results, setResults }) => {
       }
     };
     getPosts();
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     if (!question) {

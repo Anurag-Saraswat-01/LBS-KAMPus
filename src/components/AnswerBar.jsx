@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { IoArrowRedoSharp } from "react-icons/io5";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
 import axios from "axios";
 import { MdComment } from "react-icons/md";
 import { TextField, Button } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../css/Comments.css";
 // import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -17,7 +17,6 @@ const AnswerBar = ({
   setExtracomments,
 }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const likeStyle = (color) => {
     return {
       fill: color,
@@ -145,6 +144,7 @@ const AnswerBar = ({
       }
     };
     getRatings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {}, [upvotes.upvotesNum, downvotes.downvotesNum]);

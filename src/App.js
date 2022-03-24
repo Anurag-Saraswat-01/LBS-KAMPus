@@ -10,8 +10,8 @@ import AskQuestion from "./pages/AskQuestion";
 import SearchResults from "./pages/SearchResults";
 import AnswerModal from "./components/AnswerModal";
 import Loader from "./components/Loader";
-import { useState, useEffect, createContext } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { AuthContext, UserContext } from "./api/Contexts";
 

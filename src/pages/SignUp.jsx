@@ -12,7 +12,7 @@ import {
   Button,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();

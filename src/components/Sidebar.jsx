@@ -63,7 +63,7 @@ function Sidebar() {
               to={`/home/${branches_id_map[data]}`}
               key={key}
               className={`${
-                location.pathname == `/home/${branches_id_map[data]}`
+                location.pathname === `/home/${branches_id_map[data]}`
                   ? "recco-active"
                   : ""
               }`}

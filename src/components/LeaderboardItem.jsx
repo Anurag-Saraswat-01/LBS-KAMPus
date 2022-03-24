@@ -5,7 +5,11 @@ function LeaderboardItem({ userData, rank }) {
   return (
     <div className="ldbd-user">
       <span>{rank}</span>
-      <img src={userData.profileImgUri} className="answer-user-img" />{" "}
+      <img
+        src={userData.profileImgUri}
+        className="answer-user-img"
+        alt="user profile"
+      />{" "}
       <div className="ldbd-user-info">
         <Link to={`/profile/${userData._id}`}>
           <span>{userData.name}</span>

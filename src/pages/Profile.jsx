@@ -4,7 +4,6 @@ import Modal from "react-bootstrap/Modal";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import axios from "axios";
-import { useNavigate } from "react-router";
 import { FaShare } from "react-icons/fa";
 import { useState, useEffect, useContext, useCallback } from "react";
 import { Button } from "@mui/material";
@@ -29,7 +28,6 @@ const yearMap = {
 // temp post data
 
 const Profile = () => {
-  const navigate = useNavigate();
   const params = useParams();
   const [followerShow, setFollowerShow] = useState(false);
   const [followingShow, setFollowingShow] = useState(false);
@@ -83,6 +81,7 @@ const Profile = () => {
       }
     };
     getPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   //callback for when cropping is complete
@@ -146,6 +145,7 @@ const Profile = () => {
     } catch (e) {
       console.error(e);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [croppedAreaPixels]);
 
   // handles closing of the cropper modal
@@ -210,22 +210,23 @@ const Profile = () => {
       setFollows(response.data.follows);
     };
     checkStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   // This for updating the state, normal useEffect shit
   useEffect(() => {}, [follows]);
 
   // dummy data
-  const user = {
-    name: "Anurag Saraswat",
-    branch: "CMPN",
-    year: "3rd",
-    followers: ["Prickvi", "Joye", "Mani"],
-    following: ["Prickvi", "Joye", "Mani", "Zope", "SortedOne"],
-    karma: 1000,
-    badges: ["1000 Karma", "Online School Graduate", "LBS 2021 Winner"],
-    societies: ["Vesit of Time"],
-  };
+  // const user = {
+  //   name: "Anurag Saraswat",
+  //   branch: "CMPN",
+  //   year: "3rd",
+  //   followers: ["Prickvi", "Joye", "Mani"],
+  //   following: ["Prickvi", "Joye", "Mani", "Zope", "SortedOne"],
+  //   karma: 1000,
+  //   badges: ["1000 Karma", "Online School Graduate", "LBS 2021 Winner"],
+  //   societies: ["Vesit of Time"],
+  // };
 
   const [userData, setUserData] = useState(null);
 
@@ -303,6 +304,7 @@ const Profile = () => {
   useEffect(() => {
     if (params.id !== authContext.user_id) return;
     userContext.setData(userContext.username, profileImage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileImage]);
 
   //* From the loginStatus after getting the id, it will fetch the userData and set it to useState userData
@@ -354,6 +356,7 @@ const Profile = () => {
     getUserData();
     getFollowings();
     getFollowers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   useEffect(() => {
@@ -386,7 +389,11 @@ const Profile = () => {
                 ? `No ${title}`
                 : list.map((data, key) => (
                     <li className="followmodal-item" key={key}>
-                      <img className="answer-user-img" src={data.img} />
+                      <img
+                        className="answer-user-img"
+                        src={data.img}
+                        alt="user profile"
+                      />
                       <Link to={`/profile/${data._id}`}>{data.name}</Link>
                     </li>
                   ))}

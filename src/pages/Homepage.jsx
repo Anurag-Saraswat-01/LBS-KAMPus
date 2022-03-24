@@ -1,12 +1,11 @@
-import { React, useState } from "react";
+import { React } from "react";
 import Sidebar from "../components/Sidebar";
 import QuestionNAnswer from "../components/QuestionsNAnswer";
 import Header from "../components/Header";
-import Comment from "../components/Comment";
 import { useParams } from "react-router-dom";
 import Leaderboard from "../components/Leaderboard";
 
-function Homepage({results, setResults}) {
+function Homepage({ results, setResults }) {
   const params = useParams();
 
   return (

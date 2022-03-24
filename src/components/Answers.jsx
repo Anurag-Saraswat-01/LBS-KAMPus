@@ -62,11 +62,12 @@ const Answers = ({ answer, questionId }) => {
       }
     };
     getComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    console.log(comments);
-    setComments([...comments, extracomments]);
+    // console.log(comments);
+    setComments(c => [...c, extracomments]);
   }, [extracomments]);
 
   // Mapping the answers from the test api

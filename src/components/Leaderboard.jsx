@@ -27,20 +27,26 @@ function Leaderboard() {
   };
 
   const [leaderData, setLeaderData] = useState({});
-  useEffect(async () => {
-    const url = "https://lbs-kampus.herokuapp.com";
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-      },
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      const url = "https://lbs-kampus.herokuapp.com";
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${url}/api/users/leaderboard`,
+          config
+        );
+        setLeaderData(response.data.users);
+        //   console.log(response.data);
+      } catch (e) {
+        console.log(e);
+      }
     };
-    try {
-      const response = await axios.get(`${url}/api/users/leaderboard`, config);
-      setLeaderData(response.data.users);
-      //   console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    fetchLeaderboard();
   }, [open]);
 
   return (
