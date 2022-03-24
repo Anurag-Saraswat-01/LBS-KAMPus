@@ -4,7 +4,6 @@ const Post = require("../models/postModel");
 const User = require("../models/userModel");
 const assignBadges = require("../utils/assignBadges");
 
-
 // Gets the post with all the answers in it
 const getPosts = async (req, res) => {
   const posts = await Post.aggregate([
@@ -18,7 +17,8 @@ const getPosts = async (req, res) => {
       },
     },
     //To sort the posts in descending order based on upvotes
-    { $sort: { upvotes: -1 } },
+    // { $sort: { upvotes: -1 } },
+    { $sort: { createdAt: -1 } },
   ]);
   if (!posts) {
     return res.json({
@@ -47,7 +47,8 @@ const getCategoryPosts = async (req, res) => {
         },
       },
       //To sort the posts in descending order based on upvotes
-      { $sort: { upvotes: -1 } },
+      // { $sort: { upvotes: -1 } },
+      { $sort: { createdAt: -1 } },
       //
     ]
     // [] // group by postID
@@ -168,8 +169,8 @@ const createOnePost = async (req, res) => {
       { $inc: { karma: 3, posts: 1 } }
     );
   }
-	// assigning badges here
-	assignBadges(decodedId, user.karma, user.badges);
+  // assigning badges here
+  assignBadges(decodedId, user.karma, user.badges);
 
   return res.status(201).json({
     isLogggedIn: logged,
@@ -183,7 +184,7 @@ const escapeRegex = (text) => {
 
 const searchPost = async (req, res) => {
   const searchString = req.body.text;
-  console.log("Query: "+searchString);
+  console.log("Query: " + searchString);
   const searchResults = await Post.fuzzySearch({ query: searchString });
   if (!searchResults) {
     return res.json({

@@ -139,7 +139,7 @@ ul {
   margin: 2% 0;
 }
 
-.landing-signup{
+.landing-signup {
   margin-top: 1em;
   color: white;
   /* text-decoration: none; */
@@ -309,7 +309,10 @@ a[href="/signin"]:hover {
 .question-body::first-letter {
   text-transform: uppercase;
 }
-
+.question-body img {
+  width: 33%;
+  height: auto;
+}
 .follow {
   align-items: center;
 }
@@ -413,17 +416,17 @@ a[href="/signin"]:hover {
 }
 .share-tooltip {
   position: absolute;
-bottom: 40px;
-background: #ffffffcc;
-border-radius: 20px;
-width: auto;
-font-weight: 600;
-font-family: 'Montserrat';
-text-align: center;
-font-size: 1rem;
-margin: auto;
-padding: 1rem;
-color: black;
+  bottom: 40px;
+  background: #ffffffcc;
+  border-radius: 20px;
+  width: auto;
+  font-weight: 600;
+  font-family: "Montserrat";
+  text-align: center;
+  font-size: 1rem;
+  margin: auto;
+  padding: 1rem;
+  color: black;
 }
 
 .shareIcon {
@@ -593,7 +596,8 @@ color: black;
 }
 
 .answer img {
-  max-width: 90%;
+  max-width: 45%;
+  height: auto;
   margin: auto;
 }
 .ves-bs {

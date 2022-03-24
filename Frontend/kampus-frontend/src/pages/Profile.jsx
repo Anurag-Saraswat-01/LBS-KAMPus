@@ -210,7 +210,7 @@ const Profile = () => {
       setFollows(response.data.follows);
     };
     checkStatus();
-  }, []);
+  }, [params.id]);
 
   // This for updating the state, normal useEffect shit
   useEffect(() => {}, [follows]);

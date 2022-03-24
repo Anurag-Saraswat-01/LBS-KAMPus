@@ -29,7 +29,12 @@ const SearchResults = ({ results, setResults }) => {
                     <h3 className="question-title">{data.title}</h3>
                   </Link>
 
-                  <p className="question-body">{data.body}</p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: data.body,
+                    }}
+                    className="question-body"
+                  ></p>
                 </Container>
                 <hr className="lineBreak" />
               </Container>

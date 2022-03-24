@@ -38,7 +38,7 @@ function ProfileComments({ profileComments }) {
         return (
           <ProfileComment
             key={key}
-            title={post.answers[0].title || "title"}
+            title={post.answers[0]?.title || "title"}
             date={moment(post.createdAt).format("Do MMMM YYYY")}
             comment={post.answerBody}
             post_id={post.question_id}

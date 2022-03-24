@@ -20,7 +20,7 @@
 .ql-editor > * {
   color: white;
 }
-.ql-container.ql-snow{
+.ql-container.ql-snow {
   border: none;
 }
 .quill {
@@ -34,6 +34,7 @@
 .ql-editor p img {
   /**/
   width: 30%;
+  height: auto;
   /* display: flex; */
 }
 

@@ -41,7 +41,7 @@ function Leaderboard() {
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [open]);
 
   return (
     <div className="leaderboard">
