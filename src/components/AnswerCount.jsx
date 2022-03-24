@@ -8,7 +8,7 @@ const AnswerCount = ({ count, data }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const copyToClipboard = () => {
     // console.log(questionId);
-    navigator.clipboard.writeText(`http://localhost:3000/post/${data._id}`);
+    navigator.clipboard.writeText(`https://lbs-kampus.netlify.app/post/${data._id}`);
     setShowTooltip(true);
     setTimeout(() => setShowTooltip(false), 2000);
   };
@@ -18,7 +18,7 @@ const AnswerCount = ({ count, data }) => {
       <Container className="answerDetails">
         <div className="answerCount d-flex justify-content-between pt-1 pb-1">
           <p className="mb-0">
-            {count} {count != 1 ? "Answers" : "Answer"}
+            {count} {count !== 1 ? "Answers" : "Answer"}
           </p>
           <div
             onClick={copyToClipboard}
