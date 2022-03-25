@@ -213,7 +213,11 @@ const Profile = () => {
   }, [params.id]);
 
   // This for updating the state, normal useEffect shit
-  useEffect(() => {}, [follows]);
+  // useEffect(() => {
+  //   // console.log(follows);
+  //   // getFollowings();
+  //   // getFollowers();
+  // }, [follows]);
 
   // dummy data
   const user = {
@@ -335,6 +339,7 @@ const Profile = () => {
         console.log(error);
       }
     };
+
     const getFollowings = async () => {
       try {
         const response = await axios.post(
@@ -354,7 +359,7 @@ const Profile = () => {
     getUserData();
     getFollowings();
     getFollowers();
-  }, [params.id]);
+  }, [params.id, follows]);
 
   useEffect(() => {
     if (!(userData && userData.profileImgUri)) return;
