@@ -157,7 +157,9 @@ const Profile = () => {
   // copies the link to the question to clipboard
   const copyToClipboard = () => {
     // console.log(questionId);
-    navigator.clipboard.writeText(`https://lbs-kampus.netlify.app/profile/${params.id}`);
+    navigator.clipboard.writeText(
+      `https://lbs-kampus.netlify.app/profile/${params.id}`
+    );
   };
 
   // following or unfollowing a user
@@ -214,7 +216,10 @@ const Profile = () => {
   }, [params.id]);
 
   // This for updating the state, normal useEffect shit
-  useEffect(() => {}, [follows]);
+  useEffect(() => {
+    getFollowers();
+    getFollowings();
+  }, [follows]);
 
   // dummy data
   // const user = {
@@ -357,7 +362,7 @@ const Profile = () => {
     getFollowings();
     getFollowers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.id, follows]);
+  }, [params.id]);
 
   useEffect(() => {
     if (!(userData && userData.profileImgUri)) return;
