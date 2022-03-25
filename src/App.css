@@ -607,6 +607,7 @@ a[href="/signin"]:hover {
   bottom: -40px;
   font-family: "Montserrat";
   color: #f5bd00;
+  text-decoration: none;
 }
 .searchresults__notfound {
   margin: 2rem 0;

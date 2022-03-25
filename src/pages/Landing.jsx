@@ -22,7 +22,35 @@ const Landing = () => {
           {"Not a member? "}
           <Link to="/signup">Sign Up </Link>
         </p>
-        <p className="ves-bs">An LBS project created by students of VESIT</p>
+        <p className="ves-bs">An LBS project created by students of VESIT:</p>
+        <a className="ves-bs"
+          href="https://www.linkedin.com/in/anurag-saraswat-498082214/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Anurag Saraswat
+        </a>
+        <a className="ves-bs"
+          href="https://www.linkedin.com/in/karan-sharma-486043204/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Karan Sharma
+        </a>
+        <a className="ves-bs"
+          href="https://www.linkedin.com/in/manigandan-kasimani-537964213/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Manigandan Kasimani
+        </a>
+        <a className="ves-bs"
+          href="https://www.linkedin.com/in/prithvi-kumar-6a977b204/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Prithvi Kumar
+        </a>
       </Container>
     </div>
   );
