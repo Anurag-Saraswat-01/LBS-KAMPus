@@ -157,7 +157,7 @@ const Profile = () => {
   // copies the link to the question to clipboard
   const copyToClipboard = () => {
     // console.log(questionId);
-    navigator.clipboard.writeText(`http://localhost:3000/profile/${params.id}`);
+    navigator.clipboard.writeText(`https://lbs-kampus.netlify.app/profile/${params.id}`);
   };
 
   // following or unfollowing a user
@@ -357,7 +357,7 @@ const Profile = () => {
     getFollowings();
     getFollowers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.id]);
+  }, [params.id, follows]);
 
   useEffect(() => {
     if (!(userData && userData.profileImgUri)) return;
