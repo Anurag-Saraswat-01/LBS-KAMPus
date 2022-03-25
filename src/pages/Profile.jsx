@@ -362,7 +362,7 @@ const Profile = () => {
     getFollowings();
     getFollowers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.id]);
+  }, [params.id, follows]);
 
   useEffect(() => {
     if (!(userData && userData.profileImgUri)) return;
