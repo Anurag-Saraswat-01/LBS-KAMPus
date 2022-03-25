@@ -31,13 +31,13 @@ const SinglePost = ({ results, setResults }) => {
           `${url}/api/posts/${params.id}`,
           config
         );
-        // console.log(response.data[0]);
+        // // console.log(response.data[0]);
         setQuestion(response.data[0]);
-        // console.log(response.data[0].allAnswers[0]);
+        // // console.log(response.data[0].allAnswers[0]);
         // setLoading(false);
       } catch (err) {
-        console.log("Something went wrong");
-        console.log(err);
+        // console.log("Something went wrong");
+        // console.log(err);
       }
     };
     getPosts();

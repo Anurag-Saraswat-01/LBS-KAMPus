@@ -63,7 +63,7 @@ const AskQuestion = () => {
     error: "Sorry couldn't post the Question, please try again.",
     success: "Question has been posted successfully.",
     warning: "Department and Title are required.",
-    info: "You have earned a new badge"
+    info: "You have earned a new badge",
   };
 
   //* will be triggered once and will check if the user is logged in
@@ -83,7 +83,7 @@ const AskQuestion = () => {
           });
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     checkLoginStatus();
@@ -105,11 +105,11 @@ const AskQuestion = () => {
   //   To do: navigate to the particular post's page when successfully posted
   const submitPost = async (event) => {
     event.preventDefault();
-    console.log({
-      department,
-      title,
-      body,
-    });
+    // console.log({
+    //   department,
+    //   title,
+    //   body,
+    // });
 
     if (checkValidity(department, title)) {
       try {
@@ -130,8 +130,8 @@ const AskQuestion = () => {
           },
           config
         );
-        console.log(response.status);
-        console.log(response);
+        // console.log(response.status);
+        // console.log(response);
         if (response) {
           if (response.badge) {
             setAlert({
@@ -143,7 +143,7 @@ const AskQuestion = () => {
               show: true,
               type: "success",
             });
-          }   
+          }
           setTimeout(() => {
             setAlert({
               show: false,
@@ -154,7 +154,7 @@ const AskQuestion = () => {
 
         //* if status === 200 or no error then log it for now and if it fails show an alert
         //* couldn't submit the question please try again
-        console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         setAlert({
           show: true,
@@ -166,7 +166,7 @@ const AskQuestion = () => {
             type: null,
           });
         }, 3000);
-        console.log(err);
+        // console.log(err);
       }
     } else {
       setAlert({
@@ -186,7 +186,7 @@ const AskQuestion = () => {
     <div className="askQuestion">
       <Header />
       {alert.show && (
-        <Alert severity={alert.type}> { alertMessages[alert.type]} </Alert>
+        <Alert severity={alert.type}> {alertMessages[alert.type]} </Alert>
       )}
       <div className="askQuestion__ques">
         <h2>Ask a Question</h2>

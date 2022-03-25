@@ -23,7 +23,7 @@ const Answers = ({ answer, questionId }) => {
   // toggles display of comments
   const toggleDisplayComments = () => {
     setDisplayComments(!displayComments);
-    console.log("toggle", displayComments);
+    // console.log("toggle", displayComments);
   };
 
   // ButtonHandler will handle the click on Read more button
@@ -52,13 +52,13 @@ const Answers = ({ answer, questionId }) => {
           `${url}/api/answers/get/comments/${answer._id}`,
           config
         );
-        // console.log(response.data);
-        // console.log(response.data[0].allAnswers[0]);
+        // // console.log(response.data);
+        // // console.log(response.data[0].allAnswers[0]);
         setComments(response.data);
         // setLoading(false);
       } catch (err) {
-        console.log("Something went wrong");
-        console.log(err);
+        // console.log("Something went wrong");
+        // console.log(err);
       }
     };
     getComments();
@@ -66,7 +66,7 @@ const Answers = ({ answer, questionId }) => {
   }, []);
 
   useEffect(() => {
-    // console.log(comments);
+    // // console.log(comments);
     setComments(c => [...c, extracomments]);
   }, [extracomments]);
 

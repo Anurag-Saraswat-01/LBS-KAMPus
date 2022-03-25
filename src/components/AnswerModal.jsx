@@ -86,22 +86,22 @@ const AnswerModal = ({ open, setOpen, data }) => {
           },
           config
         );
-        console.log(response.data);
+        // console.log(response.data);
         if (location.pathname === `/post/${data._id}`) {
           window.location.reload();
         } else response && navigate(`/post/${data._id}`);
         // response && navigate(`/post/${data._id}`)
         //closes modal on submit
       } catch (err) {
-        console.log("Something went wrong!");
-        console.log(err);
+        // console.log("Something went wrong!");
+        // console.log(err);
       }
     } else {
       alert("Answer required");
     }
   };
 
-  // console.log(text);
+  // // console.log(text);
   return (
     <div className="answerModal">
       <div

@@ -31,7 +31,7 @@ function ProfilePosts({ posts, profilePosts }) {
   //     />
   //   </Container>
   // );
-  console.log(posts);
+  // console.log(posts);
   return (
     <Container>
       {profilePosts.map((post, key) => {

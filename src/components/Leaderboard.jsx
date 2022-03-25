@@ -41,9 +41,9 @@ function Leaderboard() {
           config
         );
         setLeaderData(response.data.users);
-        //   console.log(response.data);
+        //   // console.log(response.data);
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       }
     };
     fetchLeaderboard();
@@ -67,7 +67,7 @@ function Leaderboard() {
           <div className="ldbd-userlist">
             {leaderData.length > 0
               ? leaderData.map((value, key) => {
-                  // console.log(value);
+                  // // console.log(value);
                   return (
                     <>
                       <LeaderboardItem

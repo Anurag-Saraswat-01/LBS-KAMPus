@@ -11,7 +11,7 @@ export const PersonInfo = (props) => {
   const authContext = useContext(AuthContext);
 
   // const handleClick = async () => {
-  //   console.log("click");
+  //   // console.log("click");
   //   try {
   //     const url = "https://lbs-kampus.herokuapp.com";
   //     const config = {
@@ -30,7 +30,7 @@ export const PersonInfo = (props) => {
   //         },
   //         config
   //       );
-  //       console.log(response.data);
+  //       // console.log(response.data);
   //       setIsFollowing(false);
   //       return;
   //     }
@@ -42,10 +42,10 @@ export const PersonInfo = (props) => {
   //       },
   //       config
   //     );
-  //     console.log(response.data);
+  //     // console.log(response.data);
   //     setIsFollowing(true);
   //   } catch (err) {
-  //     console.log(err);
+  //     // console.log(err);
   //     setIsFollowing(!isFollowing);
   //   }
   // };
@@ -70,7 +70,7 @@ export const PersonInfo = (props) => {
         );
         setIsFollowing(response.data.follows);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     checkFollowStatus();

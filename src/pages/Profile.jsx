@@ -68,16 +68,16 @@ const Profile = () => {
           config
         );
         setPosts(response.data.posts);
-        console.log(response.data.posts);
+        // console.log(response.data.posts);
         const answers = await axios.get(
           `${url}/api/profile/getAnswers/${params.id}`,
           config
         );
         setAnswers(answers.data.answers);
-        console.log(answers.data.answers);
+        // console.log(answers.data.answers);
       } catch (err) {
-        console.log(err.message);
-        console.log(err);
+        // console.log(err.message);
+        // console.log(err);
       }
     };
     getPosts();
@@ -87,7 +87,7 @@ const Profile = () => {
   //callback for when cropping is complete
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
-    // console.log(croppedArea, croppedAreaPixels);
+    // // console.log(croppedArea, croppedAreaPixels);
   }, []);
 
   // creates a image element from the url
@@ -140,7 +140,7 @@ const Profile = () => {
   const showCroppedImage = useCallback(async () => {
     try {
       const croppedImage = await getCroppedImg(newImage, croppedAreaPixels);
-      //   console.log("donee", { croppedImage });
+      //   // console.log("donee", { croppedImage });
       setCroppedImage(croppedImage);
     } catch (e) {
       console.error(e);
@@ -156,7 +156,7 @@ const Profile = () => {
 
   // copies the link to the question to clipboard
   const copyToClipboard = () => {
-    // console.log(questionId);
+    // // console.log(questionId);
     navigator.clipboard.writeText(
       `https://lbs-kampus.netlify.app/profile/${params.id}`
     );
@@ -174,7 +174,7 @@ const Profile = () => {
           },
           config
         );
-        console.log(response.data);
+        // console.log(response.data);
         setFollows(false);
         return;
       }
@@ -186,10 +186,10 @@ const Profile = () => {
         },
         config
       );
-      console.log(response.data);
+      // console.log(response.data);
       setFollows(true);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
   // creating a useEffect because thera are already too much useEffects and
@@ -208,7 +208,7 @@ const Profile = () => {
         },
         config
       );
-      console.log(response.data);
+      // console.log(response.data);
       setFollows(response.data.follows);
     };
     checkStatus();
@@ -237,12 +237,12 @@ const Profile = () => {
 
   // set new image data in the use stte
   const onImageChange = (event) => {
-    // console.log(event.target.files[0]);
+    // // console.log(event.target.files[0]);
     if (!event.target.files[0]) return;
     getBase64(event.target.files[0])
       .then((response) => setNewImage(response))
       .catch((err) => console.log(err));
-    // console.log(newImage);
+    // // console.log(newImage);
   };
 
   // handle visibility of edit image div
@@ -277,7 +277,7 @@ const Profile = () => {
   // adds cropped image to profile
   useEffect(() => {
     if (!croppedImage) return;
-    // console.log("cropped image changed");
+    // // console.log("cropped image changed");
     setProfileImage(croppedImage);
     const uploadProfile = async () => {
       try {
@@ -296,9 +296,9 @@ const Profile = () => {
           },
           config
         );
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     uploadProfile();
@@ -323,7 +323,7 @@ const Profile = () => {
         );
         setUserData(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     const getFollowers = async () => {
@@ -336,10 +336,10 @@ const Profile = () => {
           },
           config
         );
-        console.log(response.data);
+        // console.log(response.data);
         setFollowerList(response.data.allFollowers);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     const getFollowings = async () => {
@@ -352,10 +352,10 @@ const Profile = () => {
           },
           config
         );
-        console.log(response.data);
+        // console.log(response.data);
         setFollowingList(response.data.allFollowings);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     getUserData();
@@ -371,12 +371,12 @@ const Profile = () => {
 
   const handleFollowerClose = () => setFollowerShow(false);
   const handleFollowerShow = () => {
-    console.log(followerList);
+    // console.log(followerList);
     setFollowerShow(true);
   };
   const handleFollowingClose = () => setFollowingShow(false);
   const handleFollowingShow = () => {
-    console.log(followingList);
+    // console.log(followingList);
     setFollowingShow(true);
   };
 

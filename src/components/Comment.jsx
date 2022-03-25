@@ -6,7 +6,7 @@ function Comment({ comment, questionId }) {
   /* Logic is to have a main Comments component (or just use the posts component)
       that will call this comment component for each item fetched from backend
     Can replace each item with data fetched from backend. Maybe pass thru as props when rendering. */
-  console.log(comment);
+  // console.log(comment);
   return (
     //* display comments will basically set the style to toggle the comments
 

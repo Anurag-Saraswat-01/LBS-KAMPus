@@ -59,16 +59,16 @@ const SignUp = () => {
   const submitHandler = async (event) => {
     setWaitingForRes(true);
     event.preventDefault();
-    console.log(password === confirmPassword);
-    console.log(password === "");
-    console.log({
-      name: name,
-      email: email.value,
-      password: password,
-      confirmPassword: confirmPassword,
-      year: year,
-      branch: department,
-    });
+    // console.log(password === confirmPassword);
+    // console.log(password === "");
+    // console.log({
+    //   name: name,
+    //   email: email.value,
+    //   password: password,
+    //   confirmPassword: confirmPassword,
+    //   year: year,
+    //   branch: department,
+    // });
     try {
       const url = "https://lbs-kampus.herokuapp.com";
       const config = {
@@ -91,11 +91,11 @@ const SignUp = () => {
         setWaitingForRes(response ? false : true);
         //redirects you to sign in page
         navigate("/signin");
-        console.log(response.data);
+        // console.log(response.data);
       }
     } catch (error) {
       setWaitingForRes(false);
-      console.log(error);
+      // console.log(error);
     }
   };
   return waitingForRes ? (

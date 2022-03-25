@@ -69,21 +69,21 @@ const AnswerBar = ({
           },
           config
         );
-        console.log(response.data);
+        // console.log(response.data);
         setComment("");
         // if (location.pathname === `/post/${answer.question_id}`) {
         //   window.location.reload();
         setExtracomments(response.data.comment);
         response && navigate(`/post/${answer.question_id}`);
       } catch (err) {
-        console.log("Something went wrong!");
-        console.log(err);
+        // console.log("Something went wrong!");
+        // console.log(err);
       }
     }
   };
   // copies the link to the question to clipboard
   const copyToClipboard = () => {
-    // console.log(questionId);
+    // // console.log(questionId);
     navigator.clipboard.writeText(`http://localhost:3000/post/${questionId}`);
     setShowTooltip(true);
     setTimeout(() => setShowTooltip(false), 2000);
@@ -106,7 +106,7 @@ const AnswerBar = ({
           { answerId: answer._id },
           config
         );
-        // console.log(getUpvotes.data);
+        // // console.log(getUpvotes.data);
         const likeData = getUpvotes.data.likes;
         const userId = getUpvotes.data.userId;
         setUpvotes({ ...upvotes, upvotesNum: likeData.length });
@@ -121,10 +121,10 @@ const AnswerBar = ({
           { answerId: answer._id },
           config
         );
-        // console.log(getDownvotes.data);
+        // // console.log(getDownvotes.data);
         const dislikeData = getDownvotes.data.dislikes;
         const dislikeUserId = getDownvotes.data.userId;
-        // console.log("dislikeData: "+dislikeData)
+        // // console.log("dislikeData: "+dislikeData)
         setDownvotes({ ...downvotes, downvotesNum: dislikeData.length });
         dislikeData.map((data) => {
           return data.userId === dislikeUserId
@@ -139,8 +139,8 @@ const AnswerBar = ({
         });
         // setLoading(false);
       } catch (err) {
-        console.log("Something went wrong");
-        console.log(err);
+        // console.log("Something went wrong");
+        // console.log(err);
       }
     };
     getRatings();
@@ -150,7 +150,7 @@ const AnswerBar = ({
   useEffect(() => {}, [upvotes.upvotesNum, downvotes.downvotesNum]);
 
   const upvote = async (id) => {
-    // console.log(id);
+    // // console.log(id);
     setUpvotes({
       upvoted: !upvotes.upvoted,
       upvotesNum: upvotes.upvotesNum + (upvotes.upvoted ? -1 : 1),
@@ -174,15 +174,15 @@ const AnswerBar = ({
       const response = await (upvotes.upvoted
         ? axios.put(`${url}/api/ratings/un-upvote`, { answerId: id }, config)
         : axios.post(`${url}/api/ratings/upvote`, { answerId: id }, config));
-      console.log(response.data);
+      // console.log(response.data);
     } catch (err) {
-      console.log("Something went wrong");
-      console.log(err);
+      // console.log("Something went wrong");
+      // console.log(err);
     }
   };
 
   const downvote = async (id) => {
-    console.log(id);
+    // console.log(id);
     // setDownvotes({...downvotes, downvotesNum: downvotes.downvotesNum + 1});
     setDownvotes({
       downvoted: !downvotes.downvoted,
@@ -207,10 +207,10 @@ const AnswerBar = ({
       const response = await (downvotes.downvoted
         ? axios.put(`${url}/api/ratings/un-downvote`, { answerId: id }, config)
         : axios.post(`${url}/api/ratings/downvote`, { answerId: id }, config));
-      console.log(response.data);
+      // console.log(response.data);
     } catch (err) {
-      console.log("Something went wrong");
-      console.log(err);
+      // console.log("Something went wrong");
+      // console.log(err);
     }
   };
 

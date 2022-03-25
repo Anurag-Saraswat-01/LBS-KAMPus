@@ -36,8 +36,8 @@ function App() {
     });
   }, []);
 
-  console.log("Search results");
-  console.log(searchResults);
+  // console.log("Search results");
+  // console.log(searchResults);
 
   // functions that get passed into context provider, that change the state of loggedin to true or false
   const login = (id) => {
@@ -73,7 +73,7 @@ function App() {
         return status;
       }
     } catch (error) {
-      console.log("Lol not logged in");
+      // console.log("Lol not logged in");
       return {
         loginStatus: false,
         id: null,

@@ -23,10 +23,10 @@ const Header = ({ page, results, setResults }) => {
   // This function to search the posts
   const searchPosts = async (event, searchText) => {
     if (event.nativeEvent.key !== "Enter" && event._reactName !== "onClick") {
-      // console.log("Not enter");
+      // // console.log("Not enter");
       return;
     }
-    // console.log("Search function called");
+    // // console.log("Search function called");
     try {
       const url = "https://lbs-kampus.herokuapp.com";
       const config = {
@@ -43,11 +43,11 @@ const Header = ({ page, results, setResults }) => {
         },
         config
       );
-      // console.log(response.data);
+      // // console.log(response.data);
       setResults(response.data.results);
       response.data && navigate("/home/search-results");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -64,14 +64,14 @@ const Header = ({ page, results, setResults }) => {
         credentials: "include",
       };
       const response = await axios.delete(`${url}/api/users/logout`, config);
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         //sets the loginstatus to false
         authContext.logout();
         navigate("/loggedout");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   return (

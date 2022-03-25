@@ -7,7 +7,7 @@ const AnswerCount = ({ count, data }) => {
   const [open, setOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const copyToClipboard = () => {
-    // console.log(questionId);
+    // // console.log(questionId);
     navigator.clipboard.writeText(`https://lbs-kampus.netlify.app/post/${data._id}`);
     setShowTooltip(true);
     setTimeout(() => setShowTooltip(false), 2000);

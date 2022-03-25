@@ -40,12 +40,12 @@ const CommentBar = ({ comment, questionId }) => {
           },
           config
         );
-        console.log(response.data);
+        // console.log(response.data);
         setReply("");
         response && navigate(`/post/${questionId}`);
       } catch (err) {
-        console.log("Something went wrong!");
-        console.log(err);
+        // console.log("Something went wrong!");
+        // console.log(err);
       }
     }
   };

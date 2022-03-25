@@ -34,7 +34,7 @@ const SignIn = () => {
   }, [email.value]);
 
   useEffect(() => {
-    console.log("Show Alert: " + showAlert);
+    // console.log("Show Alert: " + showAlert);
   }, [showAlert]);
 
   const handleEmailChange = (event) => {
@@ -49,10 +49,10 @@ const SignIn = () => {
     // event.preventDefault();
     //set waiting to true
     setWaitingForRes(true);
-    console.log({
-      email: email.value,
-      password: password,
-    });
+    // console.log({
+    //   email: email.value,
+    //   password: password,
+    // });
 
     try {
       const url = "https://lbs-kampus.herokuapp.com";
@@ -72,7 +72,7 @@ const SignIn = () => {
         },
         config
       );
-      console.log(response.data);
+      // console.log(response.data);
       setWaitingForRes(response ? false : true);
       const status = {
         // if response is received, set waiting to false
@@ -81,7 +81,7 @@ const SignIn = () => {
         userImg: response.data.userImg,
         userId: response.data.userId,
       };
-      // console.log(status);
+      // // console.log(status);
       if (status.loginStatus) {
         // right now this is just setting loginstatus, can modify login function to take in id as a parameter and modify the userID context
         authContext.login(status.userId);
@@ -94,7 +94,7 @@ const SignIn = () => {
     } catch (error) {
       // if error, stop waiting
       setWaitingForRes(false);
-      console.log(error);
+      // console.log(error);
       setShowAlert(true);
     }
   };

@@ -31,13 +31,13 @@ const QuestionNAnswer = ({ category }) => {
           `${url}/api/posts/${category ? `category/${category}` : "posts"}`,
           config
         );
-        // console.log(response.data);
-        // console.log(response.data[0].allAnswers[0]);
+        // // console.log(response.data);
+        // // console.log(response.data[0].allAnswers[0]);
         setQuestions(response.data);
         // setLoading(false);
       } catch (err) {
-        console.log("Something went wrong");
-        console.log(err);
+        // console.log("Something went wrong");
+        // console.log(err);
       }
     };
     getPosts();
