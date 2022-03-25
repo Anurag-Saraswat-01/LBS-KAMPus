@@ -171,7 +171,7 @@ const AnswerBar = ({
         credentials: "include",
       };
       //same funda as in app.js, dont need to use .then inside an async func
-      const response = await (upvotes.upvoted
+      await (upvotes.upvoted
         ? axios.put(`${url}/api/ratings/un-upvote`, { answerId: id }, config)
         : axios.post(`${url}/api/ratings/upvote`, { answerId: id }, config));
       // console.log(response.data);
@@ -204,10 +204,9 @@ const AnswerBar = ({
         credentials: "include",
       };
       //same funda as in app.js, dont need to use .then inside an async func
-      const response = await (downvotes.downvoted
+      await (downvotes.downvoted
         ? axios.put(`${url}/api/ratings/un-downvote`, { answerId: id }, config)
         : axios.post(`${url}/api/ratings/downvote`, { answerId: id }, config));
-      // console.log(response.data);
     } catch (err) {
       // console.log("Something went wrong");
       // console.log(err);

@@ -166,7 +166,7 @@ const Profile = () => {
   const followUser = async () => {
     try {
       if (follows) {
-        const response = await axios.post(
+        await axios.post(
           `${url}/api/profile/unfollow-user`,
           {
             userId: authContext.user_id,
@@ -178,7 +178,7 @@ const Profile = () => {
         setFollows(false);
         return;
       }
-      const response = await axios.post(
+      await axios.post(
         `${url}/api/profile/follow-user`,
         {
           userId: authContext.user_id,
@@ -289,7 +289,7 @@ const Profile = () => {
           withCredentials: true,
           credentials: "include",
         };
-        const response = await axios.put(
+        await axios.put(
           `${url}/api/users/upload-profile`,
           {
             profileImgUri: croppedImage,
