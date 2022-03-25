@@ -4,6 +4,7 @@ import NewPoster from "../assets/custom badges/post1.png";
 import Pro from "../assets/custom badges/pro.png";
 import NewReplier from "../assets/custom badges/reply1.png";
 import Rookie from "../assets/custom badges/rookie.png";
+import VOT from "../assets/custom badges/VOT.png"
 // society badges
 import Codecell from "../assets/society badges/codecell.png";
 import Connect from "../assets/society badges/connect.png";
@@ -25,7 +26,7 @@ export const custom_badges_map = {
   "New Replier": NewReplier,
   "Rookie": Rookie,
   // to be changed later
-  "Vesit of Time": Pro,
+  "Vesit of Time": VOT,
 };
 
 export const society_badges_map = {
