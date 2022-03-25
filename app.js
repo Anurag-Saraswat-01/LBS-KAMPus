@@ -17,8 +17,8 @@ const User = require("./models/userModel");
 
 // For cross-sharing the data
 const whitelist = [
-  "http://localhost:3000",
-  "http://localhost:8080",
+  // "http://localhost:3000",
+  // "http://localhost:8080",
   "https://lbs-kampus.herokuapp.com",
   "https://lbs-kampus.netlify.app",
 ];
