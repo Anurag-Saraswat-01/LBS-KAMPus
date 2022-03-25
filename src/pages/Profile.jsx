@@ -216,10 +216,10 @@ const Profile = () => {
   }, [params.id]);
 
   // This for updating the state, normal useEffect shit
-  // useEffect(() => {
-  //   getFollowers();
-  //   getFollowings();
-  // }, [follows]);
+  useEffect(() => {
+    // getFollowers();
+    // getFollowings();
+  }, [follows]);
 
   // dummy data
   // const user = {
