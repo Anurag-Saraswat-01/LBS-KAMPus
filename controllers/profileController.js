@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const getAllPosts = async (req, res) => {
   // console.log(req.params)
   const userId = req.params.id || res.locals.decodedId;
-  const posts = await Post.find({ userId: userId });
-  
+  const posts = await Post.find({ userId: userId }).sort({ createdAt: -1 });
+
   if (!posts) {
     return res.status(400).json({
       success: false,
@@ -34,6 +34,7 @@ const getAllAnswers = async (req, res) => {
     {
       $match: { answeredByUserId: new mongoose.Types.ObjectId(userId) },
     },
+    { $sort: { createdAt: -1 } },
   ]);
   if (answers) {
     return res.status(201).json({
