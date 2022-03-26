@@ -59,7 +59,7 @@ const getComments_to = async (req, res) => {
         comment_to: answer_id,
       },
     },
-    { $sort: { createdAt: -1 } },
+    { $sort: { createdAt: 1 } },
   ]).allowDiskUse(true);
   //   console.log("Answer Controller:", comments);
   if (!comments) {
